@@ -23,7 +23,7 @@ export function MarketingHeader({
   const copy = marketingCopyFor(locale);
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between border-b border-line bg-surface/90 px-6 py-4 backdrop-blur">
+    <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-line bg-surface/90 px-6 py-4 backdrop-blur">
       <Link href="/" className="flex items-center gap-3 text-ink" aria-label="BenefitBridge CA home">
         <BrandMark />
         <span className="text-lg font-bold tracking-tight">BenefitBridge CA</span>
