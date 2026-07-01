@@ -1,0 +1,50 @@
+/*
+ * Ported verbatim from `frontend/components/conversation-atlas/ConversationAtlas.module.css`
+ * (`.brandMark` and related selectors, source lines 65-107), so this component does not
+ * depend on the conversation-atlas module that ships alongside the soon-to-be-deleted
+ * BenefitBridgeDashboard.tsx monolith. Visual output is unchanged.
+ */
+
+.brandMark {
+  align-items: end;
+  color: var(--atlas-ink);
+  display: inline-grid;
+  gap: 3px;
+  grid-template-columns: repeat(3, 12px);
+  height: 46px;
+  position: relative;
+  width: 58px;
+}
+
+.brandMark::before {
+  background: var(--atlas-orange);
+  border-radius: 999px;
+  content: "";
+  height: 10px;
+  left: 23px;
+  position: absolute;
+  top: 0;
+  transform: rotate(45deg);
+  width: 10px;
+}
+
+.brandMark::after {
+  border-bottom: 5px solid var(--atlas-green);
+  border-radius: 50%;
+  bottom: 0;
+  content: "";
+  height: 26px;
+  left: 0;
+  position: absolute;
+  width: 58px;
+}
+
+.brandMark span {
+  background: currentColor;
+  border-radius: 9px 9px 2px 2px;
+  height: 28px;
+}
+
+.brandMark span:nth-child(2) {
+  height: 36px;
+}
