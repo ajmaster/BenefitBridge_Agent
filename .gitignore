@@ -213,3 +213,6 @@ my_env.tfvars
 
 # A2A Inspector
 tools/a2a-inspector/
+
+# Superpowers subagent-driven-development scratch state
+.superpowers/
