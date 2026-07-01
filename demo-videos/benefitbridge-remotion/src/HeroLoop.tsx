@@ -282,8 +282,11 @@ const PacketAssembly = () => {
         }}
       >
         {CHECKLIST_WIDTHS.map((width, index) => {
-          const lineStart = fps * 1.3 + index * 15;
-          const lineOpacity = interpolate(frame, [lineStart, lineStart + 15], [0, 1], clamp);
+          // Packet card finishes forming at fps * 1.2 (frame 36 @ 30fps). Start
+          // the checklist fades just after that and stagger + bound them so all
+          // 3 lines complete well before the beat ends at local frame 69.
+          const lineStart = fps * 1.2 + 1 + index * 9;
+          const lineOpacity = interpolate(frame, [lineStart, lineStart + 10], [0, 1], clamp);
           return (
             <div key={width} style={{ display: "flex", alignItems: "center", gap: 14, opacity: lineOpacity }}>
               <div
