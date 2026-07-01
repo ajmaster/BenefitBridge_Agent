@@ -1,0 +1,553 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - link "Inngest home" [ref=e8] [cursor=pointer]:
+            - /url: /
+            - img "Inngest" [ref=e9]:
+              - img [ref=e10]
+          - navigation "Primary" [ref=e23]:
+            - list [ref=e24]:
+              - listitem [ref=e25]:
+                - button "Platform" [ref=e26] [cursor=pointer]:
+                  - generic [ref=e27]: Platform
+                  - img [ref=e28]
+              - listitem [ref=e30]:
+                - button "Use Cases" [ref=e31] [cursor=pointer]:
+                  - generic [ref=e32]: Use Cases
+                  - img [ref=e33]
+              - listitem [ref=e35]:
+                - link "Customers" [ref=e36] [cursor=pointer]:
+                  - /url: /customers?ref=nav
+                  - generic [ref=e37]: Customers
+              - listitem [ref=e38]:
+                - button "Resources" [ref=e39] [cursor=pointer]:
+                  - generic [ref=e40]: Resources
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Docs" [ref=e44] [cursor=pointer]:
+                  - /url: /docs?ref=nav
+                  - generic [ref=e45]: Docs
+              - listitem [ref=e46]:
+                - link "Pricing" [ref=e47] [cursor=pointer]:
+                  - /url: /pricing?ref=nav
+                  - generic [ref=e48]: Pricing
+        - generic [ref=e49]:
+          - button "Open Source, 6.9K GitHub stars" [ref=e51] [cursor=pointer]:
+            - generic "Open Source, 6.9K GitHub stars" [ref=e52]:
+              - generic [ref=e53]:
+                - generic [ref=e54]: Open Source
+                - img [ref=e55]
+                - generic [ref=e57]: 6.9K
+              - generic [ref=e58]:
+                - generic [ref=e59]: Open Source
+                - img [ref=e60]
+                - generic [ref=e62]: 6.9K
+            - img [ref=e63]
+          - link "Sign in" [ref=e65] [cursor=pointer]:
+            - /url: https://app.inngest.com?ref=nav
+            - generic [ref=e66]: Sign in
+          - link "Start free" [ref=e67] [cursor=pointer]:
+            - /url: https://app.inngest.com/sign-up?ref=nav
+    - generic [ref=e69]:
+      - main [ref=e70]:
+        - region "Unbreakable Agents. Invisible Infra." [ref=e71]:
+          - generic:
+            - button "Show function 1" [ref=e72] [cursor=pointer]
+            - button "Show function 2" [ref=e73] [cursor=pointer]
+            - button "Show function 3" [ref=e74] [cursor=pointer]
+          - heading "Unbreakable Agents. Invisible Infra." [level=1] [ref=e75]
+          - generic:
+            - paragraph:
+              - generic: Unbreakable
+              - generic: Agents.
+            - paragraph:
+              - generic: Invisible
+              - generic: Infra.
+            - generic:
+              - paragraph: No workers. No queues. No refactoring.
+              - generic [ref=e76]:
+                - link "Start Building" [ref=e77] [cursor=pointer]:
+                  - /url: https://app.inngest.com/sign-up?ref=homepage-hero
+                - link "Book a demo" [ref=e78] [cursor=pointer]:
+                  - /url: /contact?ref=homepage-hero
+        - region "Trusted by" [ref=e80]:
+          - generic [ref=e82]:
+            - img "Replit" [ref=e83]
+            - img "Cubic" [ref=e84]
+            - img "ElevenLabs" [ref=e85]
+            - img "Cohere" [ref=e86]
+            - img "Soundcloud" [ref=e87]
+            - img "GitBook" [ref=e88]
+            - img "Resend" [ref=e89]
+            - img "Avoca" [ref=e90]
+            - img "Tripadvisor" [ref=e91]
+            - img "BAERskin" [ref=e92]
+            - img "Outtake" [ref=e93]
+        - region "Why Inngest" [ref=e95]:
+          - paragraph [ref=e97]:
+            - generic [ref=e98]:
+              - generic [ref=e100]: How
+              - generic [ref=e102]: you
+              - generic [ref=e104]: build
+              - generic [ref=e106]: agents
+              - generic [ref=e108]: will
+              - generic [ref=e110]: change.
+            - generic [ref=e111]:
+              - generic [ref=e113]: How
+              - generic [ref=e115]: they
+              - generic [ref=e117]: run
+              - generic [ref=e119]: shouldn't.
+            - generic [ref=e120]:
+              - generic [ref=e122]: Inngest
+              - generic [ref=e124]: moves
+              - generic [ref=e126]: durability
+              - generic [ref=e128]: and
+            - generic [ref=e129]:
+              - generic [ref=e131]: observability
+              - generic [ref=e133]: out
+              - generic [ref=e135]: of
+              - generic [ref=e137]: separate
+            - generic [ref=e138]:
+              - generic [ref=e140]: infrastructure
+              - generic [ref=e142]: and
+              - generic [ref=e144]: into
+              - generic [ref=e146]: your
+            - generic [ref=e147]:
+              - generic [ref=e149]: codebase,
+              - generic [ref=e151]: so
+              - generic [ref=e153]: what
+              - generic [ref=e155]: you
+              - generic [ref=e157]: write
+              - generic [ref=e159]: today
+            - generic [ref=e162]:
+              - generic [ref=e164]: still
+              - generic [ref=e166]: runs
+              - generic [ref=e168]: tomorrow.
+        - region "Durability belongs in code" [ref=e169]:
+          - generic [ref=e172]:
+            - tablist "Durability capabilities" [ref=e173]:
+              - article [ref=e174]:
+                - generic [ref=e175]:
+                  - img [ref=e177]
+                  - heading "Durable execution" [level=3] [ref=e178]
+                - paragraph [ref=e179]:
+                  - generic [ref=e180]: Your code has to work no matter what. Add steps
+                  - generic [ref=e181]: to any codebase to automate retries from failure—
+                  - generic [ref=e182]: not from scratch.
+                - tab "Durable execution" [selected] [ref=e183] [cursor=pointer]
+              - article [ref=e184]:
+                - generic [ref=e185]:
+                  - img [ref=e187]
+                  - heading "Flow Control" [level=3] [ref=e188]
+                - paragraph [ref=e189]:
+                  - generic [ref=e190]: Don’t let one needy user starve the rest. Add rate
+                  - generic [ref=e191]: limits, per-tenant concurrency, and throttling with
+                  - generic [ref=e192]: one line of code.
+                - tab "Flow Control" [ref=e193] [cursor=pointer]
+              - article [ref=e194]:
+                - generic [ref=e195]:
+                  - img [ref=e197]
+                  - heading "Agent Observability" [level=3] [ref=e198]
+                - paragraph [ref=e199]:
+                  - generic [ref=e200]: Observability that lives outside the execution
+                  - generic [ref=e201]: chain misses context. Trace everything, replay
+                  - generic [ref=e202]: anything, and eval variants based on real
+                  - generic [ref=e203]: product outcomes.
+                - tab "Agent Observability" [ref=e204] [cursor=pointer]
+            - generic [ref=e205]:
+              - heading "Durability belongs in code" [level=2] [ref=e206]
+              - tabpanel "Durable execution" [ref=e207]:
+                - paragraph [ref=e210]:
+                  - generic [ref=e211]: Because durability lives in code—not tied to any specific infrastructure pattern—the same primitives that power your background jobs also power agents and apps. And because Inngest handles execution, you get full observability by default.
+                  - generic [ref=e212]: No new infrastructure. No new instrumentation. No new architecture when there’s a new ‘right way’ to build in 6 weeks’ time.
+                - list [ref=e220]:
+                  - listitem [ref=e221]:
+                    - link "AI Agents Pause mid-execution, wait for input, then resume exactly where you left off." [ref=e222] [cursor=pointer]:
+                      - /url: /ai
+                      - generic [ref=e223]:
+                        - img [ref=e225]
+                        - heading "AI Agents" [level=3] [ref=e226]
+                      - paragraph [ref=e227]: Pause mid-execution, wait for input, then resume exactly where you left off.
+                  - listitem [ref=e228]:
+                    - link "API Endpoints Long-running endpoints that survive timeouts, failures, and deploys." [ref=e229] [cursor=pointer]:
+                      - /url: /docs/learn/durable-endpoints
+                      - generic [ref=e230]:
+                        - img [ref=e232]
+                        - heading "API Endpoints" [level=3] [ref=e233]
+                      - paragraph [ref=e234]: Long-running endpoints that survive timeouts, failures, and deploys.
+                  - listitem [ref=e235]:
+                    - link "Workflows Each step retries independently. No failed run restarts from scratch." [ref=e236] [cursor=pointer]:
+                      - /url: /ai
+                      - generic [ref=e237]:
+                        - img [ref=e239]
+                        - heading "Workflows" [level=3] [ref=e240]
+                      - paragraph [ref=e241]: Each step retries independently. No failed run restarts from scratch.
+                  - listitem [ref=e242]:
+                    - link "Schedules Missed runs recover automatically. Every execution is logged and replayable." [ref=e243] [cursor=pointer]:
+                      - /url: /uses/scheduled-jobs
+                      - generic [ref=e244]:
+                        - img [ref=e246]
+                        - heading "Schedules" [level=3] [ref=e247]
+                      - paragraph [ref=e248]: Missed runs recover automatically. Every execution is logged and replayable.
+                  - listitem [ref=e249]:
+                    - link "Serverless Functions persist state across invocations without a database." [ref=e250] [cursor=pointer]:
+                      - /url: /docs/reference/typescript/v4/extended-traces#serverless
+                      - generic [ref=e251]:
+                        - img [ref=e253]
+                        - heading "Serverless" [level=3] [ref=e254]
+                      - paragraph [ref=e255]: Functions persist state across invocations without a database.
+                  - listitem [ref=e256]:
+                    - link "Events Fan out thousands of jobs per event. Every one tracked, retriable, and replayable." [ref=e257] [cursor=pointer]:
+                      - /url: /uses/webhooks
+                      - generic [ref=e258]:
+                        - img [ref=e260]
+                        - heading "Events" [level=3] [ref=e261]
+                      - paragraph [ref=e262]: Fan out thousands of jobs per event. Every one tracked, retriable, and replayable.
+        - region "For humans and agents that want to keep their edge" [ref=e263]:
+          - generic [ref=e264]:
+            - heading "For humans and agents that want to keep their edge" [level=2] [ref=e265]
+            - group "Show next testimonial" [ref=e266]:
+              - img "Sully Omar, Co-founder at Otto (Acquired by Cohere)" [ref=e269]
+              - generic [ref=e270]:
+                - generic [ref=e271]:
+                  - button "Show Cohere testimonial" [ref=e272] [cursor=pointer]:
+                    - img [ref=e273]
+                    - img
+                  - button "Show Outtake testimonial" [ref=e274] [cursor=pointer]:
+                    - img [ref=e275]
+                    - img
+                  - button "Show Day.ai testimonial" [ref=e276] [cursor=pointer]:
+                    - img [ref=e277]
+                    - img
+                - generic [ref=e278]:
+                  - paragraph [ref=e281]: Inngest completely transformed how we handle AI orchestration at Cohere. Its intuitive developer experience, built-in multi-tenant concurrency, and flow control allowed us to scale without the complexity of other tools or the need to build custom solutions. What would have taken us a month.
+                  - generic [ref=e282]:
+                    - generic [ref=e283]:
+                      - paragraph [ref=e284]:
+                        - generic [ref=e285]: Sully Omar
+                      - paragraph [ref=e286]:
+                        - generic [ref=e287]: Co-founder - Otto (Acquired by Cohere)
+                    - generic [ref=e288]:
+                      - link "View case study" [ref=e289] [cursor=pointer]:
+                        - /url: /customers/otto
+                      - link "View all" [ref=e290] [cursor=pointer]:
+                        - /url: /customers?ref=testimonials
+                - generic [ref=e291]:
+                  - button "Previous testimonial" [ref=e292] [cursor=pointer]:
+                    - img [ref=e293]
+                  - button "Next testimonial" [ref=e300] [cursor=pointer]:
+                    - img [ref=e301]
+        - region "It doesn't have to be hard" [ref=e304]:
+          - generic [ref=e305]:
+            - generic [ref=e306]:
+              - heading "It doesn't have to be hard" [level=2] [ref=e307]:
+                - generic [ref=e308]: It doesn’t
+                - generic [ref=e309]: have to
+                - generic [ref=e310]: be hard
+              - paragraph [ref=e312]:
+                - generic [ref=e313]: Durability that runs on top of existing code,
+                - generic [ref=e314]: not alongside it in separate infrastructure.
+            - slider "Drag to compare the before and after states" [ref=e315]:
+              - generic:
+                - 'img "Before: the tangle of infrastructure (queues, pubsub, idempotency, error handling, capacity management) you have to build yourself."'
+              - generic:
+                - 'img "After: a single step.run() call replacing all that infrastructure."'
+              - generic:
+                - generic: Before
+              - generic:
+                - generic: After
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+        - region "How Inngest works" [ref=e316]:
+          - generic [ref=e317]:
+            - group "Show next step" [ref=e318]:
+              - generic [ref=e320]:
+                - generic [ref=e322]:
+                  - img [ref=e324]
+                  - generic [ref=e325]:
+                    - generic [ref=e328]: "01"
+                    - generic [ref=e329]:
+                      - heading "Install the SDK" [level=3] [ref=e330]
+                      - paragraph [ref=e331]: Write functions that know when to run, wait, fan-out, and throttle—during any event, at any scale.
+                - generic [ref=e333]:
+                  - img [ref=e335]
+                  - generic [ref=e336]:
+                    - generic [ref=e339]: "02"
+                    - generic [ref=e340]:
+                      - heading "Deploy alongside your app" [level=3] [ref=e341]
+                      - paragraph [ref=e342]: Deploy within your existing app, on your favorite cloud provider—serverless, traditional, or anywhere.
+                - generic [ref=e344]:
+                  - img [ref=e346]
+                  - generic [ref=e347]:
+                    - generic [ref=e350]: "03"
+                    - generic [ref=e351]:
+                      - heading "Observe and optimize" [level=3] [ref=e352]
+                      - paragraph [ref=e353]: The data that makes code durable is the same used to make it better. Fix fast, and continuously improve.
+                - generic [ref=e355]:
+                  - img [ref=e357]
+                  - generic [ref=e358]:
+                    - generic [ref=e361]: "01"
+                    - generic [ref=e362]:
+                      - heading "Install the SDK" [level=3] [ref=e363]
+                      - paragraph [ref=e364]: Write functions that know when to run, wait, fan-out, and throttle—during any event, at any scale.
+                - generic [ref=e366]:
+                  - img [ref=e368]
+                  - generic [ref=e369]:
+                    - generic [ref=e372]: "02"
+                    - generic [ref=e373]:
+                      - heading "Deploy alongside your app" [level=3] [ref=e374]
+                      - paragraph [ref=e375]: Deploy within your existing app, on your favorite cloud provider—serverless, traditional, or anywhere.
+                - generic [ref=e377]:
+                  - img [ref=e379]
+                  - generic [ref=e380]:
+                    - generic [ref=e383]: "03"
+                    - generic [ref=e384]:
+                      - heading "Observe and optimize" [level=3] [ref=e385]
+                      - paragraph [ref=e386]: The data that makes code durable is the same used to make it better. Fix fast, and continuously improve.
+            - generic [ref=e388]:
+              - button "Previous step" [ref=e389] [cursor=pointer]:
+                - img [ref=e390]
+              - button "Next step" [ref=e397] [cursor=pointer]:
+                - img [ref=e398]
+        - region "Scale instantly, improve constantly" [ref=e401]:
+          - generic [ref=e404]:
+            - generic [ref=e405]:
+              - heading "Scale instantly, improve constantly" [level=2] [ref=e406]
+              - generic [ref=e407]:
+                - generic [ref=e408]:
+                  - button "Guardrails for scale Set concurrency, ensure fairness, and handle every blip, burst, and bounce without babysitting. See docs" [ref=e409] [cursor=pointer]:
+                    - generic [ref=e413]: Guardrails for scale
+                    - paragraph [ref=e414]: Set concurrency, ensure fairness, and handle every blip, burst, and bounce without babysitting.
+                    - link "See docs" [ref=e415]:
+                      - /url: /docs/guides/flow-control?ref=home
+                      - generic [ref=e416]: See docs
+                      - generic [ref=e417]: →
+                  - button "Faster troubleshooting Store and track everything that happens in your product inside your own OLAP environment. See docs" [ref=e418] [cursor=pointer]:
+                    - generic [ref=e422]: Faster troubleshooting
+                    - paragraph [ref=e423]: Store and track everything that happens in your product inside your own OLAP environment.
+                    - link "See docs" [ref=e424]:
+                      - /url: /docs/platform/replay?ref=home
+                      - generic [ref=e425]: See docs
+                      - generic [ref=e426]: →
+                  - button "Traces, metrics, evals Step-level insights and scores for every run and session. See docs" [ref=e427] [cursor=pointer]:
+                    - generic [ref=e431]: Traces, metrics, evals
+                    - paragraph [ref=e432]: Step-level insights and scores for every run and session.
+                    - link "See docs" [ref=e433]:
+                      - /url: /docs/platform/monitor/inspecting-function-runs?ref=home
+                      - generic [ref=e434]: See docs
+                      - generic [ref=e435]: →
+                - img "Total runs throughput chart across a 24-hour window with four series." [ref=e440]:
+                  - generic [ref=e441]: Total runs throughput
+                  - generic [ref=e443]: "0"
+                  - generic [ref=e445]: "3"
+                  - generic [ref=e447]: "6"
+                  - generic [ref=e449]: "9"
+                  - generic [ref=e451]: "12"
+                  - generic [ref=e453]: "15"
+                  - generic [ref=e454]: 16:00
+                  - generic [ref=e455]: 22:30
+                  - generic [ref=e456]: 05:00
+                  - generic [ref=e457]: 11:30
+                  - generic [ref=e464]: Create chat completion
+                  - generic [ref=e467]: Data warehouse sync
+                  - generic [ref=e470]: Delete integration data
+                  - generic [ref=e473]: Generate video
+            - generic [ref=e474]:
+              - generic [ref=e475]:
+                - heading "Stuff your CISO needs to see" [level=2] [ref=e476]
+                - paragraph [ref=e477]: No fancy animations here—just the facts. We serve heavily regulated industries, and have the certs to prove it.
+              - list [ref=e478]:
+                - listitem [ref=e479]:
+                  - heading "SOC 2 Compliant" [level=3] [ref=e480]
+                  - paragraph [ref=e481]:
+                    - text: Regular security audits and compliance with SOC 2 standards.
+                    - link "Read more here" [ref=e482] [cursor=pointer]:
+                      - /url: /security?ref=home
+                      - generic [ref=e483]: Read more here
+                    - text: .
+                - listitem [ref=e484]:
+                  - heading "E2E Encryption" [level=3] [ref=e485]
+                  - paragraph [ref=e486]: Encrypt all data that passes through Inngest with end-to-end encryption middleware.
+                - listitem [ref=e487]:
+                  - heading "SSO & SAML" [level=3] [ref=e488]
+                  - paragraph [ref=e489]: Single sign-on and SAML support for enterprise customers.
+                - listitem [ref=e490]:
+                  - heading "100K+ Executions per second" [level=3] [ref=e491]
+                  - paragraph [ref=e492]: Designed for your heavy workloads with capacity for bursting.
+                - listitem [ref=e493]:
+                  - heading "Low Latency" [level=3] [ref=e494]
+                  - paragraph [ref=e495]: Inngest is designed to be low latency for all functions.
+                - listitem [ref=e496]:
+                  - heading "HIPAA BAA Available" [level=3] [ref=e497]
+                  - paragraph [ref=e498]: Ready to handle sensitive data.
+        - region "Start building" [ref=e499]:
+          - generic [ref=e500]:
+            - generic [ref=e501]:
+              - heading "Start Building" [level=2] [ref=e503]
+              - paragraph [ref=e505]: Pick a template
+            - list [ref=e506]:
+              - listitem [ref=e507]:
+                - link "Quickstart Next.js Get Started" [ref=e508] [cursor=pointer]:
+                  - /url: /docs/getting-started/nextjs-quick-start?ref=home-start-building
+                  - generic [ref=e509]:
+                    - paragraph [ref=e511]: Quickstart
+                    - heading "Next.js" [level=3] [ref=e512]
+                  - generic [ref=e513]:
+                    - text: Get Started
+                    - generic [ref=e514]: →
+              - listitem [ref=e515]:
+                - link "Quickstart Node.js Get Started" [ref=e516] [cursor=pointer]:
+                  - /url: /docs/getting-started/nodejs-quick-start?ref=home-start-building
+                  - generic [ref=e517]:
+                    - paragraph [ref=e519]: Quickstart
+                    - heading "Node.js" [level=3] [ref=e520]
+                  - generic [ref=e521]:
+                    - text: Get Started
+                    - generic [ref=e522]: →
+              - listitem [ref=e523]:
+                - link "Quickstart Python Get Started" [ref=e524] [cursor=pointer]:
+                  - /url: /docs/reference/python?ref=home-start-building
+                  - generic [ref=e525]:
+                    - paragraph [ref=e527]: Quickstart
+                    - heading "Python" [level=3] [ref=e528]
+                  - generic [ref=e529]:
+                    - text: Get Started
+                    - generic [ref=e530]: →
+      - contentinfo [ref=e535]:
+        - generic [ref=e536]:
+          - link "All systems operational" [ref=e538] [cursor=pointer]:
+            - /url: https://status.inngest.com
+            - generic [ref=e540]: All systems operational
+          - generic [ref=e541]:
+            - generic [ref=e542]:
+              - heading "Platform" [level=2] [ref=e543]
+              - list [ref=e544]:
+                - listitem [ref=e545]:
+                  - link "Durable Execution" [ref=e546] [cursor=pointer]:
+                    - /url: /platform/durable-execution?ref=footer
+                    - generic [ref=e547]: Durable Execution
+                - listitem [ref=e548]:
+                  - link "Queues & Flow Control" [ref=e549] [cursor=pointer]:
+                    - /url: /platform/flow-control?ref=footer
+                    - generic [ref=e550]: Queues & Flow Control
+                - listitem [ref=e551]:
+                  - link "Observability" [ref=e552] [cursor=pointer]:
+                    - /url: /platform/observability?ref=footer
+                    - generic [ref=e553]: Observability
+                - listitem [ref=e554]:
+                  - link "Agent Evals" [ref=e555] [cursor=pointer]:
+                    - /url: /platform/agent-evals?ref=footer
+                    - generic [ref=e556]: Agent Evals
+            - generic [ref=e557]:
+              - heading "Use cases" [level=2] [ref=e558]
+              - list [ref=e559]:
+                - listitem [ref=e560]:
+                  - link "AI Workflows" [ref=e561] [cursor=pointer]:
+                    - /url: /ai?ref=footer
+                    - generic [ref=e562]: AI Workflows
+                - listitem [ref=e563]:
+                  - link "Webhooks & Events" [ref=e564] [cursor=pointer]:
+                    - /url: /uses/webhooks?ref=footer
+                    - generic [ref=e565]: Webhooks & Events
+                - listitem [ref=e566]:
+                  - link "Background Jobs" [ref=e567] [cursor=pointer]:
+                    - /url: /uses/serverless-node-background-jobs?ref=footer
+                    - generic [ref=e568]: Background Jobs
+                - listitem [ref=e569]:
+                  - link "Crons & Scheduled Jobs" [ref=e570] [cursor=pointer]:
+                    - /url: /uses/scheduled-jobs?ref=footer
+                    - generic [ref=e571]: Crons & Scheduled Jobs
+            - generic [ref=e572]:
+              - heading "Resources" [level=2] [ref=e573]
+              - list [ref=e574]:
+                - listitem [ref=e575]:
+                  - link "Blog" [ref=e576] [cursor=pointer]:
+                    - /url: /blog?ref=footer
+                    - generic [ref=e577]: Blog
+                - listitem [ref=e578]:
+                  - link "Docs" [ref=e579] [cursor=pointer]:
+                    - /url: /docs?ref=footer
+                    - generic [ref=e580]: Docs
+                - listitem [ref=e581]:
+                  - link "Inngest vs. Traditional Queues" [ref=e582] [cursor=pointer]:
+                    - /url: /platform/flow-control?ref=footer
+                    - generic [ref=e583]: Inngest vs. Traditional Queues
+                - listitem [ref=e584]:
+                  - link "Inngest vs. Temporal" [ref=e585] [cursor=pointer]:
+                    - /url: /compare-to-temporal?ref=footer
+                    - generic [ref=e586]: Inngest vs. Temporal
+            - generic [ref=e587]:
+              - heading "Company" [level=2] [ref=e588]
+              - list [ref=e589]:
+                - listitem [ref=e590]:
+                  - link "About" [ref=e591] [cursor=pointer]:
+                    - /url: /about?ref=footer
+                    - generic [ref=e592]: About
+                - listitem [ref=e593]:
+                  - link "Contact Us" [ref=e594] [cursor=pointer]:
+                    - /url: /get-in-touch?ref=footer
+                    - generic [ref=e595]: Contact Us
+                - listitem [ref=e596]:
+                  - link "Pricing" [ref=e597] [cursor=pointer]:
+                    - /url: /pricing?ref=footer
+                    - generic [ref=e598]: Pricing
+                - listitem [ref=e599]:
+                  - link "Changelog" [ref=e600] [cursor=pointer]:
+                    - /url: /changelog?ref=footer
+                    - generic [ref=e601]: Changelog
+                - listitem [ref=e602]:
+                  - link "Support" [ref=e603] [cursor=pointer]:
+                    - /url: https://support.inngest.com
+                    - generic [ref=e604]: Support
+                - listitem [ref=e605]:
+                  - link "Careers" [ref=e606] [cursor=pointer]:
+                    - /url: https://jobs.ashbyhq.com/inngest
+                    - generic [ref=e607]: Careers
+            - generic [ref=e608]:
+              - heading "Community" [level=2] [ref=e609]
+              - list [ref=e610]:
+                - listitem [ref=e611]:
+                  - link "X" [ref=e612] [cursor=pointer]:
+                    - /url: https://x.com/inngest
+                    - generic [ref=e613]: X
+                - listitem [ref=e614]:
+                  - link "Github" [ref=e615] [cursor=pointer]:
+                    - /url: https://github.com/inngest/inngest
+                    - generic [ref=e616]: Github
+                - listitem [ref=e617]:
+                  - link "Discord" [ref=e618] [cursor=pointer]:
+                    - /url: https://www.inngest.com/discord
+                    - generic [ref=e619]: Discord
+                - listitem [ref=e620]:
+                  - link "Bluesky" [ref=e621] [cursor=pointer]:
+                    - /url: https://bsky.app/profile/inngest.com
+                    - generic [ref=e622]: Bluesky
+                - listitem [ref=e623]:
+                  - link "LinkedIn" [ref=e624] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/company/inngest-inc/
+                    - generic [ref=e625]: LinkedIn
+            - generic [ref=e626]:
+              - img "AICPA SOC 2 Type II compliance badge" [ref=e627]
+              - paragraph [ref=e628]: Inngest is SOC 2 Type II compliant.
+          - generic [ref=e629]:
+            - paragraph [ref=e630]: ©2026 Inngest Inc. All rights reserved.
+            - list [ref=e631]:
+              - listitem [ref=e632]:
+                - link "Privacy Policy" [ref=e633] [cursor=pointer]:
+                  - /url: /privacy?ref=footer
+                  - generic [ref=e634]: Privacy Policy
+              - listitem [ref=e635]: "|"
+              - listitem [ref=e636]:
+                - link "Terms" [ref=e637] [cursor=pointer]:
+                  - /url: /terms?ref=footer
+                  - generic [ref=e638]: Terms
+              - listitem [ref=e639]: "|"
+              - listitem [ref=e640]:
+                - link "Security" [ref=e641] [cursor=pointer]:
+                  - /url: /security?ref=footer
+                  - generic [ref=e642]: Security
+  - alert [ref=e643]

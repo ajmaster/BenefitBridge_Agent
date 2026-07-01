@@ -1,0 +1,193 @@
+[
+  {
+    "name": "lookup_county_from_location",
+    "purpose": "Map ZIP/city or optional session-only address to county/state/FIPS.",
+    "input": "{ location_text, granularity_preference, user_consented_exact_address:false }",
+    "output": "Jurisdiction { state, county, city, zip?, fips?, confidence, source_citations[] }",
+    "errors": [
+      "OUT_OF_SCOPE_GEOGRAPHY",
+      "EXACT_ADDRESS_BLOCKED",
+      "API_TIMEOUT",
+      "NO_MATCH"
+    ],
+    "cache": "ZIP/city county lookup cache 30 days; never cache exact addresses.",
+    "timeout_ms": 2500,
+    "freshness": "Census benchmark/vintage recorded in citation."
+  },
+  {
+    "name": "get_county_profile",
+    "purpose": "Return local pilot profile for Santa Clara, San José, or San Francisco.",
+    "input": "{ county_or_city }",
+    "output": "CountyProfile { offices, phones, food_handoff, shelter_handoff, wic_handoff, source_citations[] }",
+    "errors": [
+      "COUNTY_NOT_SUPPORTED",
+      "SOURCE_STALE"
+    ],
+    "cache": "Static fixture; refresh weekly/manual before demo freeze.",
+    "timeout_ms": 200,
+    "freshness": "County contacts 14–30 day freshness window."
+  },
+  {
+    "name": "retrieve_approved_source",
+    "purpose": "Fetch metadata and snippets from source snapshot corpus by ID.",
+    "input": "{ source_id }",
+    "output": "SourceMetadata with source citation fields",
+    "errors": [
+      "SOURCE_NOT_FOUND",
+      "SOURCE_STALE",
+      "SOURCE_RETIRED"
+    ],
+    "cache": "Source snapshot corpus; no live request during packet generation.",
+    "timeout_ms": 100,
+    "freshness": "Program sources 30–60 days; urgent resources 7 days."
+  },
+  {
+    "name": "search_source_snapshot",
+    "purpose": "Search approved source corpus by program area, jurisdiction, or need.",
+    "input": "{ query, jurisdiction?, program_area?, source_type? }",
+    "output": "SourceMetadata[]",
+    "errors": [
+      "NO_APPROVED_SOURCE",
+      "QUERY_TOO_BROAD"
+    ],
+    "cache": "Local index over source snapshot corpus.",
+    "timeout_ms": 250,
+    "freshness": "Returned citations include last_checked/freshness_state."
+  },
+  {
+    "name": "get_benefit_program_area",
+    "purpose": "Return prep/handoff logic for CalFresh, WIC, Medi-Cal/Covered CA, LIHEAP, housing, county services.",
+    "input": "{ program_area_id }",
+    "output": "BenefitProgramArea { status_logic, prep_questions, documents_to_prepare, never_claim, primary_source_ids }",
+    "errors": [
+      "PROGRAM_AREA_UNKNOWN"
+    ],
+    "cache": "Versioned fixture in repo.",
+    "timeout_ms": 100,
+    "freshness": "Version controlled with source pack."
+  },
+  {
+    "name": "match_benefit_paths",
+    "purpose": "Produce likely benefit areas from household snapshot without determining eligibility.",
+    "input": "{ HouseholdSnapshot, CountyProfile, BenefitProgramArea[] }",
+    "output": "BenefitPath[] with status_label and citations",
+    "errors": [
+      "MISSING_JURISDICTION",
+      "NO_SOURCE_CITATION",
+      "SCHEMA_VALIDATION_FAILED"
+    ],
+    "cache": "No cross-session cache; deterministic with synthetic profile.",
+    "timeout_ms": 1500,
+    "freshness": "Blocked if any required source is stale/retired."
+  },
+  {
+    "name": "find_local_resources",
+    "purpose": "Return curated local resources for food, housing, WIC, 211, offices, HUD counselors.",
+    "input": "{ jurisdiction, need_type, radius?, language? }",
+    "output": "LocalResource[] { name, category, phone, address_or_area, call_before_going, source_citations[] }",
+    "errors": [
+      "NO_LOCAL_FIXTURE",
+      "RESOURCE_STALE"
+    ],
+    "cache": "Curated HSDS-style fixture; optional Maps/Places enrichment session-only.",
+    "timeout_ms": 1000,
+    "freshness": "Urgent resources: 7 days or mark call_before_going/source_refresh_needed."
+  },
+  {
+    "name": "get_healthcare_gov_content",
+    "purpose": "Retrieve HealthCare.gov public content API article/index objects for health coverage explanations.",
+    "input": "{ slug_or_query, lang:\"en|es\" }",
+    "output": "SourceSnippet[]",
+    "errors": [
+      "API_TIMEOUT",
+      "API_UNREACHABLE",
+      "CONTENT_NOT_FOUND"
+    ],
+    "cache": "7 days; cached snippets permitted if within freshness window.",
+    "timeout_ms": 3000,
+    "freshness": "Store content URL + retrieved_at + lang."
+  },
+  {
+    "name": "search_hud_housing_counselors",
+    "purpose": "Find HUD-approved housing counselors by city/state or lat/long.",
+    "input": "{ city?, state:\"CA\", lat?, long?, distance? }",
+    "output": "AgencyContact[]",
+    "errors": [
+      "API_TIMEOUT",
+      "NO_RESULTS",
+      "API_RATE_LIMIT"
+    ],
+    "cache": "7–30 days for public counselor contacts; show call-before-going.",
+    "timeout_ms": 3000,
+    "freshness": "Retrieved date shown in source drawer."
+  },
+  {
+    "name": "query_datasf_socrata",
+    "purpose": "Optional smoke-test or refresh helper for DataSF datasets; not required for runtime packet generation.",
+    "input": "{ dataset_id?, discovery_query?, limit? }",
+    "output": "DatasetMetadata|Record[]",
+    "errors": [
+      "DATASET_NOT_APPROVED",
+      "API_TIMEOUT",
+      "TERMS_REVIEW_REQUIRED"
+    ],
+    "cache": "Refresh-only; runtime uses curated fixtures.",
+    "timeout_ms": 3000,
+    "freshness": "Treat DataSF as as-is; verify with source owner."
+  },
+  {
+    "name": "redact_pii",
+    "purpose": "Detect and redact SSNs, exact addresses, phone/email, DOB, case numbers, credentials before logs/model calls.",
+    "input": "{ text, context }",
+    "output": "{ redacted_text, findings[], blocked:boolean }",
+    "errors": [
+      "DLP_SERVICE_UNAVAILABLE",
+      "PII_BLOCKED"
+    ],
+    "cache": "No cache of raw input; log only findings count/type.",
+    "timeout_ms": 2000,
+    "freshness": "N/A."
+  },
+  {
+    "name": "validate_packet",
+    "purpose": "Final critic: schema, citations, safety, no prohibited claims.",
+    "input": "{ PrepPacket, SourceMetadata[], HouseholdSnapshot }",
+    "output": "ValidationReport { pass, failures[], blocking_failures[] }",
+    "errors": [
+      "SCHEMA_VALIDATION_FAILED",
+      "CITATION_MISSING",
+      "SAFETY_BLOCK"
+    ],
+    "cache": "No cache; run every generation.",
+    "timeout_ms": 1000,
+    "freshness": "Blocks stale critical sources."
+  },
+  {
+    "name": "translate_packet",
+    "purpose": "Translate packet to Spanish using reviewed templates and glossary; no unreviewed high-stakes languages in MVP.",
+    "input": "{ PrepPacket, target_language:\"es\", glossary_version }",
+    "output": "TranslatedPacket { lang, reviewed_template_version, caveats, content }",
+    "errors": [
+      "LANGUAGE_NOT_SUPPORTED",
+      "QA_REQUIRED",
+      "TRANSLATION_TIMEOUT"
+    ],
+    "cache": "Template-level cache; no raw PII.",
+    "timeout_ms": 4000,
+    "freshness": "Glossary version recorded."
+  },
+  {
+    "name": "export_packet",
+    "purpose": "Export printable web view, PDF, Markdown, and JSON summary.",
+    "input": "{ PrepPacket, formats:[\"html\",\"pdf\",\"md\",\"json\"] }",
+    "output": "{ artifacts[], source_citations_json }",
+    "errors": [
+      "EXPORT_FAILED",
+      "SAFETY_BLOCK",
+      "SOURCE_STALE_BLOCK"
+    ],
+    "cache": "Session-only artifact unless user saves locally.",
+    "timeout_ms": 5000,
+    "freshness": "Packet includes generated_at + source last_checked."
+  }
+]

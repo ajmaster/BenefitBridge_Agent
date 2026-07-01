@@ -1,0 +1,33 @@
+{
+  "name": "benefitbridge-remotion-demos",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "capture": "npm --prefix ../../frontend run build && node scripts/capture-flows.cjs",
+    "preview": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "still:sanjose": "remotion still src/index.ts SanJoseFamilyNavigator out/sanjose-family-navigator-still.png --frame=540 --scale=0.5 --overwrite",
+    "still:sf": "remotion still src/index.ts SfFoodShelterHandoff out/sf-food-shelter-handoff-still.png --frame=540 --scale=0.5 --overwrite",
+    "still:spanish": "remotion still src/index.ts SpanishWicPrep out/spanish-wic-prep-still.png --frame=540 --scale=0.5 --overwrite",
+    "still:atlas": "remotion still src/index.ts ConversationAtlasDemo out/conversation-atlas-poster.png --frame=360 --scale=0.5 --overwrite",
+    "still:all": "npm run still:sanjose && npm run still:sf && npm run still:spanish && npm run still:atlas",
+    "render:sanjose": "remotion render src/index.ts SanJoseFamilyNavigator out/sanjose-family-navigator.mp4 --codec=h264 --overwrite",
+    "render:sf": "remotion render src/index.ts SfFoodShelterHandoff out/sf-food-shelter-handoff.mp4 --codec=h264 --overwrite",
+    "render:spanish": "remotion render src/index.ts SpanishWicPrep out/spanish-wic-prep.mp4 --codec=h264 --overwrite",
+    "render:atlas": "remotion render src/index.ts ConversationAtlasDemo out/conversation-atlas.mp4 --codec=h264 --overwrite",
+    "render:all": "npm run render:sanjose && npm run render:sf && npm run render:spanish && npm run render:atlas",
+    "verify:outputs": "node scripts/verify-outputs.cjs"
+  },
+  "dependencies": {
+    "@remotion/captions": "latest",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "remotion": "latest"
+  },
+  "devDependencies": {
+    "@remotion/cli": "latest",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^5.9.0"
+  }
+}

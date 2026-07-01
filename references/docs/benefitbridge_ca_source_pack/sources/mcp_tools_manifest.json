@@ -1,0 +1,146 @@
+{
+  "server_name": "benefitbridge_ca_public_sources",
+  "scope": "read_only_no_key_public_sources_except_google_services",
+  "version": "0.1.0",
+  "tools": [
+    {
+      "name": "lookup_county_from_location",
+      "inputs": {
+        "location_text": "string"
+      },
+      "uses": [
+        "census_geocoder_api",
+        "google_maps_geocoding_optional"
+      ],
+      "output": "Jurisdiction",
+      "guardrails": [
+        "Do not store exact address unless user opts in.",
+        "Prefer county-level summary in logs."
+      ]
+    },
+    {
+      "name": "get_benefit_program_area",
+      "inputs": {
+        "program_area_id": "string"
+      },
+      "uses": [
+        "program_areas.json"
+      ],
+      "output": "BenefitProgramArea",
+      "guardrails": [
+        "Return prep/handoff logic only, not eligibility decision."
+      ]
+    },
+    {
+      "name": "get_county_profile",
+      "inputs": {
+        "county_or_city": "string"
+      },
+      "uses": [
+        "county_profiles.json"
+      ],
+      "output": "CountyProfile",
+      "guardrails": [
+        "If outside Santa Clara/San Jose/SF, state MVP geography limitation."
+      ]
+    },
+    {
+      "name": "retrieve_approved_source",
+      "inputs": {
+        "source_id": "string"
+      },
+      "uses": [
+        "approved_sources.json"
+      ],
+      "output": "SourceMetadata",
+      "guardrails": [
+        "Source IDs must exist in approved list."
+      ]
+    },
+    {
+      "name": "find_local_resources",
+      "inputs": {
+        "jurisdiction": "string",
+        "need_type": "string"
+      },
+      "uses": [
+        "local_resources_hsds_seed.json"
+      ],
+      "output": "LocalResource[]",
+      "guardrails": [
+        "Add call_before_going=true for food/shelter/legal/health handoffs."
+      ]
+    },
+    {
+      "name": "get_healthcare_gov_content",
+      "inputs": {
+        "slug_or_query": "string"
+      },
+      "uses": [
+        "healthcare_gov_developers_content_api"
+      ],
+      "output": "SourceSnippet[]",
+      "guardrails": [
+        "Educational content only; do not infer Medi-Cal eligibility."
+      ]
+    },
+    {
+      "name": "find_hud_housing_counselors",
+      "inputs": {
+        "lat": "number",
+        "lon": "number",
+        "radius_miles": "number"
+      },
+      "uses": [
+        "hud_housing_counselor_api"
+      ],
+      "output": "AgencyContact[]",
+      "guardrails": [
+        "Referral only; no legal/housing eligibility advice."
+      ]
+    },
+    {
+      "name": "redact_pii",
+      "inputs": {
+        "text": "string"
+      },
+      "uses": [
+        "google_sensitive_data_protection_optional",
+        "local_regex_fallback"
+      ],
+      "output": "RedactedText",
+      "guardrails": [
+        "Block SSN, case numbers, EBT card/PIN, dates of birth, exact addresses in logs."
+      ]
+    },
+    {
+      "name": "translate_packet",
+      "inputs": {
+        "packet": "PrepPacket",
+        "target_language": "string"
+      },
+      "uses": [
+        "google_cloud_translation_optional",
+        "gemini_translation_optional"
+      ],
+      "output": "PrepPacket",
+      "guardrails": [
+        "Preserve caveats and citations; do not translate official URLs."
+      ]
+    },
+    {
+      "name": "validate_prep_packet",
+      "inputs": {
+        "packet": "PrepPacket"
+      },
+      "uses": [
+        "approved_sources.json",
+        "program_areas.json"
+      ],
+      "output": "ValidationReport",
+      "guardrails": [
+        "Every benefit path must cite official/approved source; reject eligibility guarantees and invented URLs."
+      ]
+    }
+  ]
+}

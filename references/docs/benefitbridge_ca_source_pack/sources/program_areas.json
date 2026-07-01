@@ -1,0 +1,261 @@
+[
+  {
+    "program_area_id": "food_calfresh",
+    "display_name": "Food help: CalFresh / SNAP",
+    "status_logic": [
+      "If user reports food insecurity, reduced income, no income, high rent relative to income, or household with children/seniors/disability: status = likely_worth_checking.",
+      "If location is outside California: status = local_handoff_recommended and route to USA.gov/USDA state directory, not CA sources.",
+      "If urgent food need today: include food-bank/211 immediate handoff before application prep."
+    ],
+    "never_claim": [
+      "You qualify for CalFresh",
+      "You will receive a specific dollar amount",
+      "BenefitBridge can submit your application"
+    ],
+    "prep_questions": [
+      "Which county do you live in or spend most nights in?",
+      "How many people buy and prepare food together?",
+      "What is your approximate monthly income range?",
+      "Do you have rent, utilities, medical, child care, or dependent-care costs?",
+      "Do you need food today, before any application is processed?"
+    ],
+    "documents_to_prepare": [
+      "Photo ID if available",
+      "Proof of income or reduced hours if available",
+      "Rent or housing cost information",
+      "Utility expense information",
+      "Household member names/ages",
+      "Existing benefit notices if any"
+    ],
+    "primary_source_ids": [
+      "cdss_calfresh_home",
+      "benefitscal_info",
+      "usda_snap_california_directory",
+      "scc_apply_public_benefits",
+      "sfhsa_calfresh_apply"
+    ],
+    "immediate_handoff_source_ids": [
+      "second_harvest_sv_get_food",
+      "sfhsa_free_food_locations",
+      "sf_marin_food_bank_find_food",
+      "ca_211_home",
+      "cpuc_211_info"
+    ],
+    "applicable_geographies": [
+      "California",
+      "Santa Clara County",
+      "San José",
+      "San Francisco"
+    ]
+  },
+  {
+    "program_area_id": "food_wic",
+    "display_name": "Family nutrition: WIC",
+    "status_logic": [
+      "If user is pregnant, recently pregnant, breastfeeding/chestfeeding, caring for an infant, or has a child under 5: status = likely_worth_checking.",
+      "If household includes children but ages are unknown: status = needs_more_information.",
+      "If no pregnancy/postpartum/breastfeeding and no child under 5 indicated: status = not_enough_evidence."
+    ],
+    "never_claim": [
+      "You qualify for WIC",
+      "Your local WIC office will accept your documents",
+      "You can skip local confirmation"
+    ],
+    "prep_questions": [
+      "Is anyone pregnant, recently pregnant, breastfeeding/chestfeeding, or caring for a child under age 5?",
+      "What are the child ages?",
+      "What city/ZIP should be used for WIC office search?",
+      "Do you prefer phone, text, or in-person contact?"
+    ],
+    "documents_to_prepare": [
+      "Identity documents if available",
+      "Proof of California residence/address if available",
+      "Medi-Cal/CalFresh/CalWORKs participation notice if available",
+      "Child age/birth information if available",
+      "Income information if asked by WIC office"
+    ],
+    "primary_source_ids": [
+      "cdph_wic_home",
+      "cdph_wic_am_i_eligible",
+      "cdph_wic_office_grocer_locator",
+      "scc_wic_apply",
+      "sf_wic_clinic_hours_locations"
+    ],
+    "applicable_geographies": [
+      "California",
+      "Santa Clara County",
+      "San Francisco"
+    ]
+  },
+  {
+    "program_area_id": "health_medi_cal_chip_marketplace",
+    "display_name": "Health coverage: Medi-Cal / children’s coverage / Covered California",
+    "status_logic": [
+      "If user lacks health coverage, has children, has reduced work hours, lost job, or needs low-cost health coverage: status = likely_worth_checking.",
+      "If user already has Medi-Cal but reports address/income/family change: status = local_handoff_recommended for county update/renewal.",
+      "If health coverage question is generic: provide educational content from HealthCare.gov and California apply links."
+    ],
+    "never_claim": [
+      "You qualify for Medi-Cal",
+      "Your plan/cost will be X",
+      "You should choose a specific plan"
+    ],
+    "prep_questions": [
+      "Do you currently have health insurance?",
+      "Are you applying for yourself, children, or both?",
+      "Has your income, address, household, pregnancy status, or other coverage changed recently?",
+      "Which county should your application be routed to?"
+    ],
+    "documents_to_prepare": [
+      "Household member names/ages",
+      "Income or reduced-hours proof if available",
+      "Current health coverage notices if any",
+      "County/BenefitsCal login details kept by the user only, not entered into BenefitBridge"
+    ],
+    "primary_source_ids": [
+      "dhcs_medi_cal_apply",
+      "dhcs_county_offices",
+      "covered_ca_get_started",
+      "healthcare_gov_developers_content_api",
+      "scc_apply_public_benefits",
+      "sfhsa_medi_cal",
+      "sfhsa_medi_cal_apply"
+    ],
+    "applicable_geographies": [
+      "California",
+      "Santa Clara County",
+      "San Francisco"
+    ]
+  },
+  {
+    "program_area_id": "utilities_liheap_lifeline",
+    "display_name": "Utilities and phone help: LIHEAP / HEAP / California LifeLine",
+    "status_logic": [
+      "If user reports utility bill difficulty, shutoff notice, high energy burden, heating/cooling need, or no phone service: status = likely_worth_checking.",
+      "If user reports no utility account because unhoused: status = local_handoff_recommended for 211/shelter/county resources and LifeLine if phone need exists.",
+      "If user has phone/internet affordability issue: include California LifeLine as a separate path."
+    ],
+    "never_claim": [
+      "You will receive LIHEAP",
+      "Your energy bill will be paid",
+      "You qualify for LifeLine"
+    ],
+    "prep_questions": [
+      "Are you behind on an energy bill or facing shutoff?",
+      "Do you have a utility bill or shutoff notice?",
+      "Is the utility account in your name?",
+      "Do you need help keeping phone service active?"
+    ],
+    "documents_to_prepare": [
+      "Recent utility bill or shutoff notice if available",
+      "Proof of income or benefit participation if available",
+      "Address/service location",
+      "Phone provider/account information kept by user only"
+    ],
+    "primary_source_ids": [
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "california_lifeline",
+      "cpuc_lifeline_eligibility",
+      "cpuc_211_info"
+    ],
+    "applicable_geographies": [
+      "California"
+    ]
+  },
+  {
+    "program_area_id": "housing_homelessness",
+    "display_name": "Housing help: shelter, homelessness, rental help, housing counseling",
+    "status_logic": [
+      "If user reports sleeping outside/in car/unsafe tonight: immediate_handoff first, not normal benefit-prep flow.",
+      "If Santa Clara/San José and shelter needed: route to Here4You 408-385-2400 and 211.",
+      "If San Francisco and homelessness risk: route to Access Points / Adult Shelter Access Line / 311/211 style handoff from official sources.",
+      "If eviction or legal papers: route to legal aid, not benefits advice.",
+      "If general housing counseling: use HUD Housing Counselor API/tool."
+    ],
+    "never_claim": [
+      "There is a shelter bed available",
+      "You are eligible for rental assistance",
+      "This is legal advice"
+    ],
+    "prep_questions": [
+      "Where are you tonight: housed, doubled up, car/RV, shelter, outside, or unsafe?",
+      "Are there children, youth, seniors, disability, pregnancy, or domestic violence safety concerns?",
+      "Have you received eviction papers or a notice to quit?",
+      "What city/county should be used for resource routing?",
+      "Do you have a safe phone number or preferred contact method?"
+    ],
+    "documents_to_prepare": [
+      "Lease/rent notice or eviction papers if applicable",
+      "Utility/rent ledger if applicable",
+      "Photo ID if available",
+      "Income/reduced-hours proof if available",
+      "Any prior case/resource numbers kept by user only"
+    ],
+    "primary_source_ids": [
+      "sanjose_homeless_services_guide",
+      "scc_osh_temporary_emergency_shelter",
+      "sf_hsh_department",
+      "sf_coordinated_entry",
+      "sfserviceguide_access_point",
+      "sfserviceguide_adult_shelter_reservation",
+      "hud_housing_counselor_api",
+      "ca_211_home",
+      "scc_211_bayarea",
+      "sf_211_bayarea_housing"
+    ],
+    "legal_handoff_source_ids": [
+      "law_foundation_housing_scc",
+      "baylegal_santa_clara_office",
+      "sf_eviction_defense_collaborative",
+      "sf_tenant_landlord_resources"
+    ],
+    "applicable_geographies": [
+      "Santa Clara County",
+      "San José",
+      "San Francisco"
+    ]
+  },
+  {
+    "program_area_id": "cash_family_adult_assistance",
+    "display_name": "Cash / county social services: CalWORKs, GA, CAAP, CAPI/refugee/trafficking-victim paths",
+    "status_logic": [
+      "If household has children and needs cash aid: CalWORKs may be worth checking; route to BenefitsCal/county office.",
+      "If Santa Clara adult without dependent children and no other means of support: GA may be worth checking.",
+      "If San Francisco adult without dependent children: CAAP may be worth checking.",
+      "If immigrant/senior/disability/refugee/trafficking facts arise: do not advise; route to county social services/legal aid."
+    ],
+    "never_claim": [
+      "You qualify for cash aid",
+      "You will receive a monthly amount",
+      "BenefitBridge decides immigration-related eligibility"
+    ],
+    "prep_questions": [
+      "Are there dependent children in your household?",
+      "Are you applying as an adult without dependent children?",
+      "Which county do you live in?",
+      "Do you want to discuss immigration-related program questions with an agency or legal-aid provider?"
+    ],
+    "documents_to_prepare": [
+      "Photo ID if available",
+      "Proof of income/no income if available",
+      "Rent/housing costs",
+      "Household composition information",
+      "Any agency notices"
+    ],
+    "primary_source_ids": [
+      "cdss_county_offices",
+      "benefitscal_info",
+      "scc_apply_public_benefits",
+      "scc_general_assistance",
+      "sfhsa_calworks_apply",
+      "sfhsa_caap",
+      "sfhsa_caap_apply"
+    ],
+    "applicable_geographies": [
+      "California",
+      "Santa Clara County",
+      "San Francisco"
+    ]
+  }
+]

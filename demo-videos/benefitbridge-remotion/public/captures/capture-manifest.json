@@ -1,0 +1,42 @@
+{
+  "capturedAt": "2026-07-01T07:38:15.142Z",
+  "baseUrl": "http://127.0.0.1:8091",
+  "flows": [
+    {
+      "prefix": "sanjose",
+      "prompt": "I am in San Jose with 3 people and need food, health coverage, utility help, and WIC prep.",
+      "captures": [
+        "sanjose-initial.png",
+        "sanjose-chat.png",
+        "sanjose-resources.png",
+        "sanjose-sources.png",
+        "sanjose-packet.png",
+        "sanjose-spanish.png"
+      ]
+    },
+    {
+      "prefix": "sf",
+      "prompt": "I am in San Francisco and need food today and shelter tonight. I have no income and I am sleeping in my car.",
+      "captures": [
+        "sf-initial.png",
+        "sf-chat.png",
+        "sf-resources.png",
+        "sf-sources.png",
+        "sf-packet.png",
+        "sf-spanish.png"
+      ]
+    },
+    {
+      "prefix": "spanish",
+      "prompt": "Prefiero espanol. Estoy en San Jose con dos ninos y necesito comida, WIC y cobertura medica.",
+      "captures": [
+        "spanish-initial.png",
+        "spanish-chat.png",
+        "spanish-resources.png",
+        "spanish-sources.png",
+        "spanish-packet.png",
+        "spanish-spanish.png"
+      ]
+    }
+  ]
+}

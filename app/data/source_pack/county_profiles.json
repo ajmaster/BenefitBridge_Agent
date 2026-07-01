@@ -1,0 +1,590 @@
+[
+  {
+    "id": "santa_clara_county",
+    "name": "Santa Clara County",
+    "state": "CA",
+    "fips_hint": "06085",
+    "cities_in_scope": [
+      "Campbell",
+      "Cupertino",
+      "Gilroy",
+      "Milpitas",
+      "Morgan Hill",
+      "Mountain View",
+      "Palo Alto",
+      "San Jose",
+      "Santa Clara",
+      "Santa Clara County",
+      "Sunnyvale"
+    ],
+    "primary_benefits_office": {
+      "organization": "Santa Clara County Social Services Agency",
+      "phone": "408-758-3800",
+      "fax": "408-295-9248",
+      "mail": "PO Box 11018, San Jose, CA 95103",
+      "source_id": "scc_apply_public_benefits"
+    },
+    "food_handoff": [
+      {
+        "label": "Second Harvest Food Connection Hotline",
+        "phone": "1-800-984-3663",
+        "languages_note": "English, Spanish, Vietnamese, Chinese, Tagalog listed by Santa Clara County reentry guide; San José page also notes multiple languages/interpreters.",
+        "source_id": "second_harvest_sv_contact"
+      },
+      {
+        "label": "211 Bay Area — Santa Clara",
+        "phone": "211",
+        "source_id": "scc_211_bayarea"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "Here4You centralized shelter hotline",
+        "phone": "408-385-2400",
+        "hours": "9 a.m. to 7 p.m. listed by San José/SCC sources",
+        "source_id": "sanjose_homeless_services_guide"
+      },
+      {
+        "label": "211 Bay Area",
+        "phone": "211",
+        "source_id": "scc_211_bayarea"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "Santa Clara County WIC",
+        "phone": "408-792-5101",
+        "text": "888-413-2698",
+        "source_id": "scc_wic_apply"
+      },
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "Law Foundation / Homelessness Prevention System",
+        "phone": "408-516-5100",
+        "source_id": "law_foundation_housing_scc"
+      },
+      {
+        "label": "Bay Area Legal Aid Santa Clara office",
+        "phone": "408-283-3700",
+        "source_id": "baylegal_santa_clara_office"
+      }
+    ],
+    "source_ids": [
+      "scc_apply_public_benefits",
+      "scc_calfresh_page",
+      "scc_general_assistance",
+      "scc_wic_apply",
+      "scc_211_bayarea",
+      "scc_osh_temporary_emergency_shelter",
+      "second_harvest_sv_get_food",
+      "second_harvest_sv_contact"
+    ]
+  },
+  {
+    "id": "san_jose_city",
+    "name": "City of San José",
+    "state": "CA",
+    "county_id": "santa_clara_county",
+    "fips_hint": null,
+    "primary_notes": [
+      "City-specific homelessness/food guidance should route to county systems for shelter and county benefit applications."
+    ],
+    "food_handoff": [
+      {
+        "label": "Second Harvest Food Connection Hotline",
+        "phone": "1-800-984-3663",
+        "source_id": "sanjose_food_family_resources"
+      },
+      {
+        "label": "After-hours 211",
+        "phone": "211",
+        "source_id": "sanjose_food_family_resources"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "Here4You centralized shelter hotline",
+        "phone": "408-385-2400",
+        "hours": "9 a.m. to 7 p.m.",
+        "source_id": "sanjose_homeless_services_guide"
+      }
+    ],
+    "source_ids": [
+      "sanjose_homeless_services_guide",
+      "sanjose_food_family_resources",
+      "scc_apply_public_benefits",
+      "scc_osh_temporary_emergency_shelter"
+    ]
+  },
+  {
+    "id": "san_francisco_county",
+    "name": "San Francisco City and County",
+    "state": "CA",
+    "fips_hint": "06075",
+    "primary_benefits_office": {
+      "organization": "San Francisco Human Services Agency",
+      "general_phone": "415-557-5000",
+      "calfresh_medi_cal_phone": "855-355-5757",
+      "calworks_phone": "855-557-5100",
+      "source_id": "sfhsa_home"
+    },
+    "service_centers": [
+      {
+        "address": "1460 Mission Street",
+        "source_id": "sfhsa_medi_cal"
+      },
+      {
+        "address": "1440 Harrison Street",
+        "source_id": "sfhsa_medi_cal"
+      },
+      {
+        "address": "3120 Mission Street",
+        "source_id": "sfhsa_medi_cal"
+      },
+      {
+        "address": "2 Gough Street",
+        "notes": "older adults and people with disabilities",
+        "source_id": "sfhsa_medi_cal"
+      },
+      {
+        "address": "170 Otis Street",
+        "notes": "CalWORKs appointment/service center",
+        "source_id": "sfhsa_calworks_apply"
+      }
+    ],
+    "food_handoff": [
+      {
+        "label": "SFHSA Free Food Locations directory",
+        "source_id": "sfhsa_free_food_locations"
+      },
+      {
+        "label": "SF-Marin Food Bank Food Locator",
+        "source_id": "sf_marin_food_bank_find_food"
+      },
+      {
+        "label": "211",
+        "phone": "211",
+        "source_id": "sf_211_bayarea_housing"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "Coordinated Entry / Access Points",
+        "phone": "415-487-3300 x7000",
+        "source_id": "sfserviceguide_access_point"
+      },
+      {
+        "label": "SFHOT / Adult Shelter Access Line",
+        "phone": "628-652-8000",
+        "source_id": "sfserviceguide_adult_shelter_reservation"
+      },
+      {
+        "label": "Department of Homelessness and Supportive Housing",
+        "phone": "628-652-7700",
+        "source_id": "sfserviceguide_adult_shelter_reservation"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "Zuckerberg San Francisco General Hospital WIC Clinic",
+        "phone": "628-206-5494",
+        "address": "2550 23rd Street, Building 9, Room 125",
+        "source_id": "sf_wic_clinic_hours_locations"
+      },
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "Eviction Defense Collaborative",
+        "phone": "415-659-9184",
+        "email": "legal@evictiondefense.org",
+        "source_id": "sf_eviction_defense_collaborative"
+      },
+      {
+        "label": "SF Tenant and Landlord Resources",
+        "source_id": "sf_tenant_landlord_resources"
+      }
+    ],
+    "source_ids": [
+      "sfhsa_home",
+      "sfhsa_benefitscal",
+      "sfhsa_calfresh_apply",
+      "sfhsa_medi_cal",
+      "sfhsa_caap",
+      "sfhsa_calworks_apply",
+      "sf_wic_clinic_hours_locations",
+      "sfhsa_free_food_locations",
+      "sf_hsh_department",
+      "sf_coordinated_entry"
+    ],
+    "cities_in_scope": [
+      "San Francisco",
+      "San Francisco County"
+    ]
+  },
+  {
+    "id": "alameda_county",
+    "name": "Alameda County",
+    "state": "CA",
+    "fips_hint": "06001",
+    "cities_in_scope": [
+      "Alameda",
+      "Berkeley",
+      "Fremont",
+      "Hayward",
+      "Oakland"
+    ],
+    "primary_benefits_office": {
+      "organization": "Alameda County Social Services Agency",
+      "source_id": "alameda_county_social_services"
+    },
+    "food_handoff": [
+      {
+        "label": "Alameda County Community Food Bank get-food page",
+        "source_id": "alameda_food_bank_get_food"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "alameda_county_social_services",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "alameda_food_bank_get_food",
+      "ca_211_home"
+    ]
+  },
+  {
+    "id": "contra_costa_county",
+    "name": "Contra Costa County",
+    "state": "CA",
+    "fips_hint": "06013",
+    "cities_in_scope": [
+      "Antioch",
+      "Concord",
+      "Pittsburg",
+      "Richmond",
+      "Walnut Creek"
+    ],
+    "primary_benefits_office": {
+      "organization": "Contra Costa County Employment & Human Services Department",
+      "source_id": "contra_costa_ehsd"
+    },
+    "food_handoff": [
+      {
+        "label": "Food Bank of Contra Costa and Solano find-food page",
+        "source_id": "food_bank_ccs_find_food"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "contra_costa_ehsd",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "food_bank_ccs_find_food",
+      "ca_211_home"
+    ]
+  },
+  {
+    "id": "marin_county",
+    "name": "Marin County",
+    "state": "CA",
+    "fips_hint": "06041",
+    "cities_in_scope": [
+      "Mill Valley",
+      "Novato",
+      "San Rafael",
+      "Sausalito"
+    ],
+    "primary_benefits_office": {
+      "organization": "Marin County Health and Human Services",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "SF-Marin Food Bank Food Locator",
+        "source_id": "sf_marin_food_bank_find_food"
+      },
+      {
+        "label": "211 Bay Area Marin County",
+        "phone": "211",
+        "source_id": "marin_211_bayarea"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 Bay Area Marin County",
+        "phone": "211",
+        "source_id": "marin_211_bayarea"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "cdss_county_offices",
+      "benefitscal_info",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "sf_marin_food_bank_find_food",
+      "marin_211_bayarea"
+    ]
+  },
+  {
+    "id": "napa_county",
+    "name": "Napa County",
+    "state": "CA",
+    "fips_hint": "06055",
+    "cities_in_scope": [
+      "American Canyon",
+      "Calistoga",
+      "Napa",
+      "St. Helena"
+    ],
+    "primary_benefits_office": {
+      "organization": "Napa County Health and Human Services Agency",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "Community Action of Napa Valley Food Bank",
+        "source_id": "canv_food_bank"
+      },
+      {
+        "label": "211 Bay Area Napa County",
+        "phone": "211",
+        "source_id": "napa_211_bayarea"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 Bay Area Napa County",
+        "phone": "211",
+        "source_id": "napa_211_bayarea"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "cdss_county_offices",
+      "benefitscal_info",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "canv_food_bank",
+      "napa_211_bayarea"
+    ]
+  },
+  {
+    "id": "san_mateo_county",
+    "name": "San Mateo County",
+    "state": "CA",
+    "fips_hint": "06081",
+    "cities_in_scope": [
+      "Daly City",
+      "East Palo Alto",
+      "Half Moon Bay",
+      "Redwood City",
+      "San Mateo",
+      "South San Francisco"
+    ],
+    "primary_benefits_office": {
+      "organization": "San Mateo County Human Services Agency",
+      "source_id": "san_mateo_hsa"
+    },
+    "food_handoff": [
+      {
+        "label": "Second Harvest Food Connection Hotline",
+        "phone": "1-800-984-3663",
+        "source_id": "second_harvest_sv_get_food"
+      },
+      {
+        "label": "211 Bay Area San Mateo County",
+        "phone": "211",
+        "source_id": "san_mateo_211_bayarea"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 Bay Area San Mateo County",
+        "phone": "211",
+        "source_id": "san_mateo_211_bayarea"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "san_mateo_hsa",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "second_harvest_sv_get_food",
+      "san_mateo_211_bayarea"
+    ]
+  },
+  {
+    "id": "solano_county",
+    "name": "Solano County",
+    "state": "CA",
+    "fips_hint": "06095",
+    "cities_in_scope": [
+      "Benicia",
+      "Fairfield",
+      "Suisun City",
+      "Vacaville",
+      "Vallejo"
+    ],
+    "primary_benefits_office": {
+      "organization": "Solano County Health and Social Services",
+      "source_id": "solano_hss"
+    },
+    "food_handoff": [
+      {
+        "label": "Food Bank of Contra Costa and Solano find-food page",
+        "source_id": "food_bank_ccs_find_food"
+      },
+      {
+        "label": "211 Bay Area Solano County",
+        "phone": "211",
+        "source_id": "solano_211_bayarea"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 Bay Area Solano County",
+        "phone": "211",
+        "source_id": "solano_211_bayarea"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "solano_hss",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "food_bank_ccs_find_food",
+      "solano_211_bayarea"
+    ]
+  },
+  {
+    "id": "sonoma_county",
+    "name": "Sonoma County",
+    "state": "CA",
+    "fips_hint": "06097",
+    "cities_in_scope": [
+      "Healdsburg",
+      "Petaluma",
+      "Rohnert Park",
+      "Santa Rosa",
+      "Sonoma"
+    ],
+    "primary_benefits_office": {
+      "organization": "Sonoma County Human Services Economic Assistance",
+      "source_id": "sonoma_human_services_economic_assistance"
+    },
+    "food_handoff": [
+      {
+        "label": "Redwood Empire Food Bank find-food page",
+        "source_id": "redwood_empire_food_bank_find_food"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "source_ids": [
+      "sonoma_human_services_economic_assistance",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "redwood_empire_food_bank_find_food",
+      "ca_211_home"
+    ]
+  }
+]

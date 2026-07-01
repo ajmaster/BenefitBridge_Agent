@@ -1,0 +1,232 @@
+{
+  "HouseholdSnapshot": {
+    "type": "object",
+    "required": [
+      "language",
+      "location",
+      "household_size",
+      "needs"
+    ],
+    "properties": {
+      "language": {
+        "type": "string"
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "county": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "string"
+          },
+          "fips": {
+            "type": "string"
+          }
+        }
+      },
+      "household_size": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "adults": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "children_ages": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      },
+      "income_range_monthly": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rent_or_housing_cost": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "utilities_need": {
+        "type": "boolean"
+      },
+      "food_need_today": {
+        "type": "boolean"
+      },
+      "housing_status": {
+        "type": "string",
+        "enum": [
+          "housed",
+          "behind_on_rent",
+          "doubled_up",
+          "car_or_rv",
+          "shelter",
+          "outside",
+          "unsafe",
+          "unknown"
+        ]
+      },
+      "needs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "pii_collected": {
+        "type": "boolean"
+      }
+    }
+  },
+  "BenefitPath": {
+    "type": "object",
+    "required": [
+      "area",
+      "program_name",
+      "status_label",
+      "why_this_is_relevant",
+      "missing_facts",
+      "documents_to_prepare",
+      "source_citations",
+      "warnings"
+    ],
+    "properties": {
+      "area": {
+        "type": "string"
+      },
+      "program_name": {
+        "type": "string"
+      },
+      "status_label": {
+        "type": "string",
+        "enum": [
+          "likely_worth_checking",
+          "needs_more_information",
+          "local_handoff_recommended",
+          "not_enough_evidence"
+        ]
+      },
+      "why_this_is_relevant": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "missing_facts": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "documents_to_prepare": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "official_links": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "agency_contacts": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "source_citations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "PrepPacket": {
+    "type": "object",
+    "required": [
+      "household_snapshot_summary",
+      "potential_benefit_paths",
+      "missing_answers",
+      "document_checklist",
+      "caseworker_questions",
+      "call_script",
+      "safety_notice",
+      "source_citations"
+    ],
+    "properties": {
+      "user_language": {
+        "type": "string"
+      },
+      "household_snapshot_summary": {
+        "type": "string"
+      },
+      "immediate_help_notes": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "potential_benefit_paths": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/BenefitPath"
+        }
+      },
+      "missing_answers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "document_checklist": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "caseworker_questions": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "call_script": {
+        "type": "string"
+      },
+      "safety_notice": {
+        "type": "string"
+      },
+      "source_citations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "generated_at": {
+        "type": "string"
+      }
+    }
+  }
+}
