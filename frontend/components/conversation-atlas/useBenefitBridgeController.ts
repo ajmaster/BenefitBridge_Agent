@@ -21,6 +21,7 @@ import type {
   SyntheticProfile,
 } from "../../lib/types";
 import { fallbackResult, syntheticProfiles } from "../../data/syntheticProfiles";
+import { getStoredLocale } from "@/lib/locale-storage";
 import { copyFor } from "./i18n";
 
 export type NoticeKind = "ready" | "warn" | "error";
@@ -72,27 +73,28 @@ export type AtlasSection =
 
 export function useBenefitBridgeController() {
   const [selectedProfileId, setSelectedProfileId] = useState(syntheticProfiles[0].id);
-  const [snapshot, setSnapshot] = useState<HouseholdSnapshotInput>(
-    syntheticProfiles[0].snapshot,
-  );
+  const [snapshot, setSnapshot] = useState<HouseholdSnapshotInput>(() => ({
+    ...syntheticProfiles[0].snapshot,
+    language: getStoredLocale() ?? "en",
+  }));
   const [userText, setUserText] = useState(syntheticProfiles[0].userText);
   const [result, setResult] = useState<PrepareResult>(fallbackResult);
   const [resources, setResources] = useState<LocalResource[]>(fallbackResources);
   const [readiness, setReadiness] = useState<ReadinessResult | null>(null);
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(() => [
     {
       role: "assistant",
-      content: copyFor(syntheticProfiles[0].snapshot.language).chatStarter,
+      content: copyFor(getStoredLocale() ?? "en").chatStarter,
     },
   ]);
   const [chatTemplates, setChatTemplates] = useState<A2UITemplate[]>([]);
   const [chatInput, setChatInput] = useState(
     "I am in San Jose and need food, health coverage, and utility help.",
   );
-  const [notice, setNotice] = useState<Notice>({
+  const [notice, setNotice] = useState<Notice>(() => ({
     kind: "ready",
-    text: copyFor(syntheticProfiles[0].snapshot.language).noticeReady,
-  });
+    text: copyFor(getStoredLocale() ?? "en").noticeReady,
+  }));
   const [busy, setBusy] = useState(false);
   const [chatBusy, setChatBusy] = useState(false);
   const [activeSection, setActiveSection] = useState<AtlasSection>("chat");
