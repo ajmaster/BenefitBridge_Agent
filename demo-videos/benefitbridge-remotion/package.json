@@ -16,6 +16,8 @@
     "render:spanish": "remotion render src/index.ts SpanishWicPrep out/spanish-wic-prep.mp4 --codec=h264 --overwrite",
     "render:atlas": "remotion render src/index.ts ConversationAtlasDemo out/conversation-atlas.mp4 --codec=h264 --overwrite",
     "render:all": "npm run render:sanjose && npm run render:sf && npm run render:spanish && npm run render:atlas",
+    "still:hero": "remotion still src/index.ts HeroLoop out/hero-loop-poster.png --frame=150 --overwrite",
+    "render:hero": "remotion render src/index.ts HeroLoop out/hero-loop.mp4 --codec=h264 --overwrite",
     "verify:outputs": "node scripts/verify-outputs.cjs"
   },
   "dependencies": {
