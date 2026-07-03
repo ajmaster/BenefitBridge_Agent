@@ -1,4 +1,4 @@
-"""Deterministic guided chat workflow for BenefitBridge CA."""
+"""Deterministic guided chat workflow for AidAtlasCA."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from typing import Any
 from app.graph import run_benefitbridge_graph
 from app.policies.privacy import RedactionResult, redact_pii
 from app.policies.safety import detect_safety_route, fixed_handoff_text
+from app.services.a2ui_contract import a2ui_action, validate_a2ui_templates
 from app.services.source_store import DEFAULT_STORE
 from app.tools.jurisdiction import lookup_county_from_location
 from app.tools.local_resources import find_local_resources
@@ -17,38 +18,28 @@ NEED_KEYWORDS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("food today", ("food today", "no food", "hungry today")),
     ("health coverage", ("health", "medi-cal", "medical", "covered california")),
     ("utility help", ("utility", "utilities", "energy", "liheap", "bill help")),
+    ("phone discount", ("phone discount", "lifeline", "cell phone", "internet discount")),
     ("cash aid", ("cash", "calworks", "caap", "general assistance")),
+    ("child care", ("child care", "childcare", "day care", "daycare")),
+    ("school meals", ("school meals", "school lunch", "school breakfast")),
+    ("ihss in-home support", ("ihss", "in-home support", "in home support", "caregiver")),
+    ("legal aid", ("legal aid", "lawyer", "eviction papers", "legal help")),
     ("housing", ("housing", "rent", "eviction", "homeless")),
     ("shelter", ("shelter", "sleeping outside", "sleeping in my car", "tonight")),
     ("WIC", ("wic", "pregnant", "breastfeeding", "baby", "infant")),
 )
 
-LOCATION_HINTS: tuple[tuple[str, str], ...] = (
-    ("alameda county", "Alameda County"),
-    ("oakland", "Oakland, CA"),
-    ("berkeley", "Berkeley, CA"),
-    ("contra costa", "Contra Costa County"),
-    ("concord", "Concord, CA"),
-    ("richmond", "Richmond, CA"),
-    ("marin county", "Marin County"),
-    ("san rafael", "San Rafael, CA"),
-    ("napa county", "Napa County"),
-    ("napa", "Napa, CA"),
-    ("san francisco", "San Francisco, CA"),
-    ("sf ", "San Francisco, CA"),
-    ("san mateo county", "San Mateo County"),
-    ("redwood city", "Redwood City, CA"),
-    ("san mateo", "San Mateo, CA"),
-    ("santa clara", "Santa Clara County"),
-    ("san jose", "San Jose, CA"),
-    ("san josé", "San Jose, CA"),
-    ("951", "San Jose, CA"),
-    ("solano county", "Solano County"),
-    ("vallejo", "Vallejo, CA"),
-    ("sonoma county", "Sonoma County"),
-    ("santa rosa", "Santa Rosa, CA"),
-)
 
+def _finalize_chat_response(response: dict[str, Any]) -> dict[str, Any]:
+    events = [str(event) for event in response.get("events", [])]
+    templates = [_progress_template(events), *response.get("ui_templates", [])]
+    response["ui_templates"] = validate_a2ui_templates(templates)
+    response["a2ui"] = {
+        "mime_type": "application/json+a2ui",
+        "validated": True,
+        "template_count": len(response["ui_templates"]),
+    }
+    return response
 
 def run_chat_workflow(
     messages: list[dict[str, str]], snapshot: dict[str, Any]
@@ -60,7 +51,7 @@ def run_chat_workflow(
     latest_user_text = _latest_user_text(messages)
     redaction = _scan_chat_privacy(latest_user_text, base_snapshot)
     if redaction.blocked:
-        return {
+        return _finalize_chat_response({
             "route": "privacy_block",
             "message": (
                 "I detected sensitive details. Please remove SSNs, credentials, "
@@ -75,13 +66,13 @@ def run_chat_workflow(
             ],
             "ui_templates": [_privacy_template(redaction.findings)],
             "redaction": redaction.to_dict(),
-        }
+        })
 
     safe_text = redaction.redacted_text
     events.append("safety_triage")
     safety = detect_safety_route(safe_text)
     if safety.suppress_normal_packet:
-        return {
+        return _finalize_chat_response({
             "route": safety.route,
             "message": fixed_handoff_text(safety.route),
             "events": events,
@@ -90,7 +81,7 @@ def run_chat_workflow(
             "next_questions": [],
             "ui_templates": [_safety_template(safety.route)],
             "safety": safety.to_dict(),
-        }
+        })
 
     events.append("fact_extraction")
     snapshot_patch = _extract_snapshot_patch(safe_text, base_snapshot)
@@ -102,7 +93,17 @@ def run_chat_workflow(
         templates.append(_questions_template(next_questions))
 
     if not _ready_for_packet(next_snapshot):
-        return {
+        source_answer = _general_source_answer(
+            safe_text,
+            events,
+            next_snapshot,
+            snapshot_patch,
+            next_questions,
+            templates,
+        )
+        if source_answer is not None:
+            return source_answer
+        return _finalize_chat_response({
             "route": "intake",
             "message": (
                 "I can guide the prep conversation. I need city/county/ZIP and "
@@ -113,13 +114,13 @@ def run_chat_workflow(
             "snapshot_patch": snapshot_patch,
             "next_questions": next_questions,
             "ui_templates": templates,
-        }
+        })
 
     events.append("deterministic_graph")
     graph_result = run_benefitbridge_graph(safe_text, next_snapshot)
     route = graph_result.get("route", "intake")
     if route != "standard_benefits_prep" or "packet" not in graph_result:
-        return {
+        return _finalize_chat_response({
             "route": route,
             "message": graph_result.get(
                 "message",
@@ -135,7 +136,7 @@ def run_chat_workflow(
                 if "jurisdiction" in graph_result
                 else {}
             ),
-        }
+        })
 
     packet = graph_result["packet"]
     resources = _resources_for_snapshot(next_snapshot)
@@ -145,9 +146,10 @@ def run_chat_workflow(
             _resources_template(resources),
             _source_links_template(packet),
             _packet_summary_template(packet),
+            *_document_kit_templates(packet, resources),
         ]
     )
-    return {
+    return _finalize_chat_response({
         "route": "packet_ready",
         "message": (
             "I prepared source-backed directions for the benefit areas worth checking. "
@@ -162,7 +164,7 @@ def run_chat_workflow(
         "resources": resources,
         "validation": graph_result.get("validation"),
         "jurisdiction": graph_result.get("jurisdiction"),
-    }
+    })
 
 
 def _latest_user_text(messages: list[dict[str, str]]) -> str:
@@ -238,8 +240,8 @@ def _extract_snapshot_patch(text: str, snapshot: dict[str, Any]) -> dict[str, An
     if "español" in lowered or "spanish" in lowered or "prefiero" in lowered:
         patch["language"] = "es"
 
-    for hint, value in LOCATION_HINTS:
-        if hint in lowered:
+    for hint, value in DEFAULT_STORE.location_hints:
+        if _location_hint_matches(lowered, hint):
             patch["location_text"] = value
             break
 
@@ -356,6 +358,102 @@ def _ready_for_packet(snapshot: dict[str, Any]) -> bool:
     return bool(snapshot.get("location_text") and snapshot.get("needs"))
 
 
+def _general_source_answer(
+    text: str,
+    events: list[str],
+    snapshot: dict[str, Any],
+    snapshot_patch: dict[str, Any],
+    next_questions: list[str],
+    templates: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    lowered = text.lower()
+    source_ids: list[str] = []
+    if "ihss" in lowered or "in-home" in lowered or "in home" in lowered:
+        source_ids = ["cdss_ihss_home", "dhcs_county_offices", "cdss_county_offices"]
+        answer = (
+            "IHSS is a California in-home support program administered through "
+            "county processes. I can help prepare broad questions and documents "
+            "for an agency conversation; official agencies decide eligibility and "
+            "service authorizations."
+        )
+    elif "calworks" in lowered:
+        source_ids = ["cdss_calworks_home", "benefitscal_info", "cdss_county_offices"]
+        answer = (
+            "CalWORKs is California's family cash-aid and services program, "
+            "operated locally by county welfare departments. I can help prepare "
+            "questions and documents, but official agencies decide eligibility and amounts."
+        )
+    elif "child care" in lowered or "childcare" in lowered:
+        source_ids = ["cdss_child_care_development", "cdss_county_offices", "ca_211_home"]
+        answer = (
+            "California child care support questions should be routed through "
+            "official child care and county resources. I can help gather ages, "
+            "schedule needs, and county details without claiming provider availability."
+        )
+    elif "school meal" in lowered or "school lunch" in lowered:
+        source_ids = ["cde_school_nutrition_home", "ca_211_home"]
+        answer = (
+            "School meal questions should be checked with the school or district "
+            "and California Department of Education school nutrition resources. "
+            "I do not claim same-day meal availability."
+        )
+    elif "legal" in lowered or "lawyer" in lowered or "court" in lowered:
+        source_ids = ["california_courts_self_help", "ca_211_home"]
+        answer = (
+            "For legal issues, I can route to legal information and legal-aid "
+            "handoffs, but I cannot give legal advice or choose a filing strategy."
+        )
+    else:
+        return None
+
+    citations = [
+        DEFAULT_STORE.citation(source_id).to_dict()
+        for source_id in source_ids
+        if source_id in DEFAULT_STORE.approved_sources_by_id
+    ]
+    return _finalize_chat_response(
+        {
+            "route": "source_answer",
+            "message": answer,
+            "events": [*events, "official_source_retrieval"],
+            "snapshot": snapshot,
+            "snapshot_patch": snapshot_patch,
+            "next_questions": next_questions
+            or ["Share a city/county/ZIP and main needs when you want a prep packet."],
+            "ui_templates": [
+                *templates,
+                _template(
+                    "source-answer",
+                    "source_sheet",
+                    "Approved Source Answer",
+                    tone="source",
+                    body=answer,
+                    items=[
+                        {
+                            "title": citation.get("source_title") or citation["source_id"],
+                            "subtitle": citation.get("agency_owner"),
+                            "links": [{"label": "Open source", "href": citation.get("url", "")}]
+                            if citation.get("url")
+                            else [],
+                        }
+                        for citation in citations
+                    ],
+                    actions=[
+                        a2ui_action(
+                            "open_resource_url",
+                            citation.get("source_title") or citation["source_id"],
+                            href=citation.get("url"),
+                        )
+                        for citation in citations[:3]
+                        if citation.get("url")
+                    ],
+                    citations=citations,
+                ),
+            ],
+        }
+    )
+
+
 def _resources_for_snapshot(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
     location_text = str(snapshot.get("location_text") or "")
     jurisdiction = lookup_county_from_location(location_text)
@@ -366,7 +464,10 @@ def _resources_for_snapshot(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
     for need in snapshot.get("needs", [])[:4]:
         need_type = _resource_need_type(str(need))
         for resource in find_local_resources(
-            county, need_type, language=snapshot.get("language")
+            county,
+            need_type,
+            language=snapshot.get("language"),
+            safety_sensitive=bool(snapshot.get("safety_sensitive", False)),
         ):
             if resource["id"] not in {item["id"] for item in resources}:
                 resources.append(resource)
@@ -375,15 +476,29 @@ def _resources_for_snapshot(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
 
 def _resource_need_type(need: str) -> str:
     lowered = need.lower()
+    if "legal" in lowered or "lawyer" in lowered:
+        return "legal_aid"
+    if "phone" in lowered or "lifeline" in lowered:
+        return "benefits_office"
+    if "child care" in lowered or "school" in lowered or "ihss" in lowered:
+        return "benefits_office"
     if "shelter" in lowered or "housing" in lowered:
         return "shelter"
     if "wic" in lowered:
         return "wic"
     if "health" in lowered:
         return "health"
+    if "utility" in lowered or "liheap" in lowered or "energy" in lowered:
+        return "utility"
     if "cash" in lowered:
         return "benefits_office"
     return "food"
+
+
+def _location_hint_matches(text: str, hint: str) -> bool:
+    if len(hint) <= 3:
+        return bool(re.search(rf"(?<![a-z0-9]){re.escape(hint)}(?![a-z0-9])", text))
+    return hint in text
 
 
 def _template(
@@ -409,6 +524,33 @@ def _template(
         "actions": actions or [],
         "citations": citations or [],
     }
+
+
+def _progress_template(events: list[str]) -> dict[str, Any]:
+    labels = {
+        "chat_received": "Chat turn received",
+        "privacy_screen": "Privacy screen",
+        "safety_triage": "Safety triage",
+        "fact_extraction": "Fact extraction",
+        "deterministic_graph": "ADK graph handoff",
+        "consent_privacy": "Consent and privacy",
+        "jurisdiction": "Jurisdiction",
+        "official_source_retrieval": "Official sources",
+        "benefit_path_matcher": "Benefit path matching",
+        "safety_and_grounding_critic": "Safety and grounding critic",
+        "eval_telemetry": "Redacted telemetry",
+    }
+    return _template(
+        "workflow-progress",
+        "progress",
+        "Workflow Progress",
+        tone="info",
+        body="Only safe route labels are shown; raw tool arguments are not exposed.",
+        items=[
+            {"label": f"Step {index + 1}", "value": labels.get(event, event.replace("_", " "))}
+            for index, event in enumerate(events[:12])
+        ],
+    )
 
 
 def _facts_template(snapshot: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
@@ -442,6 +584,9 @@ def _questions_template(questions: list[str]) -> dict[str, Any]:
             {"label": f"Q{index + 1}", "value": question}
             for index, question in enumerate(questions)
         ],
+        actions=[
+            a2ui_action("open_resources", "Review local handoff options", target="local-resources")
+        ],
     )
 
 
@@ -467,6 +612,7 @@ def _benefit_paths_template(packet: dict[str, Any]) -> dict[str, Any]:
         tone="success",
         body="These are preparation directions, not eligibility decisions.",
         items=items,
+        actions=[a2ui_action("open_packet", "Open packet", target="packet-summary")],
         citations=citations,
     )
 
@@ -478,15 +624,16 @@ def _resources_template(resources: list[dict[str, Any]]) -> dict[str, Any]:
             "local_resources",
             "Local Handoffs",
             tone="warning",
-            body="No local handoff matched yet. Try county-level wording such as Santa Clara County or San Francisco.",
-            items=[],
-        )
+        body="No local handoff matched yet. Try county-level wording such as Santa Clara County or San Francisco.",
+        items=[],
+        actions=[a2ui_action("open_resources", "Open resources", target="local-resources")],
+    )
     return _template(
         "local-resources",
         "local_resources",
         "Local Handoffs",
         tone="accent",
-        body="Local details can change. Call before going.",
+        body="Local details can change. Call before going to confirm current availability.",
         items=[
             {
                 "title": resource.get("organization"),
@@ -503,6 +650,7 @@ def _resources_template(resources: list[dict[str, Any]]) -> dict[str, Any]:
             }
             for resource in resources
         ],
+        actions=[a2ui_action("open_resources", "Open resources", target="local-resources")],
     )
 
 
@@ -529,6 +677,7 @@ def _source_links_template(packet: dict[str, Any]) -> dict[str, Any]:
             }
             for citation in citations
         ],
+        actions=[a2ui_action("open_sources", "Open source sheet", target="source-sheet")],
         citations=citations,
     )
 
@@ -548,6 +697,180 @@ def _packet_summary_template(packet: dict[str, Any]) -> dict[str, Any]:
             },
             {"title": "Call script", "body": packet.get("call_script", "")},
         ],
+        actions=[
+            a2ui_action("open_packet", "Open packet", target="packet-summary"),
+            a2ui_action("copy_call_script", "Copy call script", target="call-script"),
+            a2ui_action("download_markdown", "Download Markdown", target="document-kit"),
+            a2ui_action("download_calendar", "Add reminders", target="document-kit"),
+        ],
+    )
+
+
+def _document_kit_templates(
+    packet: dict[str, Any], resources: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """Build stable A2UI document templates for the Document Studio."""
+
+    citations = _dedupe_packet_citations(packet)
+    local_items = _local_handoff_items(resources)
+    return [
+        _template(
+            "document-kit",
+            "document_kit",
+            "Prep Document Kit",
+            tone="success",
+            subtitle="Built from conversation facts, official sources, and local handoffs.",
+            body=(
+                "Use these preparation documents for an agency conversation. "
+                "Official agencies decide eligibility and amounts."
+            ),
+            items=[
+                {"label": "Summary", "value": "One-page situation summary"},
+                {"label": "Checklist", "value": "Documents and facts to gather"},
+                {"label": "Questions", "value": "Questions to ask a caseworker"},
+                {"label": "Call script", "value": "Plain-language call opener"},
+                {"label": "Handoffs", "value": "Local resources to call before going"},
+                {"label": "Sources", "value": "Official source sheet"},
+            ],
+            actions=[
+                a2ui_action("open_packet", "Open packet", target="document-kit"),
+                a2ui_action("open_sources", "Open sources", target="source-sheet"),
+            ],
+            citations=citations[:4],
+        ),
+        _template(
+            "document-summary",
+            "document_summary",
+            "One-Page Summary",
+            tone="info",
+            body=packet.get("household_snapshot_summary"),
+            items=[
+                {
+                    "title": path.get("program_name", "Benefit path"),
+                    "subtitle": str(path.get("status_label", "")).replace("_", " "),
+                    "body": " ".join(path.get("why_this_is_relevant", [])[:2]),
+                }
+                for path in packet.get("potential_benefit_paths", [])[:4]
+            ],
+            citations=citations[:4],
+        ),
+        _template(
+            "document-checklist",
+            "document_checklist",
+            "Documents To Bring",
+            tone="accent",
+            body="Gather only documents you already have or can safely access.",
+            items=[
+                {"label": f"Item {index + 1}", "value": item}
+                for index, item in enumerate(packet.get("document_checklist", [])[:10])
+            ],
+        ),
+        _template(
+            "caseworker-questions",
+            "caseworker_questions",
+            "Questions To Ask",
+            tone="warning",
+            body="Use these as prompts during a call or appointment.",
+            items=[
+                {"label": f"Q{index + 1}", "value": question}
+                for index, question in enumerate(
+                    packet.get("caseworker_questions", [])[:8]
+                )
+            ],
+        ),
+        _template(
+            "call-script",
+            "call_script",
+            "Call Script",
+            tone="neutral",
+            body=packet.get("call_script", ""),
+            items=[
+                {"label": "Reminder", "value": "Call before going."},
+                {
+                    "label": "Boundary",
+                    "value": "AidAtlasCA does not submit applications.",
+                },
+            ],
+            actions=[a2ui_action("copy_call_script", "Copy call script", target="call-script")],
+        ),
+        _template(
+            "local-handoff-sheet",
+            "local_handoff_sheet",
+            "Local Handoff Sheet",
+            tone="accent" if local_items else "warning",
+            body="Local details can change. Call before going to confirm current availability.",
+            items=local_items,
+            actions=[a2ui_action("open_resources", "Open resources", target="local-handoff-sheet")],
+        ),
+        _template(
+            "source-sheet",
+            "source_sheet",
+            "Official Source Sheet",
+            tone="source",
+            body="Use these official or approved sources to verify next steps.",
+            items=[
+                {
+                    "title": citation.get("source_title") or citation.get("source_id"),
+                    "subtitle": citation.get("agency_owner")
+                    or citation.get("source_type")
+                    or citation.get("freshness_state", "source"),
+                    "links": [{"label": "Open source", "href": citation.get("url", "")}]
+                    if citation.get("url")
+                    else [],
+                }
+                for citation in citations[:10]
+            ],
+            actions=[
+                a2ui_action(
+                    "open_resource_url",
+                    citation.get("source_title") or citation.get("source_id") or "Open source",
+                    href=citation.get("url"),
+                )
+                for citation in citations[:4]
+                if citation.get("url")
+            ],
+            citations=citations[:10],
+        ),
+    ]
+
+
+def _local_handoff_items(resources: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    items = []
+    for resource in resources[:6]:
+        badges = [
+            value
+            for value in (
+                resource.get("service_type"),
+                resource.get("jurisdiction"),
+                resource.get("phone"),
+            )
+            if value
+        ]
+        links = []
+        if resource.get("url"):
+            links.append({"label": "Open resource", "href": resource["url"]})
+        if resource.get("maps_url"):
+            links.append({"label": "Open map", "href": resource["maps_url"]})
+        items.append(
+            {
+                "title": resource.get("organization"),
+                "subtitle": resource.get("service_name"),
+                "body": resource.get("availability_notice", "Call before going."),
+                "badges": badges,
+                "links": links,
+            }
+        )
+    return items
+
+
+def _dedupe_packet_citations(packet: dict[str, Any]) -> list[dict[str, Any]]:
+    return _dedupe_citations(
+        list(packet.get("source_citations", []))
+        + [
+            citation
+            for path in packet.get("potential_benefit_paths", [])
+            for citation in path.get("source_citations", [])
+        ]
     )
 
 
@@ -557,7 +880,7 @@ def _privacy_template(findings: list[str]) -> dict[str, Any]:
         "privacy_notice",
         "Sensitive Details Blocked",
         tone="danger",
-        body="BenefitBridge does not need SSNs, credentials, case numbers, cards, real documents, or exact addresses.",
+        body="AidAtlasCA does not need SSNs, credentials, case numbers, cards, real documents, or exact addresses.",
         items=[
             {"label": "Detected", "value": ", ".join(findings) or "sensitive detail"}
         ],
@@ -581,7 +904,15 @@ def _safety_template(route: str) -> dict[str, Any]:
         "Safety Handoff",
         tone="danger",
         body=fixed_handoff_text(route),
-        actions=_links_from_citations(citations),
+        actions=[
+            a2ui_action(
+                "open_resource_url",
+                citation.get("source_title") or citation.get("source_id") or "Open source",
+                href=citation.get("url"),
+            )
+            for citation in citations
+            if citation.get("url")
+        ],
         citations=citations,
     )
 

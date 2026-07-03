@@ -10,7 +10,7 @@
     "never_claim": [
       "You qualify for CalFresh",
       "You will receive a specific dollar amount",
-      "BenefitBridge can submit your application"
+      "AidAtlasCA can submit your application"
     ],
     "prep_questions": [
       "Which county do you live in or spend most nights in?",
@@ -139,7 +139,7 @@
       "Household member names/ages",
       "Income or reduced-hours proof if available",
       "Current health coverage notices if any",
-      "County/BenefitsCal login details kept by the user only, not entered into BenefitBridge"
+      "County/BenefitsCal login details kept by the user only, not entered into AidAtlasCA"
     ],
     "primary_source_ids": [
       "dhcs_medi_cal_apply",
@@ -294,7 +294,7 @@
     "never_claim": [
       "You qualify for cash aid",
       "You will receive a monthly amount",
-      "BenefitBridge decides immigration-related eligibility"
+      "AidAtlasCA decides immigration-related eligibility"
     ],
     "prep_questions": [
       "Are there dependent children in your household?",
@@ -336,5 +336,247 @@
       "Solano County",
       "Sonoma County"
     ]
+  },
+  {
+    "program_area_id": "phone_lifeline",
+    "display_name": "Phone and internet discount: California LifeLine",
+    "status_logic": [
+      "If user asks about phone, cell, internet, or communications discounts: status = likely_worth_checking.",
+      "If household already mentions Medi-Cal, CalFresh, CalWORKs, LIHEAP, or SSI: mention those can be relevant program-participation facts without deciding eligibility.",
+      "If user asks whether they qualify or what amount they get: explain the official program decides and route to California LifeLine."
+    ],
+    "never_claim": [
+      "You qualify for LifeLine",
+      "You will receive a specific discount amount",
+      "AidAtlasCA can enroll your phone service"
+    ],
+    "prep_questions": [
+      "Do you need help with phone, cell, or internet service costs?",
+      "Do you already participate in programs such as Medi-Cal, CalFresh, CalWORKs, LIHEAP, or SSI?",
+      "Which county/city should be used for local handoff if you need in-person help?"
+    ],
+    "documents_to_prepare": [
+      "Program participation notice if available",
+      "Broad income information if not using program participation",
+      "Current phone/internet provider information if available",
+      "Preferred contact method"
+    ],
+    "primary_source_ids": [
+      "california_lifeline",
+      "cpuc_lifeline_eligibility",
+      "ca_211_home"
+    ],
+    "applicable_geographies": [
+      "California"
+    ],
+    "audience_tags": [
+      "low_income",
+      "phone_or_internet_costs"
+    ],
+    "fact_requirements": [
+      "county_or_city",
+      "program_participation_or_income_range"
+    ],
+    "coverage_level": "statewide_core",
+    "handoff_policy": "official_source_or_211",
+    "freshness_status": "monthly_manual_check",
+    "language_status": "english_reviewed_spanish_draft"
+  },
+  {
+    "program_area_id": "child_care_support",
+    "display_name": "Child care support: CDSS child care and development",
+    "status_logic": [
+      "If household has children and asks about work, school, training, or child care costs: status = likely_worth_checking.",
+      "If child ages or schedule are missing: status = needs_more_information.",
+      "If user asks for provider openings: route to local child care resource/referral or 211 and do not claim availability."
+    ],
+    "never_claim": [
+      "You qualify for a child care subsidy",
+      "A provider has space available",
+      "AidAtlasCA can place your child in care"
+    ],
+    "prep_questions": [
+      "What are the children's ages?",
+      "Do you need child care for work, school, training, or job search?",
+      "What county/city should be used for local child care handoff?",
+      "Do you need care during standard hours, evenings, overnight, or weekends?"
+    ],
+    "documents_to_prepare": [
+      "Children's ages",
+      "Work, school, or training schedule if available",
+      "Broad income information",
+      "Any existing child care notices",
+      "Preferred language and accessibility needs"
+    ],
+    "primary_source_ids": [
+      "cdss_child_care_development",
+      "cdss_county_offices",
+      "ca_211_home"
+    ],
+    "applicable_geographies": [
+      "California"
+    ],
+    "audience_tags": [
+      "families_with_children",
+      "working_parent",
+      "student_parent"
+    ],
+    "fact_requirements": [
+      "child_ages",
+      "schedule_need",
+      "county_or_city"
+    ],
+    "coverage_level": "statewide_core",
+    "handoff_policy": "official_source_or_211",
+    "freshness_status": "monthly_manual_check",
+    "language_status": "english_reviewed_spanish_draft"
+  },
+  {
+    "program_area_id": "school_meals",
+    "display_name": "School meals and child nutrition",
+    "status_logic": [
+      "If household has school-age children and asks about meals, lunch, breakfast, or summer food: status = likely_worth_checking.",
+      "If school district or school is missing: status = needs_more_information.",
+      "If user asks whether meals are available today: route to school/district and do not claim current availability."
+    ],
+    "never_claim": [
+      "Your child is approved for school meals",
+      "This school has meals available today",
+      "AidAtlasCA can submit school meal forms"
+    ],
+    "prep_questions": [
+      "What school district or school does the child attend?",
+      "What grade or age range applies?",
+      "Do you need school-year meals, summer meals, or both?",
+      "Which language should the school use when contacting you?"
+    ],
+    "documents_to_prepare": [
+      "School or district name",
+      "Child age or grade range",
+      "Broad household income/program participation facts if requested by the school",
+      "Preferred language"
+    ],
+    "primary_source_ids": [
+      "cde_school_nutrition_home",
+      "ca_211_home"
+    ],
+    "applicable_geographies": [
+      "California"
+    ],
+    "audience_tags": [
+      "families_with_school_age_children",
+      "food"
+    ],
+    "fact_requirements": [
+      "school_or_district",
+      "child_age_or_grade"
+    ],
+    "coverage_level": "statewide_core",
+    "handoff_policy": "school_or_district_contact",
+    "freshness_status": "monthly_manual_check",
+    "language_status": "english_reviewed_spanish_draft"
+  },
+  {
+    "program_area_id": "ihss_in_home_support",
+    "display_name": "In-home support: IHSS preparation",
+    "status_logic": [
+      "If user mentions IHSS, caregiving, disability, older adult support, or help staying safely at home: status = likely_worth_checking.",
+      "If Medi-Cal status, county, or broad care needs are missing: status = needs_more_information.",
+      "If user asks for authorized hours, rates, medical need, or approval: explain the county/IHSS process decides."
+    ],
+    "never_claim": [
+      "You qualify for IHSS",
+      "You will receive a number of hours",
+      "AidAtlasCA can assess your medical need"
+    ],
+    "prep_questions": [
+      "Which county should be used for the IHSS office handoff?",
+      "Is the person asking about help for an older adult, blind/disabled adult, or disabled child?",
+      "Has Medi-Cal already been discussed with the county or health coverage office?",
+      "What broad help-at-home tasks are difficult?"
+    ],
+    "documents_to_prepare": [
+      "County/city",
+      "Medi-Cal status if known",
+      "Broad list of daily tasks needing help",
+      "Health care certification form information if already provided by the county",
+      "Preferred language and accessibility needs"
+    ],
+    "primary_source_ids": [
+      "cdss_ihss_home",
+      "dhcs_county_offices",
+      "cdss_county_offices"
+    ],
+    "applicable_geographies": [
+      "California"
+    ],
+    "audience_tags": [
+      "older_adults",
+      "disability",
+      "caregiver"
+    ],
+    "fact_requirements": [
+      "county_or_city",
+      "broad_support_need",
+      "medi_cal_status_if_known"
+    ],
+    "coverage_level": "statewide_core",
+    "handoff_policy": "county_ihss_office",
+    "freshness_status": "monthly_manual_check",
+    "language_status": "english_reviewed_spanish_draft"
+  },
+  {
+    "program_area_id": "legal_aid_handoff",
+    "display_name": "Legal information and legal-aid handoff",
+    "status_logic": [
+      "If user mentions eviction papers, benefits denial, court papers, legal aid, or needing a lawyer: status = local_handoff_recommended.",
+      "If immediate safety or domestic violence is mentioned: route through the safety handoff first and do not search exact locations.",
+      "If user asks what legal strategy to use: explain AidAtlasCA cannot give legal advice and route to legal information/legal aid."
+    ],
+    "never_claim": [
+      "This is legal advice",
+      "You should file a specific court paper",
+      "AidAtlasCA can represent you"
+    ],
+    "prep_questions": [
+      "What type of legal issue is this, such as eviction, benefits notice, family safety, or court papers?",
+      "What county should be used for legal-aid handoff?",
+      "Is there a deadline printed on a notice or court paper?",
+      "Do you need language access or disability accommodation information?"
+    ],
+    "documents_to_prepare": [
+      "Notice or court paper title only, not full document upload",
+      "Deadline date if already known",
+      "County/city",
+      "Preferred language",
+      "Any agency/court contact information the user already has"
+    ],
+    "primary_source_ids": [
+      "california_courts_self_help",
+      "ca_211_home",
+      "baylegal_santa_clara_office",
+      "law_foundation_housing_scc",
+      "sf_eviction_defense_collaborative",
+      "sf_tenant_landlord_resources"
+    ],
+    "applicable_geographies": [
+      "California",
+      "Santa Clara County",
+      "San Francisco"
+    ],
+    "audience_tags": [
+      "legal_aid",
+      "eviction",
+      "benefits_notice"
+    ],
+    "fact_requirements": [
+      "county_or_city",
+      "legal_issue_type",
+      "deadline_if_known"
+    ],
+    "coverage_level": "statewide_core",
+    "handoff_policy": "legal_information_not_advice",
+    "freshness_status": "monthly_manual_check",
+    "language_status": "english_reviewed_spanish_draft"
   }
 ]

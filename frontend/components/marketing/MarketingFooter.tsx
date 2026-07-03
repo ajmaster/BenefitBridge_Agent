@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Locale } from "@/components/conversation-atlas/i18n";
 import { marketingCopyFor } from "@/components/marketing/marketingCopy";
 import { Button } from "@/components/ui/button";
+import { BRAND_NAME } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const LOCALES: Array<{ value: Locale; label: string }> = [
@@ -13,7 +14,7 @@ const LOCALES: Array<{ value: Locale; label: string }> = [
 ];
 
 const NON_GOALS_STATEMENT =
-  "BenefitBridge does not determine eligibility, calculate benefit amounts, or submit applications.";
+  "AidAtlasCA does not determine eligibility, calculate benefit amounts, or submit applications.";
 
 export function MarketingFooter({
   locale,
@@ -58,7 +59,7 @@ export function MarketingFooter({
         </div>
 
         <p className="text-xs text-muted">
-          &copy; {year} BenefitBridge CA. {copy.footerTagline}
+          &copy; {year} {BRAND_NAME}. {copy.footerTagline}
         </p>
       </div>
     </footer>

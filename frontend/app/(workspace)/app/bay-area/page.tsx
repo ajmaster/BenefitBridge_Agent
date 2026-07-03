@@ -1,5 +1,5 @@
-import { BayAreaSection } from "@/components/workspace/sections/BayAreaSection";
+import { CaliforniaExplorerSection } from "@/components/workspace/sections/CaliforniaExplorerSection";
 
-export default function BayAreaPage() {
-  return <BayAreaSection />;
+export default function CaliforniaCompatibilityPage() {
+  return <CaliforniaExplorerSection />;
 }

@@ -6,6 +6,7 @@ import type { Locale } from "@/components/conversation-atlas/i18n";
 import { Button } from "@/components/ui/button";
 import BrandMark from "@/components/workspace/icons/BrandMark";
 import { marketingCopyFor } from "@/components/marketing/marketingCopy";
+import { BRAND_NAME } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const LOCALES: Array<{ value: Locale; label: string }> = [
@@ -24,9 +25,9 @@ export function MarketingHeader({
 
   return (
     <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-line bg-surface/90 px-6 py-4 backdrop-blur">
-      <Link href="/" className="flex items-center gap-3 text-ink" aria-label="BenefitBridge CA home">
+      <Link href="/" className="flex items-center gap-3 text-ink" aria-label={`${BRAND_NAME} home`}>
         <BrandMark />
-        <span className="text-lg font-bold tracking-tight">BenefitBridge CA</span>
+        <span className="text-lg font-bold tracking-tight">{BRAND_NAME}</span>
       </Link>
 
       <div className="flex items-center gap-4">

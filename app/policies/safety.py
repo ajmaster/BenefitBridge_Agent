@@ -72,13 +72,13 @@ def fixed_handoff_text(route: str) -> str:
     if route == "crisis_handoff":
         return (
             "If there is immediate danger, call 911. For suicide or emotional crisis "
-            "support in the U.S., call or text 988. BenefitBridge cannot provide "
+            "support in the U.S., call or text 988. AidAtlasCA cannot provide "
             "crisis counseling."
         )
     if route == "dv_safety_handoff":
         return (
             "If it is safe to do so, contact the National Domestic Violence Hotline "
-            "at 1-800-799-7233 or visit thehotline.org. BenefitBridge will not store "
+            "at 1-800-799-7233 or visit thehotline.org. AidAtlasCA will not store "
             "or print your exact address or safety narrative by default."
         )
     return "Local food, shelter, and legal-aid resources can change. Call before going."

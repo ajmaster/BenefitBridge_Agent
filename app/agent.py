@@ -1,4 +1,4 @@
-"""ADK entrypoint for the BenefitBridge CA prototype."""
+"""ADK entrypoint for the AidAtlasCA prototype."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from google.adk.models import Gemini
 from google.genai import types
 
 from app.callbacks import (
+    after_model_callback,
     after_tool_callback,
     before_agent_callback,
     before_tool_callback,
@@ -16,18 +17,20 @@ from app.config import GEMINI_MODEL, prompt_text
 from app.tools import BENEFITBRIDGE_TOOLS
 
 root_agent = Agent(
-    name="benefitbridge_agent",
+    name="aidatlasca_agent",
     model=Gemini(
         model=GEMINI_MODEL,
         retry_options=types.HttpRetryOptions(attempts=3),
     ),
     description=(
-        "California benefits preparation and local handoff assistant for "
-        "Santa Clara County, San Jose, and San Francisco."
+        "California benefits preparation and local handoff assistant with "
+        "reviewed local depth in selected Bay Area counties and statewide "
+        "core locator handoffs for all 58 California counties."
     ),
     instruction=prompt_text("root_agent.md"),
     tools=BENEFITBRIDGE_TOOLS,
     before_agent_callback=before_agent_callback,
+    after_model_callback=after_model_callback,
     before_tool_callback=before_tool_callback,
     after_tool_callback=after_tool_callback,
 )

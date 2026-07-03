@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Voice agent icon</title>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="#eaf5ff"/>
+  <path d="M176 218v76c0 44 36 80 80 80s80-36 80-80v-76" fill="none" stroke="#07183f" stroke-width="24" stroke-linecap="round"/>
+  <rect x="196" y="92" width="120" height="196" rx="60" fill="#0756d9"/>
+  <path d="M212 340c-40-16-68-55-68-100" fill="none" stroke="#008260" stroke-width="24" stroke-linecap="round"/>
+  <path d="M368 240c0 45-28 84-68 100" fill="none" stroke="#008260" stroke-width="24" stroke-linecap="round"/>
+  <path d="M256 376v54" stroke="#07183f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M205 430h102" stroke="#07183f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M76 214v80M112 184v140M436 214v80M400 184v140" stroke="#008260" stroke-width="20" stroke-linecap="round"/>
+</svg>

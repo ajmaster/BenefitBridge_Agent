@@ -1,5 +1,5 @@
 {
-  "name": "benefitbridge-remotion-demos",
+  "name": "aidatlasca-remotion-demos",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,13 +10,15 @@
     "still:sf": "remotion still src/index.ts SfFoodShelterHandoff out/sf-food-shelter-handoff-still.png --frame=540 --scale=0.5 --overwrite",
     "still:spanish": "remotion still src/index.ts SpanishWicPrep out/spanish-wic-prep-still.png --frame=540 --scale=0.5 --overwrite",
     "still:atlas": "remotion still src/index.ts ConversationAtlasDemo out/conversation-atlas-poster.png --frame=360 --scale=0.5 --overwrite",
-    "still:all": "npm run still:sanjose && npm run still:sf && npm run still:spanish && npm run still:atlas",
+    "still:document-kit": "remotion still src/index.ts DocumentKitDemo out/document-kit-demo-poster.png --frame=420 --scale=0.5 --overwrite",
+    "still:all": "npm run still:sanjose && npm run still:sf && npm run still:spanish && npm run still:atlas && npm run still:document-kit",
     "render:sanjose": "remotion render src/index.ts SanJoseFamilyNavigator out/sanjose-family-navigator.mp4 --codec=h264 --overwrite",
     "render:sf": "remotion render src/index.ts SfFoodShelterHandoff out/sf-food-shelter-handoff.mp4 --codec=h264 --overwrite",
     "render:spanish": "remotion render src/index.ts SpanishWicPrep out/spanish-wic-prep.mp4 --codec=h264 --overwrite",
     "render:atlas": "remotion render src/index.ts ConversationAtlasDemo out/conversation-atlas.mp4 --codec=h264 --overwrite",
-    "render:all": "npm run render:sanjose && npm run render:sf && npm run render:spanish && npm run render:atlas",
-    "still:hero": "remotion still src/index.ts HeroLoop out/hero-loop-poster.png --frame=275 --overwrite",
+    "render:document-kit": "remotion render src/index.ts DocumentKitDemo out/document-kit-demo.mp4 --codec=h264 --overwrite",
+    "render:all": "npm run render:sanjose && npm run render:sf && npm run render:spanish && npm run render:atlas && npm run render:document-kit",
+    "still:hero": "remotion still src/index.ts HeroLoop out/hero-loop-poster.png --frame=0 --overwrite",
     "render:hero": "remotion render src/index.ts HeroLoop out/hero-loop.mp4 --codec=h264 --overwrite",
     "verify:outputs": "node scripts/verify-outputs.cjs",
     "sync:frontend": "node scripts/sync-to-frontend.cjs"

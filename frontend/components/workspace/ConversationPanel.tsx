@@ -2,9 +2,11 @@
 
 import AtlasIcon from "@/components/workspace/icons/AtlasIcon";
 import { copyFor } from "@/components/conversation-atlas/i18n";
+import { BRAND_SHORT_NAME } from "@/lib/brand";
 import { cn } from "@/lib/utils";
-import type { A2UITemplate } from "@/lib/types";
+import type { A2UIAction, A2UITemplate } from "@/lib/types";
 import { useBenefitBridgeContext } from "./BenefitBridgeContext";
+import { VoiceRecorderButton } from "./VoiceRecorderButton";
 
 // Ported from `ConversationCard` in `frontend/components/BenefitBridgeDashboard.tsx`
 // (source lines 377-467), converting prop reads to `useBenefitBridgeContext()` reads.
@@ -30,10 +32,63 @@ function toneClasses(tone: A2UITemplate["tone"]) {
   }
 }
 
+function noticeClasses(kind: "ready" | "warn" | "error") {
+  switch (kind) {
+    case "error":
+      return "border-red bg-red-soft text-red";
+    case "warn":
+      return "border-orange bg-orange-soft text-ink";
+    default:
+      return "border-line bg-sky/40 text-ink-soft";
+  }
+}
+
 export function ConversationPanel() {
-  const { chatMessages, chatTemplates, chatInput, chatBusy, snapshot, setChatInput, runChat } =
-    useBenefitBridgeContext();
+  const {
+    chatMessages,
+    chatTemplates,
+    chatInput,
+    chatBusy,
+    notice,
+    snapshot,
+    setChatInput,
+    runChat,
+    runCopyCallScript,
+    runDownloadCalendar,
+    runDownloadMarkdown,
+    runVoiceTurn,
+    setActiveSection,
+  } = useBenefitBridgeContext();
   const copy = copyFor(snapshot.language);
+
+  function handleA2UIAction(action: A2UIAction) {
+    switch (action.type) {
+      case "open_packet":
+        setActiveSection("packet");
+        break;
+      case "open_sources":
+        setActiveSection("sources");
+        break;
+      case "open_resources":
+        setActiveSection("resources");
+        break;
+      case "copy_call_script":
+        void runCopyCallScript();
+        break;
+      case "download_markdown":
+        void runDownloadMarkdown();
+        break;
+      case "download_calendar":
+        void runDownloadCalendar();
+        break;
+      case "open_resource_url":
+      case "open_maps_search":
+        if (action.href) {
+          window.open(action.href, "_blank", "noopener,noreferrer");
+        }
+        break;
+    }
+  }
 
   return (
     <article
@@ -51,6 +106,16 @@ export function ConversationPanel() {
         </span>
       </div>
 
+      {notice.text && (
+        <div
+          className={cn("rounded-lg border px-3 py-2 text-xs leading-5", noticeClasses(notice.kind))}
+          role={notice.kind === "error" ? "alert" : "status"}
+          data-testid="workspace-status"
+        >
+          {notice.text}
+        </div>
+      )}
+
       <div className="flex-1 space-y-3 overflow-y-auto" aria-live="polite">
         {chatMessages.map((message, index) => (
           <div
@@ -61,7 +126,7 @@ export function ConversationPanel() {
             )}
           >
             <span className="block text-xs font-semibold uppercase tracking-wide opacity-70">
-              {message.role === "assistant" ? "BenefitBridge" : "You"}
+              {message.role === "assistant" ? BRAND_SHORT_NAME : "You"}
             </span>
             <p>{message.content}</p>
           </div>
@@ -95,6 +160,18 @@ export function ConversationPanel() {
                       {item.value && <span>{item.value}</span>}
                       {item.subtitle && <span className="text-ink-soft">{item.subtitle}</span>}
                       {item.body && <p className="text-ink-soft">{item.body}</p>}
+                      {item.badges && item.badges.length > 0 && (
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {item.badges.map((badge) => (
+                            <span
+                              key={`${template.id}-${index}-${badge}`}
+                              className="rounded-full border border-line bg-surface px-2 py-0.5 text-xs text-ink-soft"
+                            >
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       {item.links && item.links.length > 0 && (
                         <div className="mt-1 flex flex-wrap gap-2">
                           {item.links.map((link) => (
@@ -111,6 +188,54 @@ export function ConversationPanel() {
                         </div>
                       )}
                     </div>
+                  ))}
+                </div>
+              )}
+              {template.actions.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {template.actions.map((action) =>
+                    action.href && action.type === "open_resource_url" ? (
+                      <a
+                        key={`${template.id}-${action.type}-${action.label}`}
+                        href={action.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-medium text-blue"
+                      >
+                        {action.label}
+                      </a>
+                    ) : (
+                      <button
+                        key={`${template.id}-${action.type}-${action.label}`}
+                        type="button"
+                        onClick={() => handleA2UIAction(action)}
+                        className="rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-medium text-ink hover:bg-sky/50"
+                      >
+                        {action.label}
+                      </button>
+                    ),
+                  )}
+                </div>
+              )}
+              {template.citations.length > 0 && (
+                <div className="mt-3 border-t border-line pt-2 text-xs text-ink-soft">
+                  <span className="font-semibold text-ink">Sources:</span>{" "}
+                  {template.citations.slice(0, 3).map((citation, index) => (
+                    <span key={`${template.id}-${citation.source_id}`}>
+                      {index > 0 ? ", " : ""}
+                      {citation.url ? (
+                        <a
+                          href={citation.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue underline"
+                        >
+                          {citation.source_title ?? citation.source_id}
+                        </a>
+                      ) : (
+                        citation.source_title ?? citation.source_id
+                      )}
+                    </span>
                   ))}
                 </div>
               )}
@@ -138,14 +263,28 @@ export function ConversationPanel() {
           placeholder={copy.chatPlaceholder}
           className="min-h-24 rounded-lg border border-line bg-surface p-3 text-sm text-ink"
         />
-        <button
-          type="submit"
-          disabled={chatBusy || !chatInput.trim()}
-          className="flex items-center justify-center gap-2 rounded-lg bg-blue px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
-        >
-          <AtlasIcon name="arrow" className="h-4 w-4" />
-          <span>{chatBusy ? copy.chatChecking : copy.chatSend}</span>
-        </button>
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            disabled={chatBusy || !chatInput.trim()}
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-blue px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
+          >
+            <AtlasIcon name="arrow" className="h-4 w-4" />
+            <span>{chatBusy ? copy.chatChecking : copy.chatSend}</span>
+          </button>
+          <VoiceRecorderButton
+            disabled={chatBusy}
+            labels={{
+              permissionDenied: copy.voicePermissionDenied,
+              recording: copy.voiceRecording,
+              speak: copy.voiceSpeak,
+              stop: copy.voiceStop,
+              unavailable: copy.voiceUnavailable,
+              unsupported: copy.voiceNotSupported,
+            }}
+            onRecordingComplete={runVoiceTurn}
+          />
+        </div>
       </form>
 
       <div className="flex flex-wrap gap-2" aria-label="Example prompts">

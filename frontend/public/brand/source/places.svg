@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Places icon</title>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="#eaf5ff"/>
+  <path d="M256 74c67 0 122 54 122 120 0 91-122 194-122 194S134 285 134 194c0-66 55-120 122-120Z" fill="#e55343"/>
+  <circle cx="256" cy="194" r="53" fill="#fff"/>
+  <path d="M190 238h132v84H190v-84Z" fill="#07183f"/>
+  <path d="M174 238l82-58 82 58H174Z" fill="#07183f"/>
+  <path d="M216 322v-46h80v46M244 238h24" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+  <ellipse cx="256" cy="416" rx="116" ry="24" fill="#008260" opacity=".24"/>
+</svg>

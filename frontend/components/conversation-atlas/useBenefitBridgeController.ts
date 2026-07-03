@@ -8,8 +8,10 @@ import {
   fetchResources,
   preparePacket,
   sendChatMessage,
+  sendVoiceTurn,
   translatePacket,
 } from "../../lib/api";
+import { blobToBase64, playAudioBase64 } from "../../lib/audio";
 import type {
   A2UITemplate,
   ChatMessage,
@@ -69,7 +71,7 @@ export type AtlasSection =
   | "sources"
   | "resources"
   | "packet"
-  | "bay-area";
+  | "california";
 
 export function useBenefitBridgeController() {
   const [selectedProfileId, setSelectedProfileId] = useState(syntheticProfiles[0].id);
@@ -182,13 +184,83 @@ export function useBenefitBridgeController() {
             : copyFor(response.snapshot.language).noticeChatUpdated,
       });
     } catch (error) {
+      const message =
+        error instanceof Error
+          ? `Chat workflow unavailable: ${error.message}`
+          : "Chat workflow unavailable.";
+      setChatMessages([
+        ...nextMessages,
+        {
+          role: "assistant",
+          content: message,
+        },
+      ]);
+      setNotice({
+        kind: "error",
+        text: message,
+      });
+    } finally {
+      setChatBusy(false);
+    }
+  }
+
+  async function runVoiceTurn(audioBlob: Blob) {
+    if (chatBusy) return;
+    setChatBusy(true);
+    setNotice({ kind: "ready", text: copyFor(snapshot.language).noticeChat });
+
+    try {
+      const audioBase64 = await blobToBase64(audioBlob);
+      const response = await sendVoiceTurn(audioBase64, chatMessages, snapshot);
+      const nextMessages: ChatMessage[] = [
+        ...chatMessages,
+        { role: "user", content: response.transcript },
+        { role: "assistant", content: response.message },
+      ];
+      setChatMessages(nextMessages);
+      setChatTemplates(response.ui_templates);
+      setSnapshot(response.snapshot);
+
+      if (response.packet) {
+        setResult({
+          route: response.route,
+          events: response.events,
+          packet: response.packet,
+          validation: response.validation,
+        });
+      }
+      if (response.resources && response.resources.length > 0) {
+        setResources(response.resources);
+      }
+      if (response.audio_base64) {
+        playAudioBase64(response.audio_base64);
+      }
+
+      setNotice({
+        kind: response.route === "privacy_block" ? "warn" : "ready",
+        text:
+          response.route === "privacy_block"
+            ? copyFor(response.snapshot.language).noticeChatBlocked
+            : copyFor(response.snapshot.language).noticeChatUpdated,
+      });
+    } catch (error) {
       setNotice({
         kind: "error",
         text:
           error instanceof Error
-            ? `Chat workflow unavailable: ${error.message}`
-            : "Chat workflow unavailable.",
+            ? `Voice turn unavailable: ${error.message}`
+            : "Voice turn unavailable.",
       });
+      setChatMessages((messages) => [
+        ...messages,
+        {
+          role: "assistant",
+          content:
+            error instanceof Error
+              ? `Voice turn unavailable: ${error.message}`
+              : "Voice turn unavailable.",
+        },
+      ]);
     } finally {
       setChatBusy(false);
     }
@@ -211,7 +283,7 @@ export function useBenefitBridgeController() {
     if (!packet) return;
     setBusy(true);
     try {
-      const response = await exportPacket(packet, ["html", "json", "md"]);
+      const response = await exportPacket(packet, ["html", "json", "md"], displayResources);
       setNotice({
         kind: "ready",
         text: `Export prepared in-session: ${response.artifacts
@@ -225,6 +297,100 @@ export function useBenefitBridgeController() {
           error instanceof Error
             ? `Export blocked: ${error.message}`
             : "Export blocked by validation.",
+      });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function runPrintPacket() {
+    if (!packet || typeof window === "undefined") return;
+    setNotice({
+      kind: "ready",
+      text: copyFor(snapshot.language).noticePrintReady,
+    });
+    window.print();
+  }
+
+  async function runCopyCallScript() {
+    if (!packet?.call_script) return;
+    setBusy(true);
+    try {
+      await navigator.clipboard.writeText(packet.call_script);
+      setNotice({
+        kind: "ready",
+        text: copyFor(snapshot.language).noticeCallScriptCopied,
+      });
+    } catch {
+      setNotice({
+        kind: "error",
+        text: copyFor(snapshot.language).noticeCallScriptBlocked,
+      });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function runDownloadMarkdown() {
+    if (!packet) return;
+    setBusy(true);
+    try {
+      const response = await exportPacket(packet, ["md"], displayResources);
+      const artifact = response.artifacts.find((item) => item.format === "md");
+      if (!artifact) {
+        throw new Error("Markdown export was not returned.");
+      }
+      const blob = new Blob([artifact.content], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "aidatlasca-prep-documents.md";
+      link.click();
+      URL.revokeObjectURL(url);
+      setNotice({
+        kind: "ready",
+        text: copyFor(snapshot.language).noticeMarkdownReady,
+      });
+    } catch (error) {
+      setNotice({
+        kind: "error",
+        text:
+          error instanceof Error
+            ? `Markdown download blocked: ${error.message}`
+            : "Markdown download blocked by validation.",
+      });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function runDownloadCalendar() {
+    if (!packet) return;
+    setBusy(true);
+    try {
+      const response = await exportPacket(packet, ["ics"]);
+      const artifact = response.artifacts.find((item) => item.format === "ics");
+      if (!artifact) {
+        throw new Error("Calendar export was not returned.");
+      }
+      const blob = new Blob([artifact.content], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "aidatlasca-reminders.ics";
+      link.click();
+      URL.revokeObjectURL(url);
+      setNotice({
+        kind: "ready",
+        text: copyFor(snapshot.language).noticeCalendarReady,
+      });
+    } catch (error) {
+      setNotice({
+        kind: "error",
+        text:
+          error instanceof Error
+            ? `Calendar export blocked: ${error.message}`
+            : "Calendar export blocked by validation.",
       });
     } finally {
       setBusy(false);
@@ -304,9 +470,14 @@ export function useBenefitBridgeController() {
     readiness,
     result,
     runChat,
+    runDownloadCalendar,
+    runDownloadMarkdown,
     runExport,
+    runPrintPacket,
+    runCopyCallScript,
     runPrepare,
     runTranslate,
+    runVoiceTurn,
     selectedProfileId,
     setActiveSection,
     setChatInput,

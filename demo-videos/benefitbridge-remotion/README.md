@@ -1,6 +1,6 @@
-# BenefitBridge Remotion Demos
+# AidAtlasCA Remotion Demos
 
-Captions-only video demos for BenefitBridge CA. The compositions use real
+Captions-only video demos for AidAtlasCA. The compositions use real
 screens captured from the built FastAPI-served app and animate them with
 Remotion overlays, zooms, callouts, and cursor motion.
 

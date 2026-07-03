@@ -24,6 +24,73 @@ export type SourceCitation = {
   freshness_state?: string;
 };
 
+export type ApprovedSourceMetadata = {
+  id: string;
+  name: string;
+  url?: string;
+  jurisdiction?: string;
+  level?: string;
+  category?: string[];
+  owner_type?: string;
+  integration?: string;
+  use_for?: string[];
+  safe_claims?: string[];
+  caveats?: string[];
+  last_checked?: string;
+  freshness_state?: string;
+  coverage_level?: string;
+};
+
+export type CaliforniaCoverageLevel = "reviewed_local" | "statewide_core";
+
+export type CaliforniaCountySummary = {
+  id: string;
+  name: string;
+  state: "CA";
+  fips: string;
+  aliases: string[];
+  major_cities: string[];
+  coverage_level: CaliforniaCoverageLevel;
+  coverage_label: string;
+  profile_id?: string;
+  source_ids: string[];
+  source_count: number;
+  local_resource_count: number;
+  primary_benefits_office?: {
+    organization?: string;
+    phone?: string;
+    fax?: string;
+    mail?: string;
+    source_id?: string;
+  };
+};
+
+export type CaliforniaCountyCounts = {
+  total_counties: number;
+  reviewed_local: number;
+  statewide_core: number;
+  approved_sources: number;
+  local_resources: number;
+};
+
+export type CaliforniaCountiesResponse = {
+  counties: CaliforniaCountySummary[];
+  source_pack_version: string;
+  counts: CaliforniaCountyCounts;
+};
+
+export type CaliforniaResourceCoverageFilter =
+  | "all"
+  | "reviewed_local"
+  | "statewide_locator";
+
+export type CaliforniaResourcesResponse = {
+  resources: LocalResource[];
+  availability_notice: string;
+  coverage_filter: CaliforniaResourceCoverageFilter;
+  source_pack_version: string;
+};
+
 export type BenefitPath = {
   area: string;
   program_name: string;
@@ -95,6 +162,17 @@ export type ReadinessResult = {
   release_gates: Record<string, unknown>;
 };
 
+export type MapsEnrichment = {
+  provider: "google_places" | string;
+  display_name?: string;
+  formatted_address?: string;
+  national_phone_number?: string;
+  google_maps_uri?: string;
+  website_uri?: string;
+  rating?: number;
+  availability_notice?: string;
+};
+
 export type LocalResource = {
   id: string;
   organization: string;
@@ -108,9 +186,13 @@ export type LocalResource = {
   map_query?: string;
   maps_url?: string;
   place_id?: string;
+  eligibility_notes?: string;
   languages: string[];
   call_before_going: boolean;
+  coverage_level?: "reviewed_local" | "statewide_locator" | string;
+  coverage_label?: string;
   availability_notice?: string;
+  maps_enrichment?: MapsEnrichment;
 };
 
 export type ChatRole = "user" | "assistant";
@@ -124,6 +206,32 @@ export type A2UILink = {
   label: string;
   href: string;
 };
+
+export type A2UIActionType =
+  | "open_packet"
+  | "open_sources"
+  | "open_resources"
+  | "copy_call_script"
+  | "download_markdown"
+  | "download_calendar"
+  | "open_resource_url"
+  | "open_maps_search";
+
+export type A2UIAction = {
+  type: A2UIActionType;
+  label: string;
+  href?: string;
+  target?: string;
+};
+
+export type DocumentTemplateType =
+  | "document_kit"
+  | "document_summary"
+  | "document_checklist"
+  | "caseworker_questions"
+  | "call_script"
+  | "local_handoff_sheet"
+  | "source_sheet";
 
 export type A2UIItem = {
   label?: string;
@@ -143,7 +251,7 @@ export type A2UITemplate = {
   subtitle?: string;
   body?: string;
   items: A2UIItem[];
-  actions: A2UILink[];
+  actions: A2UIAction[];
   citations: SourceCitation[];
 };
 
@@ -162,6 +270,12 @@ export type ChatResponse = {
     findings: string[];
     blocked: boolean;
   };
+};
+
+export type VoiceTurnResponse = ChatResponse & {
+  transcript: string;
+  audio_base64: string;
+  voice_mode: { provider: string; live: boolean; warning?: string };
 };
 
 export type SyntheticProfile = {

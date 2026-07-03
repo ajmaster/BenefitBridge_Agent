@@ -1,4 +1,5 @@
 import type { copyFor } from "@/components/conversation-atlas/i18n";
+import { BRAND_NAME } from "@/lib/brand";
 import type { PrepareResult, PrepPacket } from "@/lib/types";
 
 // Ported from the paper-preview portion of `PacketPanel` in
@@ -43,7 +44,7 @@ export function PacketPreview({
   return (
     <article className="grid gap-4 rounded-lg border border-line bg-surface p-6 shadow-atlas-soft">
       <div className="flex items-center justify-between gap-2.5 border-b-2 border-blue pb-3">
-        <span className="font-extrabold text-ink">BenefitBridge CA</span>
+        <span className="font-extrabold text-ink">{BRAND_NAME}</span>
         <strong className="text-xs font-extrabold text-green-dark">
           {result.route.replaceAll("_", " ")}
         </strong>

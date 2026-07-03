@@ -10,6 +10,8 @@ const targetDir = path.join(repoRoot, "frontend", "public", "demo-videos");
 const filesToSync = [
   "hero-loop.mp4",
   "hero-loop-poster.png",
+  "document-kit-demo.mp4",
+  "document-kit-demo-poster.png",
 ];
 
 fs.mkdirSync(targetDir, { recursive: true });

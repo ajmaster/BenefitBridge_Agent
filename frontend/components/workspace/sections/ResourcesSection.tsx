@@ -7,8 +7,7 @@ import { ResourceCard } from "@/components/workspace/shared/ResourceCard";
 
 // Section body ported from `ResourcesPanel` in
 // `frontend/components/BenefitBridgeDashboard.tsx` (source lines 756-781: a map preview
-// followed by a two-column grid of `ResourceCard`s). The source overrode the map testids to
-// `bay-map-panel`/`bay-map-fallback` here; that override is preserved.
+// followed by a two-column grid of `ResourceCard`s).
 
 export function ResourcesSection() {
   const { snapshot, displayResources } = useBenefitBridgeContext();
@@ -28,8 +27,8 @@ export function ResourcesSection() {
           resources={displayResources}
           copy={copy}
           locale={locale}
-          testId="bay-map-panel"
-          fallbackTestId="bay-map-fallback"
+          testId="resource-map-panel"
+          fallbackTestId="resource-map-fallback"
         />
         <div className="grid gap-3.5 sm:grid-cols-2">
           {displayResources.map((resource) => (

@@ -1,4 +1,4 @@
-"""Deterministic BenefitBridge graph pipeline.
+"""Deterministic AidAtlasCA graph pipeline.
 
 This is the scaffolded graph spine that the ADK agent and tests can call. It
 keeps high-stakes policy and source handling outside free-form model output.

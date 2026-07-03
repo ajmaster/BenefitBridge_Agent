@@ -28,6 +28,7 @@ www.cafoodbanks.org
 www.californialifeline.com
 www.caliheapapply.com
 www.canv.org
+www.cde.ca.gov
 www.cdph.ca.gov
 www.cdss.ca.gov
 www.coveredca.com
@@ -42,6 +43,7 @@ www.healthcare.gov
 www.lawfoundation.org
 www.samhsa.gov
 www.sanjoseca.gov
+selfhelp.courts.ca.gov
 www.sf.gov
 www.sfhsa.org
 www.sfmfoodbank.org

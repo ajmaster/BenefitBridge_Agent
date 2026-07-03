@@ -1,0 +1,2026 @@
+[
+  {
+    "id": "benefitscal_info",
+    "name": "BenefitsCal information site",
+    "url": "https://info.benefitscal.com/",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "application_portal",
+      "benefits"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Apply/manage California benefits",
+      "Official apply link for CalFresh, Medi-Cal, CalWORKs, other county benefits"
+    ],
+    "safe_claims": [
+      "BenefitsCal is California's online portal for applying for and managing public benefits such as CalFresh, Medi-Cal, CalWORKs, and other county benefit programs.",
+      "AidAtlasCA may link users to BenefitsCal but must not submit applications for them."
+    ],
+    "caveats": [
+      "Do not collect BenefitsCal credentials.",
+      "Do not automate application submission."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "benefitscal_login",
+    "name": "BenefitsCal public login/apply portal",
+    "url": "https://benefitscal.com/Public/login?lang=en",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "application_portal"
+    ],
+    "owner_type": "state_official",
+    "integration": "link_out_only",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Final official application destination"
+    ],
+    "safe_claims": [
+      "Use as official destination after preparing the user; do not embed or automate."
+    ],
+    "caveats": [
+      "Never ask for or store login credentials."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cdss_calfresh_home",
+    "name": "California CalFresh official site",
+    "url": "https://calfresh.dss.ca.gov/",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "food",
+      "snap",
+      "calfresh"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "CalFresh overview",
+      "CalFresh helpline",
+      "Food benefit path grounding"
+    ],
+    "safe_claims": [
+      "CalFresh is California's SNAP/food assistance program.",
+      "The CalFresh Benefits Helpline is 1-877-847-3663."
+    ],
+    "caveats": [
+      "Do not decide CalFresh eligibility or benefit amounts."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "usda_snap_california_directory",
+    "name": "USDA/FNS SNAP State Directory — California",
+    "url": "https://www.fns.usda.gov/snap-directory-entry/california",
+    "jurisdiction": "California",
+    "level": "federal_state",
+    "category": [
+      "food",
+      "snap",
+      "state_contact"
+    ],
+    "owner_type": "federal_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "SNAP/CalFresh state contact and links"
+    ],
+    "safe_claims": [
+      "Use as an official federal directory page for California SNAP/CalFresh contact routing."
+    ],
+    "caveats": [
+      "Directory pages may not include county-specific process changes."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "getcalfresh_support",
+    "name": "GetCalFresh support and prep site",
+    "url": "https://www.getcalfresh.org/en/",
+    "jurisdiction": "California",
+    "level": "state_partner",
+    "category": [
+      "food",
+      "calfresh",
+      "application_prep"
+    ],
+    "owner_type": "state_partner_nonprofit",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Plain-language CalFresh preparation support"
+    ],
+    "safe_claims": [
+      "GetCalFresh explains the CalFresh process and directs users to BenefitsCal to apply.",
+      "GetCalFresh can support users with questions before/during/after the process, but AidAtlasCA should still cite official state/federal sources for program facts."
+    ],
+    "caveats": [
+      "Partner/support site; not the final agency determination source."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cdph_wic_home",
+    "name": "California WIC Program home",
+    "url": "https://myfamily.wic.ca.gov/",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "food",
+      "wic",
+      "nutrition"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "WIC overview, contact, office search"
+    ],
+    "safe_claims": [
+      "California WIC provides nutrition support to eligible pregnant/postpartum/breastfeeding people, infants, and children up to age 5."
+    ],
+    "caveats": [
+      "Local WIC staff officially confirm eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cdph_wic_am_i_eligible",
+    "name": "California WIC Am I Eligible?",
+    "url": "https://myfamily.wic.ca.gov/Home/AmIEligible",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "food",
+      "wic",
+      "prescreen"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "WIC caution language and eligibility-assessment handoff"
+    ],
+    "safe_claims": [
+      "The WIC self-assessment can indicate that a user may be eligible.",
+      "Only local WIC office staff can officially confirm WIC eligibility."
+    ],
+    "caveats": [
+      "AidAtlasCA should label WIC as 'needs more information' when pregnancy/postpartum/breastfeeding or child age facts are missing."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cdph_wic_office_grocer_locator",
+    "name": "California WIC Office & Grocer Locator",
+    "url": "https://myfamily.wic.ca.gov/home/wicofficegrocer",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "wic",
+      "locator"
+    ],
+    "owner_type": "state_official",
+    "integration": "link_out_only",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Find WIC offices and authorized grocers by city/ZIP"
+    ],
+    "safe_claims": [
+      "Use this official locator for current WIC office/grocer information."
+    ],
+    "caveats": [
+      "Do not depend on undocumented internal locator APIs."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "dhcs_medi_cal_apply",
+    "name": "DHCS Medi-Cal Apply page",
+    "url": "https://www.dhcs.ca.gov/medi-cal/apply/",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "health",
+      "medi_cal",
+      "medicaid"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Medi-Cal application pathways",
+      "BenefitsCal/CoveredCA/county office links"
+    ],
+    "safe_claims": [
+      "Users can apply for Medi-Cal through BenefitsCal, Covered California, or a county office."
+    ],
+    "caveats": [
+      "Do not decide Medi-Cal eligibility or plan enrollment."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "dhcs_county_offices",
+    "name": "DHCS County Offices navigator",
+    "url": "https://www.dhcs.ca.gov/services/medi-cal-resources/county-offices/",
+    "jurisdiction": "California",
+    "level": "state_county",
+    "category": [
+      "health",
+      "medi_cal",
+      "county_contact"
+    ],
+    "owner_type": "state_official",
+    "integration": "link_out_only",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Find county Medi-Cal offices and health coverage help"
+    ],
+    "safe_claims": [
+      "Use for current county Medi-Cal office routing."
+    ],
+    "caveats": [
+      "Navigator may be dynamic; keep fallback county URLs in source pack."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "covered_ca_get_started",
+    "name": "Covered California Get Started",
+    "url": "https://www.coveredca.com/get-started/",
+    "jurisdiction": "California",
+    "level": "state_marketplace",
+    "category": [
+      "health",
+      "marketplace",
+      "medi_cal_handoff"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Health coverage pathway when Medi-Cal/Marketplace questions arise"
+    ],
+    "safe_claims": [
+      "Covered California can be used as a health coverage application pathway; if a person does not qualify for Medi-Cal, it can help with low-cost health plans."
+    ],
+    "caveats": [
+      "No plan shopping or plan recommendation in MVP."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "healthcare_gov_developers_content_api",
+    "name": "HealthCare.gov Content API",
+    "url": "https://www.healthcare.gov/developers/",
+    "jurisdiction": "United States",
+    "level": "federal",
+    "category": [
+      "health",
+      "api",
+      "content"
+    ],
+    "owner_type": "federal_official",
+    "integration": "live_no_key_json_api",
+    "base_endpoints": [
+      "https://www.healthcare.gov/api/index.json",
+      "https://www.healthcare.gov/api/glossary.json"
+    ],
+    "no_key": true,
+    "refresh_frequency": "weekly_live_cache",
+    "use_for": [
+      "Educational health-coverage content",
+      "Health insurance glossary terms"
+    ],
+    "safe_claims": [
+      "HealthCare.gov Content API exposes content objects, collections, and a site-wide index over HTTP GET."
+    ],
+    "caveats": [
+      "Educational content only; not California Medi-Cal eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "csd_liheap_program",
+    "name": "California CSD LIHEAP Program",
+    "url": "https://www.csd.ca.gov/pages/liheapprogram.aspx",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "utilities",
+      "liheap",
+      "energy_assistance"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Utility/energy assistance prep",
+      "LIHEAP explanation"
+    ],
+    "safe_claims": [
+      "LIHEAP is a federally funded program to help low-income households with heating/cooling energy costs.",
+      "California LIHEAP includes HEAP and crisis assistance components."
+    ],
+    "caveats": [
+      "Funding and local providers vary; do not promise assistance."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "caliheapapply_home",
+    "name": "CALIHEAPApply online portal",
+    "url": "https://www.caliheapapply.com/",
+    "jurisdiction": "California",
+    "level": "state_partner",
+    "category": [
+      "utilities",
+      "liheap",
+      "application_portal"
+    ],
+    "owner_type": "state_program_portal",
+    "integration": "link_out_only",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Online application link for LIHEAP/energy assistance"
+    ],
+    "safe_claims": [
+      "Low-income Californians can apply for LIHEAP heating/cooling assistance through this portal."
+    ],
+    "caveats": [
+      "Never create accounts or submit forms for users."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "california_lifeline",
+    "name": "California LifeLine",
+    "url": "https://www.californialifeline.com/en",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "phone",
+      "utility_discount",
+      "communications"
+    ],
+    "owner_type": "state_program",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Phone/internet discount prep path"
+    ],
+    "safe_claims": [
+      "California LifeLine offers discounted phone service for households that qualify through program participation or income."
+    ],
+    "caveats": [
+      "Do not calculate final qualification; route to official application."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cpuc_lifeline_eligibility",
+    "name": "CPUC California LifeLine Eligibility",
+    "url": "https://www.cpuc.ca.gov/consumer-support/financial-assistance-savings-and-discounts/lifeline/california-lifeline-eligibility",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "phone",
+      "utility_discount",
+      "eligibility_reference"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Program participation and income-based LifeLine path"
+    ],
+    "safe_claims": [
+      "Program participation such as Medi-Cal, LIHEAP, SSI, and others can be a qualifying pathway; income limits also exist."
+    ],
+    "caveats": [
+      "Income limits update; use source date and do not decide final eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cdss_county_offices",
+    "name": "CDSS County Offices",
+    "url": "https://www.cdss.ca.gov/county-offices",
+    "jurisdiction": "California",
+    "level": "state_county",
+    "category": [
+      "county_contact",
+      "social_services"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "County social services routing"
+    ],
+    "safe_claims": [
+      "Use as official statewide county social services directory."
+    ],
+    "caveats": [
+      "County page details can change; link to official county pages when possible."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cdss_food_banks",
+    "name": "CDSS Food Banks list",
+    "url": "https://www.cdss.ca.gov/food-banks",
+    "jurisdiction": "California",
+    "level": "state_county",
+    "category": [
+      "food",
+      "food_bank"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Official county food bank mapping"
+    ],
+    "safe_claims": [
+      "For Santa Clara County, CDSS lists Second Harvest Food Bank of Silicon Valley in San Jose.",
+      "For San Francisco County, CDSS lists San Francisco Food Bank in San Francisco."
+    ],
+    "caveats": [
+      "Use food bank locators/hotlines for current pantry hours and availability."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cafoodbanks_members",
+    "name": "California Association of Food Banks members",
+    "url": "https://www.cafoodbanks.org/our-members/",
+    "jurisdiction": "California",
+    "level": "state_nonprofit",
+    "category": [
+      "food",
+      "food_bank"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_only",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Food bank handoff and 211 fallback"
+    ],
+    "safe_claims": [
+      "The association points people needing help now to call 2-1-1 and find a local food bank."
+    ],
+    "caveats": [
+      "Not a government source; use as food-resource handoff only."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "cpuc_211_info",
+    "name": "California Public Utilities Commission 2-1-1 Information Services",
+    "url": "https://www.cpuc.ca.gov/industries-and-topics/internet-and-phone/211-information-services",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "211",
+      "resource_handoff",
+      "crisis",
+      "food",
+      "housing",
+      "utilities"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Explain 211 as statewide resource referral service"
+    ],
+    "safe_claims": [
+      "2-1-1 is a free phone number for local community services, available in multiple languages, including housing, utility, food, health and crisis resources."
+    ],
+    "caveats": [
+      "Coverage and service-provider databases vary by county."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "ca_211_home",
+    "name": "211 California",
+    "url": "https://211ca.org/",
+    "jurisdiction": "California",
+    "level": "state_network",
+    "category": [
+      "211",
+      "resource_handoff"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_only",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Free help for housing, food, and financial-aid resources"
+    ],
+    "safe_claims": [
+      "211 California provides free housing, food, and financial aid resource navigation by phone/text/web."
+    ],
+    "caveats": [
+      "Do not claim real-time availability unless the local 211 resource source states it."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "census_geocoder_api",
+    "name": "U.S. Census Geocoding Services API",
+    "url": "https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html",
+    "jurisdiction": "United States",
+    "level": "federal",
+    "category": [
+      "geocoder",
+      "jurisdiction",
+      "api"
+    ],
+    "owner_type": "federal_official",
+    "integration": "live_no_key_rest_api",
+    "example_endpoint": "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=70+W+Hedding+St,+San+Jose,+CA&benchmark=Public_AR_Current&vintage=Current_Current&format=json",
+    "no_key": true,
+    "refresh_frequency": "live_with_cache",
+    "use_for": [
+      "Normalize address/ZIP to county/state/FIPS for routing"
+    ],
+    "safe_claims": [
+      "Census Geocoder offers programmatic REST access and can return geographic entities for U.S. addresses."
+    ],
+    "caveats": [
+      "If user gives only ZIP/city, do not over-claim exact residence; use county-level routing."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "hud_housing_counselor_api",
+    "name": "HUD Housing Counselor API Query Tool",
+    "url": "https://data.hud.gov/housing_counseling.html",
+    "jurisdiction": "United States",
+    "level": "federal",
+    "category": [
+      "housing",
+      "housing_counseling",
+      "api"
+    ],
+    "owner_type": "federal_official",
+    "integration": "live_no_key_query_tool_or_page",
+    "no_key": true,
+    "refresh_frequency": "live_with_cache",
+    "use_for": [
+      "Find HUD-approved housing counseling agencies by city/state or lat/lon"
+    ],
+    "safe_claims": [
+      "HUD's tool supports searching housing counseling agencies by agency name, city/state, or current location."
+    ],
+    "caveats": [
+      "Use as a referral source; do not provide legal or housing eligibility decisions."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "hhs_2026_poverty_guidelines",
+    "name": "2026 HHS Poverty Guidelines Federal Register notice",
+    "url": "https://www.federalregister.gov/documents/2026/01/15/2026-00755/annual-update-of-the-hhs-poverty-guidelines",
+    "jurisdiction": "United States",
+    "level": "federal",
+    "category": [
+      "poverty_guidelines",
+      "income_context"
+    ],
+    "owner_type": "federal_official",
+    "integration": "static_fixture",
+    "no_key": true,
+    "refresh_frequency": "annual_check",
+    "use_for": [
+      "General income-context explanation only"
+    ],
+    "safe_claims": [
+      "HHS updates poverty guidelines annually; many programs use percentage multiples of these guidelines."
+    ],
+    "caveats": [
+      "Do not calculate eligibility from poverty guidelines alone."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "openreferral_hsds",
+    "name": "Open Referral Human Services Data Specification",
+    "url": "https://docs.openreferral.org/en/latest/hsds/overview.html",
+    "jurisdiction": "Global/standard",
+    "level": "standard",
+    "category": [
+      "schema",
+      "human_services",
+      "open_referral"
+    ],
+    "owner_type": "open_standard",
+    "integration": "internal_schema_guidance",
+    "no_key": true,
+    "refresh_frequency": "annual_check",
+    "use_for": [
+      "Internal local resource schema: organizations, services, locations, contacts, schedules"
+    ],
+    "safe_claims": [
+      "HSDS is a flexible data model for human services directories, including services, organizations, locations, and contacts."
+    ],
+    "caveats": [
+      "HSDS is a schema, not a data source."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "datasf_developers",
+    "name": "DataSF Developer Resources",
+    "url": "https://data.sfgov.org/developers",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "open_data",
+      "api",
+      "socrata"
+    ],
+    "owner_type": "local_official",
+    "integration": "optional_live_no_key_soda",
+    "no_key": true,
+    "refresh_frequency": "as_needed",
+    "use_for": [
+      "Optional San Francisco open data lookup using Socrata/SODA"
+    ],
+    "safe_claims": [
+      "DataSF developer docs state that building with open data is easy with the Socrata Open Data API."
+    ],
+    "caveats": [
+      "Socrata app tokens increase limits; unauthenticated use can be throttled."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "socrata_soda_api_docs",
+    "name": "Socrata SODA Consumer API docs",
+    "url": "https://dev.socrata.com/consumers/getting-started.html",
+    "jurisdiction": "Global/platform",
+    "level": "platform_docs",
+    "category": [
+      "open_data",
+      "api",
+      "soda"
+    ],
+    "owner_type": "platform_docs",
+    "integration": "optional_live_no_key_soda",
+    "no_key": true,
+    "refresh_frequency": "annual_check",
+    "use_for": [
+      "General SODA API guidance for open data endpoints"
+    ],
+    "safe_claims": [
+      "Every Socrata dataset has a built-in SODA API endpoint accessible through dataset export/API controls."
+    ],
+    "caveats": [
+      "Use low-rate caching and cite dataset pages."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_apply_public_benefits",
+    "name": "Santa Clara County Apply for Public Benefits",
+    "url": "https://ssa.santaclaracounty.gov/apply-public-benefits",
+    "jurisdiction": "Santa Clara County",
+    "level": "county",
+    "category": [
+      "county_contact",
+      "calfresh",
+      "medi_cal",
+      "calworks",
+      "general_assistance",
+      "capi"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Santa Clara County public-benefits application methods and contact info"
+    ],
+    "safe_claims": [
+      "Santa Clara County lists phone (408) 758-3800, fax (408) 295-9248, PO Box 11018, San Jose, CA 95103 for public benefits application support."
+    ],
+    "caveats": [
+      "Do not apply or upload documents for users."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_calfresh_page",
+    "name": "Santa Clara County CalFresh Food",
+    "url": "https://ssa.santaclaracounty.gov/food-assistance/get-help-buying-groceries-calfresh-food",
+    "jurisdiction": "Santa Clara County",
+    "level": "county",
+    "category": [
+      "food",
+      "calfresh"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "County-specific CalFresh guidance and scam warnings"
+    ],
+    "safe_claims": [
+      "Use as county-specific CalFresh source; warn users not to share EBT card/PIN with callers/texts/emails."
+    ],
+    "caveats": [
+      "Do not handle EBT numbers/PINs."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_general_assistance",
+    "name": "Santa Clara County General Assistance",
+    "url": "https://ssa.santaclaracounty.gov/financial-assistance/get-financial-assistance-adults-without-dependent-children-general-assistance",
+    "jurisdiction": "Santa Clara County",
+    "level": "county",
+    "category": [
+      "cash_assistance",
+      "general_assistance"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Cash assistance prep for adults without dependent children"
+    ],
+    "safe_claims": [
+      "Santa Clara County GA is for adults without dependent children who have no other means of support; county eligibility worker determines eligibility."
+    ],
+    "caveats": [
+      "Do not decide GA eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_wic_apply",
+    "name": "Santa Clara County WIC apply/contact",
+    "url": "https://publichealth.santaclaracounty.gov/programs-and-services/apply-receive-nutrition-information-breastfeeding-support-and-healthy-foods",
+    "jurisdiction": "Santa Clara County",
+    "level": "county",
+    "category": [
+      "wic",
+      "nutrition",
+      "food"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Santa Clara County WIC contact and local path"
+    ],
+    "safe_claims": [
+      "Santa Clara County WIC lists phone (408) 792-5101 and text (888) 413-2698 to check if a person qualifies."
+    ],
+    "caveats": [
+      "Local WIC staff determine eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_wic_provider_contacts",
+    "name": "Santa Clara County WIC provider contacts",
+    "url": "https://publichealthproviders.santaclaracounty.gov/health-care-providers/programs/women-infants-and-children-nutrition-program",
+    "jurisdiction": "Santa Clara County",
+    "level": "county",
+    "category": [
+      "wic",
+      "provider_contacts"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Additional WIC local agencies: Indian Health Center and Gardner Health"
+    ],
+    "safe_claims": [
+      "Santa Clara County lists Indian Health Center at (408) 960-0900 and Gardner Health Services at (408) 254-5197 as WIC-related contacts."
+    ],
+    "caveats": [
+      "Call to confirm locations and appointment availability."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_211_bayarea",
+    "name": "211 Bay Area — Santa Clara County",
+    "url": "https://211bayarea.org/counties/santa-clara/",
+    "jurisdiction": "Santa Clara County",
+    "level": "county_network",
+    "category": [
+      "211",
+      "housing",
+      "food",
+      "health",
+      "legal",
+      "transportation",
+      "crisis"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Local resource handoff for Santa Clara County"
+    ],
+    "safe_claims": [
+      "211 Bay Area provides free 24/7 assistance in Santa Clara County across housing, food, mental health, crisis, transportation, health care and related categories."
+    ],
+    "caveats": [
+      "Use as handoff, not a scraped database."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sanjose_homeless_services_guide",
+    "name": "City of San José Homeless Services Guide",
+    "url": "https://www.sanjoseca.gov/your-government/departments-offices/housing/resource-library/homeless-services-guide",
+    "jurisdiction": "San José / Santa Clara County",
+    "level": "city_county",
+    "category": [
+      "housing",
+      "shelter",
+      "homeless_services",
+      "food"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San José homelessness and shelter handoff"
+    ],
+    "safe_claims": [
+      "The City of San José states that most shelters in Santa Clara County, including San José, require referral through Here4You at 408-385-2400."
+    ],
+    "caveats": [
+      "Call before going; no live bed availability claims."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "scc_osh_temporary_emergency_shelter",
+    "name": "Santa Clara County Office of Supportive Housing: Temporary and Emergency Shelter",
+    "url": "https://osh.santaclaracounty.gov/get-assistance/temporary-and-emergency-shelter",
+    "jurisdiction": "Santa Clara County",
+    "level": "county",
+    "category": [
+      "housing",
+      "shelter",
+      "homeless_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Here4You shelter routing"
+    ],
+    "safe_claims": [
+      "Santa Clara County directs people needing shelter to the Here4You hotline at (408) 385-2400."
+    ],
+    "caveats": [
+      "No live shelter bed claims; instruct to call."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "second_harvest_sv_get_food",
+    "name": "Second Harvest of Silicon Valley Get Food",
+    "url": "https://www.shfb.org/get-food/",
+    "jurisdiction": "Santa Clara County / San Mateo County",
+    "level": "regional_nonprofit",
+    "category": [
+      "food",
+      "food_bank",
+      "locator"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Santa Clara food bank locator and food hotline handoff"
+    ],
+    "safe_claims": [
+      "Second Harvest of Silicon Valley provides a food locator for free groceries and prepared meals."
+    ],
+    "caveats": [
+      "Call or use locator for current pantry availability."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "second_harvest_sv_contact",
+    "name": "Second Harvest of Silicon Valley Contact / Food Connection Hotline",
+    "url": "https://www.shfb.org/about-us/contact-us/",
+    "jurisdiction": "Santa Clara County / San Mateo County",
+    "level": "regional_nonprofit",
+    "category": [
+      "food",
+      "hotline"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "source_fixture_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Food Connection Hotline contact"
+    ],
+    "safe_claims": [
+      "Second Harvest lists Food Connection Hotline 1-800-984-3663 and foodconnection@shfb.org."
+    ],
+    "caveats": [
+      "Not a government agency; use for food-access handoff."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sanjose_food_family_resources",
+    "name": "City of San José Food and Family Resources",
+    "url": "https://www.sanjoseca.gov/your-government/departments-offices/parks-recreation-neighborhood-services/food-distribution-media-toolkit",
+    "jurisdiction": "San José",
+    "level": "city",
+    "category": [
+      "food",
+      "family_resources"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Food hotline and after-hours 211 language"
+    ],
+    "safe_claims": [
+      "San José points users to Second Harvest at 1-800-984-3663 and 211 after hours for food and family resources."
+    ],
+    "caveats": [
+      "Call before going to specific food distribution sites."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "law_foundation_housing_scc",
+    "name": "Law Foundation of Silicon Valley housing help",
+    "url": "https://www.lawfoundation.org/housing",
+    "jurisdiction": "Santa Clara County",
+    "level": "county_nonprofit_legal",
+    "category": [
+      "legal_aid",
+      "housing",
+      "eviction_prevention"
+    ],
+    "owner_type": "nonprofit_legal_aid",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Housing legal aid and Homelessness Prevention System handoff"
+    ],
+    "safe_claims": [
+      "Law Foundation routes eligible low-income Santa Clara County residents at risk of homelessness to HPS assistance; contact preventhomelessness.org, (408) 516-5100, or info@preventhomelessness.org."
+    ],
+    "caveats": [
+      "Do not provide legal advice; route to legal aid."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "baylegal_santa_clara_office",
+    "name": "Bay Area Legal Aid Santa Clara County office",
+    "url": "https://baylegal.org/resources/santa-clara-county-office/",
+    "jurisdiction": "Santa Clara County",
+    "level": "county_nonprofit_legal",
+    "category": [
+      "legal_aid",
+      "housing",
+      "benefits"
+    ],
+    "owner_type": "nonprofit_legal_aid",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "General civil legal aid referral"
+    ],
+    "safe_claims": [
+      "Bay Area Legal Aid Santa Clara office address: 4 North Second Street, Suite 600, San Jose, CA 95113; phone: (408) 283-3700."
+    ],
+    "caveats": [
+      "Do not provide legal advice; route to legal aid."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_home",
+    "name": "San Francisco Human Services Agency",
+    "url": "https://www.sfhsa.org/",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "county_contact",
+      "social_services",
+      "benefits"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco public benefits and service-center routing"
+    ],
+    "safe_claims": [
+      "SFHSA offers CalFresh, CalWORKs, Medi-Cal, CAAP, child care, financial assistance, food, health, housing and jobs information."
+    ],
+    "caveats": [
+      "Use specific program pages for detailed contacts."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_benefitscal",
+    "name": "SFHSA BenefitsCal page",
+    "url": "https://www.sfhsa.org/benefitscal",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "benefitscal",
+      "county_contact"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco BenefitsCal management/apply guidance"
+    ],
+    "safe_claims": [
+      "San Francisco says BenefitsCal can be used to apply for benefits, upload documents, renew cases, update information, download proof of benefits, and view EBT balance."
+    ],
+    "caveats": [
+      "Do not handle credentials or case data."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_calfresh_apply",
+    "name": "SFHSA Apply for CalFresh",
+    "url": "https://www.sfhsa.org/services/food/calfresh/apply-calfresh",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "food",
+      "calfresh"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco CalFresh apply/contact guidance"
+    ],
+    "safe_claims": [
+      "SFHSA says users can apply for CalFresh on BenefitsCal, call (855) 355-5757, or download multilingual applications."
+    ],
+    "caveats": [
+      "Do not apply or submit documents for user."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_medi_cal",
+    "name": "SFHSA Medi-Cal",
+    "url": "https://www.sfhsa.org/services/health/medi-cal",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "health",
+      "medi_cal"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco Medi-Cal contact/service-center details"
+    ],
+    "safe_claims": [
+      "SFHSA lists Medi-Cal contact phone (855) 355-5757, email sfbncfmc@sfgov.org, fax (415) 355-2300, BenefitsCal online, and service centers including 1460 Mission, 1440 Harrison, 3120 Mission, and 2 Gough for older adults/people with disabilities."
+    ],
+    "caveats": [
+      "Do not decide Medi-Cal eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_medi_cal_apply",
+    "name": "SFHSA Apply for Medi-Cal",
+    "url": "https://www.sfhsa.org/services/health/medi-cal/apply-medi-cal",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "health",
+      "medi_cal",
+      "application"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Medi-Cal application submission channels"
+    ],
+    "safe_claims": [
+      "SFHSA lists email SFMedi-Cal@sfgov.org, fax (415) 355-2432, mail PO Box 7988, San Francisco, CA 94120, and service-center drop boxes for applications."
+    ],
+    "caveats": [
+      "Do not collect or transmit documents in MVP."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_caap",
+    "name": "SFHSA County Adult Assistance Programs (CAAP)",
+    "url": "https://www.sfhsa.org/services/financial-assistance/county-adult-assistance-programs-caap",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "cash_assistance",
+      "caap"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco CAAP prep path"
+    ],
+    "safe_claims": [
+      "CAAP provides cash assistance and employment services to low-income San Franciscans with no dependent children."
+    ],
+    "caveats": [
+      "Do not decide CAAP eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_caap_apply",
+    "name": "SFHSA Apply for CAAP",
+    "url": "https://www.sfhsa.org/services/financial-assistance/county-adult-assistance-programs-caap/apply-caap",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "cash_assistance",
+      "caap",
+      "application"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "CAAP application method"
+    ],
+    "safe_claims": [
+      "SFHSA says users can apply for CAAP online at BenefitsCal or in person at 1460 Mission Street; an intake interview is scheduled."
+    ],
+    "caveats": [
+      "No automatic application submission."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_caap_check_eligibility",
+    "name": "SFHSA Check CAAP Eligibility",
+    "url": "https://www.sfhsa.org/services/county-adult-assistance-programs-caap/check-caap-eligibility",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "cash_assistance",
+      "caap",
+      "eligibility_reference"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_cautious",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "CAAP missing-facts prompts only"
+    ],
+    "safe_claims": [
+      "San Francisco CAAP eligibility screening considers residency, income, expenses, property, vehicle ownership, student status, and CalFresh/Medi-Cal connection."
+    ],
+    "caveats": [
+      "Do not calculate or decide CAAP eligibility; use to ask missing facts and route to SFHSA."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_calworks_apply",
+    "name": "SFHSA Apply for CalWORKs",
+    "url": "https://www.sfhsa.org/services/financial-assistance/calworks/apply-calworks",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "cash_assistance",
+      "families",
+      "calworks"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Family cash-aid prep path"
+    ],
+    "safe_claims": [
+      "SFHSA says CalWORKs applications can start at BenefitsCal and involve a CalWORKs appointment; phone (855) 557-5100; in person at 170 Otis Street."
+    ],
+    "caveats": [
+      "Do not decide CalWORKs eligibility."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_wic_program",
+    "name": "San Francisco WIC program",
+    "url": "https://www.sf.gov/women-infants-children-wic-supplemental-nutrition-program",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "wic",
+      "food",
+      "nutrition"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "San Francisco WIC overview"
+    ],
+    "safe_claims": [
+      "San Francisco WIC has clinic locations and provides breastfeeding/nutrition support."
+    ],
+    "caveats": [
+      "Use clinic-hours page and official WIC locator for current locations/hours."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_wic_clinic_hours_locations",
+    "name": "San Francisco WIC clinic hours and locations",
+    "url": "https://www.sf.gov/information--wic-clinic-hours-and-locations",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "wic",
+      "locations"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "San Francisco WIC clinic locations"
+    ],
+    "safe_claims": [
+      "San Francisco lists WIC clinics including Zuckerberg San Francisco General Hospital WIC Clinic at 2550 23rd Street, Building 9, Room 125; phone (628) 206-5494."
+    ],
+    "caveats": [
+      "Call before visiting; use official page for all clinics."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfhsa_free_food_locations",
+    "name": "SFHSA Free Food Locations",
+    "url": "https://www.sfhsa.org/services/food/free-food-locations",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "food",
+      "meals",
+      "pantries",
+      "locator"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco free food sources and call-before-going warning"
+    ],
+    "safe_claims": [
+      "SFHSA provides a free food directory and warns users to call before visiting to confirm food availability and hours."
+    ],
+    "caveats": [
+      "Do not claim availability without calling or source confirmation."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_marin_food_bank_find_food",
+    "name": "SF-Marin Food Bank Find Food locator",
+    "url": "https://www.sfmfoodbank.org/find-food/",
+    "jurisdiction": "San Francisco / Marin",
+    "level": "regional_nonprofit",
+    "category": [
+      "food",
+      "food_bank",
+      "locator"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "San Francisco food locator and multilingual food assistance"
+    ],
+    "safe_claims": [
+      "SF-Marin Food Bank's locator can find free groceries, senior food boxes, emergency food, and CalFresh help; it is available in multiple languages."
+    ],
+    "caveats": [
+      "Not a government agency; use as food-access handoff."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_hsh_department",
+    "name": "San Francisco Department of Homelessness and Supportive Housing",
+    "url": "https://www.sf.gov/departments--homelessness-and-supportive-housing",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "housing",
+      "homeless_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Homelessness services overview and official entry point"
+    ],
+    "safe_claims": [
+      "SF HSH provides information for people at risk of or experiencing homelessness, including shelter, housing, meals, clothing, and eviction prevention resources."
+    ],
+    "caveats": [
+      "Do not claim shelter availability."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_coordinated_entry",
+    "name": "San Francisco Coordinated Entry / Access Points",
+    "url": "https://www.sf.gov/resource--2024--coordinated-entry",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "housing",
+      "homeless_services",
+      "access_points"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Route families/adults/youth to access points"
+    ],
+    "safe_claims": [
+      "Access Points are community gateways into San Francisco's Homelessness Response System, serving adults, families, and young adults ages 18 to 24."
+    ],
+    "caveats": [
+      "Call/visit access point; no live availability claims."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfserviceguide_access_point",
+    "name": "SF Service Guide Access Point entry",
+    "url": "https://www.sfserviceguide.org/services/2664",
+    "jurisdiction": "San Francisco",
+    "level": "city_nonprofit_directory",
+    "category": [
+      "housing",
+      "homeless_services",
+      "access_points"
+    ],
+    "owner_type": "local_service_directory",
+    "integration": "source_fixture_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Concrete adult/family/youth access point contact details"
+    ],
+    "safe_claims": [
+      "SF Service Guide lists an Adult/Family/Youth Coordinated Entry Access Point and contact email/phone, including 415-487-3300 x7000."
+    ],
+    "caveats": [
+      "Verify current hours before routing users."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sfserviceguide_adult_shelter_reservation",
+    "name": "SF Service Guide Adult Shelter Reservation System",
+    "url": "https://www.sfserviceguide.org/services/3792",
+    "jurisdiction": "San Francisco",
+    "level": "city_nonprofit_directory",
+    "category": [
+      "housing",
+      "shelter",
+      "hotline"
+    ],
+    "owner_type": "local_service_directory",
+    "integration": "source_fixture_handoff",
+    "no_key": true,
+    "refresh_frequency": "weekly_manual_check",
+    "use_for": [
+      "Adult shelter line and HSH contact"
+    ],
+    "safe_claims": [
+      "SF Service Guide lists SFHOT/Adult Shelter Access Line at (628) 652-8000 and HSH phone (628) 652-7700."
+    ],
+    "caveats": [
+      "Call before going; no live bed availability claims."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_211_bayarea_housing",
+    "name": "211 Bay Area Housing & Homeless Services",
+    "url": "https://211bayarea.org/topics/housing-homeless-services/",
+    "jurisdiction": "San Francisco / Bay Area",
+    "level": "regional_network",
+    "category": [
+      "211",
+      "housing",
+      "homeless_services"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Housing services handoff"
+    ],
+    "safe_claims": [
+      "211 Bay Area says users can dial 211 for personalized housing assistance, free/confidential/24/7 and multilingual."
+    ],
+    "caveats": [
+      "Use handoff; do not scrape database."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_eviction_defense_collaborative",
+    "name": "Eviction Defense Collaborative",
+    "url": "https://evictiondefense.org/",
+    "jurisdiction": "San Francisco",
+    "level": "city_nonprofit_legal",
+    "category": [
+      "legal_aid",
+      "eviction",
+      "rental_assistance"
+    ],
+    "owner_type": "nonprofit_legal_aid",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "San Francisco eviction legal assistance and rent help handoff"
+    ],
+    "safe_claims": [
+      "EDC says people served a Summons & Complaint or notice to quit should call (415) 659-9184 or email legal@evictiondefense.org."
+    ],
+    "caveats": [
+      "Do not provide legal advice."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "sf_tenant_landlord_resources",
+    "name": "San Francisco tenant and landlord resources",
+    "url": "https://www.sf.gov/tenant-and-landlord-resources",
+    "jurisdiction": "San Francisco",
+    "level": "city_county",
+    "category": [
+      "legal_aid",
+      "tenant",
+      "housing"
+    ],
+    "owner_type": "local_official",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Tenant/housing legal issue routing"
+    ],
+    "safe_claims": [
+      "San Francisco directs tenants with eviction court papers to contact Eviction Defense Collaborative immediately."
+    ],
+    "caveats": [
+      "Do not give legal advice."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "988_lifeline",
+    "name": "988 Suicide & Crisis Lifeline",
+    "url": "https://988lifeline.org/",
+    "jurisdiction": "United States",
+    "level": "federal_national",
+    "category": [
+      "crisis",
+      "mental_health",
+      "suicide_prevention"
+    ],
+    "owner_type": "national_crisis_service",
+    "integration": "urgent_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Immediate crisis support handoff"
+    ],
+    "safe_claims": [
+      "988 offers call, text, and chat support for mental health struggles, emotional distress, alcohol/drug use concerns, or needing someone to talk to."
+    ],
+    "caveats": [
+      "In imminent danger, advise 911/emergency services. AidAtlasCA is not crisis counseling."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "samhsa_national_helpline",
+    "name": "SAMHSA National Helpline",
+    "url": "https://www.samhsa.gov/find-help/helplines/national-helpline",
+    "jurisdiction": "United States",
+    "level": "federal_national",
+    "category": [
+      "crisis",
+      "mental_health",
+      "substance_use",
+      "treatment_referral"
+    ],
+    "owner_type": "federal_official",
+    "integration": "urgent_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Substance use / mental health treatment referral handoff"
+    ],
+    "safe_claims": [
+      "SAMHSA National Helpline is free, confidential, 24/7/365, in English and Spanish; 1-800-662-HELP (4357)."
+    ],
+    "caveats": [
+      "AidAtlasCA should not provide treatment advice."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "national_domestic_violence_hotline",
+    "name": "National Domestic Violence Hotline",
+    "url": "https://www.thehotline.org/",
+    "jurisdiction": "United States",
+    "level": "national",
+    "category": [
+      "crisis",
+      "domestic_violence",
+      "safety"
+    ],
+    "owner_type": "national_hotline_nonprofit",
+    "integration": "urgent_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Domestic violence safety handoff"
+    ],
+    "safe_claims": [
+      "The Hotline offers confidential support 24/7/365."
+    ],
+    "caveats": [
+      "Do not log sensitive location details for DV situations; provide safe-exit guidance only at high level."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "california_youth_crisis_line",
+    "name": "California Youth Crisis Line",
+    "url": "https://calyouth.org/cycl/",
+    "jurisdiction": "California",
+    "level": "state_nonprofit",
+    "category": [
+      "crisis",
+      "youth",
+      "homeless_youth"
+    ],
+    "owner_type": "statewide_nonprofit_hotline",
+    "integration": "urgent_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Youth crisis / runaway / homelessness handoff"
+    ],
+    "safe_claims": [
+      "California Coalition for Youth operates a Youth Crisis Line resource for youth in crisis."
+    ],
+    "caveats": [
+      "Do not serve minors with detailed benefit workflows without guardian/professional safety logic."
+    ],
+    "last_checked": "2026-06-28"
+  },
+  {
+    "id": "alameda_county_social_services",
+    "name": "Alameda County Social Services Agency",
+    "url": "https://socialservices.alamedacountyca.gov/index.page",
+    "jurisdiction": "Alameda County",
+    "level": "county",
+    "category": [
+      "benefits",
+      "county_contact",
+      "social_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Alameda County public benefits office routing",
+      "County social services handoff"
+    ],
+    "safe_claims": [
+      "Use as Alameda County official social services routing; link out rather than collecting application credentials."
+    ],
+    "caveats": [
+      "Program pages and office details can change; pair with BenefitsCal and CDSS statewide directories."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "contra_costa_ehsd",
+    "name": "Contra Costa County Employment & Human Services Department",
+    "url": "https://ehsd.org/",
+    "jurisdiction": "Contra Costa County",
+    "level": "county",
+    "category": [
+      "benefits",
+      "county_contact",
+      "social_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Contra Costa County public benefits office routing",
+      "County social services handoff"
+    ],
+    "safe_claims": [
+      "Use as Contra Costa County official social services routing; link out rather than collecting application credentials."
+    ],
+    "caveats": [
+      "Program pages and office details can change; pair with BenefitsCal and CDSS statewide directories."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "san_mateo_hsa",
+    "name": "San Mateo County Human Services Agency",
+    "url": "https://www.smcgov.org/hsa",
+    "jurisdiction": "San Mateo County",
+    "level": "county",
+    "category": [
+      "benefits",
+      "county_contact",
+      "social_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "San Mateo County public benefits office routing",
+      "County human services handoff"
+    ],
+    "safe_claims": [
+      "Use as San Mateo County official Human Services Agency routing; link out rather than collecting application credentials."
+    ],
+    "caveats": [
+      "Program pages and office details can change; pair with BenefitsCal and CDSS statewide directories."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "solano_hss",
+    "name": "Solano County Health and Social Services",
+    "url": "https://www.solanocounty.gov/government/health-social-services-hss",
+    "jurisdiction": "Solano County",
+    "level": "county",
+    "category": [
+      "benefits",
+      "county_contact",
+      "social_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Solano County public benefits and health/social services routing"
+    ],
+    "safe_claims": [
+      "Use as Solano County official Health and Social Services routing; link out rather than collecting application credentials."
+    ],
+    "caveats": [
+      "Program pages and office details can change; pair with BenefitsCal and CDSS statewide directories."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "sonoma_human_services_economic_assistance",
+    "name": "Sonoma County Human Services Economic Assistance",
+    "url": "https://sonomacounty.gov/health-and-human-services/human-services/divisions-and-services/economic-assistance",
+    "jurisdiction": "Sonoma County",
+    "level": "county",
+    "category": [
+      "benefits",
+      "county_contact",
+      "social_services"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Sonoma County economic assistance routing",
+      "County social services handoff"
+    ],
+    "safe_claims": [
+      "Use as Sonoma County official Economic Assistance routing; link out rather than collecting application credentials."
+    ],
+    "caveats": [
+      "Program pages and office details can change; pair with BenefitsCal and CDSS statewide directories."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "marin_211_bayarea",
+    "name": "211 Bay Area Marin County",
+    "url": "https://211bayarea.org/counties/marin-county/",
+    "jurisdiction": "Marin County",
+    "level": "regional_network",
+    "category": [
+      "211",
+      "resource_handoff",
+      "food",
+      "housing",
+      "utilities"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Marin County local resource navigation by 211"
+    ],
+    "safe_claims": [
+      "Use as a county-specific 211 Bay Area handoff; call 211 for current local resource navigation."
+    ],
+    "caveats": [
+      "Do not claim live availability from 211 directory pages."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "napa_211_bayarea",
+    "name": "211 Bay Area Napa County",
+    "url": "https://211bayarea.org/counties/napa-county/",
+    "jurisdiction": "Napa County",
+    "level": "regional_network",
+    "category": [
+      "211",
+      "resource_handoff",
+      "food",
+      "housing",
+      "utilities"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Napa County local resource navigation by 211"
+    ],
+    "safe_claims": [
+      "Use as a county-specific 211 Bay Area handoff; call 211 for current local resource navigation."
+    ],
+    "caveats": [
+      "Do not claim live availability from 211 directory pages."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "san_mateo_211_bayarea",
+    "name": "211 Bay Area San Mateo County",
+    "url": "https://211bayarea.org/counties/san-mateo/",
+    "jurisdiction": "San Mateo County",
+    "level": "regional_network",
+    "category": [
+      "211",
+      "resource_handoff",
+      "food",
+      "housing",
+      "utilities"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "San Mateo County local resource navigation by 211"
+    ],
+    "safe_claims": [
+      "Use as a county-specific 211 Bay Area handoff; call 211 for current local resource navigation."
+    ],
+    "caveats": [
+      "Do not claim live availability from 211 directory pages."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "solano_211_bayarea",
+    "name": "211 Bay Area Solano County",
+    "url": "https://211bayarea.org/counties/solano-county/",
+    "jurisdiction": "Solano County",
+    "level": "regional_network",
+    "category": [
+      "211",
+      "resource_handoff",
+      "food",
+      "housing",
+      "utilities"
+    ],
+    "owner_type": "nonprofit_network",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Solano County local resource navigation by 211"
+    ],
+    "safe_claims": [
+      "Use as a county-specific 211 Bay Area handoff; call 211 for current local resource navigation."
+    ],
+    "caveats": [
+      "Do not claim live availability from 211 directory pages."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "alameda_food_bank_get_food",
+    "name": "Alameda County Community Food Bank Get Food",
+    "url": "https://www.accfb.org/get-food/",
+    "jurisdiction": "Alameda County",
+    "level": "county_nonprofit",
+    "category": [
+      "food",
+      "food_bank",
+      "locator"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Alameda County food locator and food assistance handoff"
+    ],
+    "safe_claims": [
+      "Use the Alameda County Community Food Bank get-food page as a local food handoff."
+    ],
+    "caveats": [
+      "Food pantry schedules and availability can change; call before going."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "food_bank_ccs_find_food",
+    "name": "Food Bank of Contra Costa and Solano Find Food",
+    "url": "https://www.foodbankccs.org/find-food/foodbycity/",
+    "jurisdiction": "Contra Costa County / Solano County",
+    "level": "regional_nonprofit",
+    "category": [
+      "food",
+      "food_bank",
+      "locator"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Contra Costa and Solano food locator handoff"
+    ],
+    "safe_claims": [
+      "Use the Food Bank of Contra Costa and Solano food-by-city page as a local food handoff."
+    ],
+    "caveats": [
+      "Food pantry schedules and availability can change; call before going."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "canv_food_bank",
+    "name": "Community Action of Napa Valley Food Bank",
+    "url": "https://www.canv.org/food-bank/",
+    "jurisdiction": "Napa County",
+    "level": "county_nonprofit",
+    "category": [
+      "food",
+      "food_bank"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Napa County food bank handoff"
+    ],
+    "safe_claims": [
+      "Use Community Action of Napa Valley Food Bank as a local food handoff."
+    ],
+    "caveats": [
+      "Food pantry schedules and availability can change; call before going."
+    ],
+    "last_checked": "2026-07-01"
+  },
+  {
+    "id": "redwood_empire_food_bank_find_food",
+    "name": "Redwood Empire Food Bank Find Food",
+    "url": "https://refb.org/programs/find-food/",
+    "jurisdiction": "Sonoma County",
+    "level": "regional_nonprofit",
+    "category": [
+      "food",
+      "food_bank",
+      "locator"
+    ],
+    "owner_type": "nonprofit_food_bank",
+    "integration": "link_out_handoff",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Sonoma County food locator handoff"
+    ],
+    "safe_claims": [
+      "Use Redwood Empire Food Bank find-food resources as a local food handoff."
+    ],
+    "caveats": [
+      "Food pantry schedules and availability can change; call before going."
+    ],
+    "last_checked": "2026-07-01"
+  }
+]

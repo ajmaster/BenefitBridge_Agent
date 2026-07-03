@@ -1,4 +1,4 @@
-"""BenefitBridge policy helpers."""
+"""AidAtlasCA policy helpers."""
 
 from app.policies.freshness import freshness_state, requires_call_before_going
 from app.policies.geography import classify_location

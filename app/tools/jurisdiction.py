@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from app.policies.geography import classify_location
+from app.policies.geography import classify_geocoded_location, classify_location
 from app.policies.privacy import has_exact_address
 from app.schemas import Jurisdiction, ToolError
+from app.services.google_integrations import maps_geocode_location
 
 
 def lookup_county_from_location(
@@ -25,12 +26,13 @@ def lookup_county_from_location(
             blocking=True,
         ).to_dict()
 
-    decision = classify_location(location_text)
+    geocode = maps_geocode_location(location_text)
+    decision = classify_geocoded_location(geocode) or classify_location(location_text)
     if not decision.in_pilot and decision.scope_note == "outside_california":
         return {
             "error": ToolError(
                 code="OUT_OF_SCOPE_GEOGRAPHY",
-                message="BenefitBridge CA only supports California prep flows.",
+                message="AidAtlasCA only supports California prep flows.",
                 blocking=False,
             ).to_dict(),
             "jurisdiction": decision.to_dict(),
@@ -40,8 +42,8 @@ def lookup_county_from_location(
             "error": ToolError(
                 code="NOT_ENOUGH_LOCATION_INFORMATION",
                 message=(
-                    "Use a Bay Area county, city, or ZIP for benefits prep; "
-                    "generic Bay Area is too broad for local routing."
+                    "Use a California county, city, or ZIP for benefits prep; "
+                    "generic California or Bay Area is too broad for local routing."
                 ),
                 blocking=True,
             ).to_dict(),
@@ -60,4 +62,7 @@ def lookup_county_from_location(
     result["granularity_preference"] = granularity_preference
     result["scope_note"] = decision.scope_note
     result["in_pilot"] = decision.in_pilot
+    result["coverage_level"] = decision.coverage_level
+    if geocode.get("specific_location_discarded"):
+        result["specific_location_discarded"] = True
     return result

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">AidAtlasCA app icon</title>
+  <rect width="512" height="512" rx="108" fill="#07183f"/>
+  <circle cx="256" cy="232" r="164" fill="#eaf5ff" stroke="#ffffff" stroke-width="20"/>
+  <path d="M256 36l20 60h-40l20-60Z" fill="#ffffff"/>
+  <path d="M452 232l-60 20v-40l60 20Z" fill="#0756d9"/>
+  <path d="M256 428l-20-60h40l-20 60Z" fill="#008260"/>
+  <path d="M60 232l60-20v40l-60-20Z" fill="#0756d9"/>
+  <path
+    d="M225 74c-20 23-33 47-39 70-9 34 18 52 10 79-8 28-48 41-45 73 3 32 54 38 69 74 10 24 24 42 56 37 46-7 25-62 55-90 31-29 41-49 27-74-14-26-51-22-71-46-21-24-20-54-62-123Z"
+    fill="#008260"
+  />
+  <path
+    d="M190 140c35 27 40 70 74 91 25 15 62 1 84 28"
+    fill="none"
+    stroke="#ffffff"
+    stroke-dasharray="2 34"
+    stroke-linecap="round"
+    stroke-width="22"
+  />
+  <path d="M331 76c45 0 82 36 82 80 0 59-82 109-82 109s-82-50-82-109c0-44 37-80 82-80Z" fill="#e55343"/>
+  <circle cx="331" cy="156" r="28" fill="#ffffff"/>
+  <path d="M352 269c36 0 65 29 65 65v38h-94c-25 0-45-20-45-45v-58h74Z" fill="#0756d9"/>
+  <rect x="303" y="300" width="90" height="48" rx="24" fill="#ffffff"/>
+  <rect x="318" y="313" width="60" height="22" rx="11" fill="#07183f"/>
+  <circle cx="337" cy="324" r="5" fill="#eaf5ff"/>
+  <circle cx="360" cy="324" r="5" fill="#eaf5ff"/>
+  <path d="M416 307c16 9 27 27 27 48" fill="none" stroke="#008260" stroke-linecap="round" stroke-width="16"/>
+</svg>

@@ -58,6 +58,7 @@ def main() -> int:
 
     approved_sources = load_json(SOURCE_ROOT / "approved_sources.json")
     program_areas = load_json(SOURCE_ROOT / "program_areas.json")
+    california_counties = load_json(SOURCE_ROOT / "california_counties.json")
     county_profiles = load_json(SOURCE_ROOT / "county_profiles.json")
     local_resources = load_json(SOURCE_ROOT / "local_resources_hsds_seed.json")
     contracts = load_json(CONTRACT_ROOT / "benefitbridge_tool_contracts.json")
@@ -75,6 +76,27 @@ def main() -> int:
     source_ids = set(ids)
     if len(ids) != len(source_ids):
         failures.append("approved_sources.json contains duplicate source IDs")
+
+    county_names = [county.get("name") for county in california_counties]
+    county_fips = [county.get("fips") for county in california_counties]
+    if len(california_counties) != 58:
+        failures.append(
+            f"california_counties.json must contain 58 counties; found {len(california_counties)}"
+        )
+    if len(county_names) != len(set(county_names)):
+        failures.append("california_counties.json contains duplicate county names")
+    if len(county_fips) != len(set(county_fips)):
+        failures.append("california_counties.json contains duplicate FIPS values")
+    for county in california_counties:
+        county_id = county.get("id") or county.get("name")
+        if county.get("state") != "CA":
+            failures.append(f"{county_id}: county state must be CA")
+        if not county.get("fips"):
+            failures.append(f"{county_id}: missing county FIPS")
+        if county.get("coverage_level") not in {"reviewed_local", "statewide_core"}:
+            failures.append(f"{county_id}: invalid coverage_level")
+        if not county.get("aliases"):
+            failures.append(f"{county_id}: missing aliases")
 
     for source in approved_sources:
         source_id = source.get("id")
@@ -104,9 +126,29 @@ def main() -> int:
         if missing:
             failures.append(f"{profile_id}: unknown source IDs: {missing}")
 
+    profiles_by_county = {
+        profile.get("county_name", profile.get("name")): profile
+        for profile in county_profiles
+        if profile.get("fips_hint")
+    }
+    for county in california_counties:
+        profile = profiles_by_county.get(county.get("name"))
+        if not profile:
+            failures.append(f"{county.get('name')}: missing county profile")
+            continue
+        if profile.get("fips_hint") != county.get("fips"):
+            failures.append(f"{county.get('name')}: profile FIPS mismatch")
+        if not profile.get("source_ids"):
+            failures.append(f"{county.get('name')}: profile missing source_ids")
+        if profile.get("coverage_level") not in {"reviewed_local", "statewide_core"}:
+            failures.append(f"{county.get('name')}: profile missing coverage_level")
+
     for resource in local_resources:
         resource_id = resource.get("id")
-        missing = sorted(set(resource.get("source_ids", [])) - source_ids)
+        referenced = set(resource.get("source_ids", []))
+        if resource.get("source_id"):
+            referenced.add(resource["source_id"])
+        missing = sorted(referenced - source_ids)
         if missing:
             failures.append(f"{resource_id}: unknown source IDs: {missing}")
 
@@ -128,6 +170,7 @@ def main() -> int:
         "Source pack validation passed: "
         f"{len(source_ids)} sources, "
         f"{len(program_areas)} program areas, "
+        f"{len(california_counties)} California counties, "
         f"{len(county_profiles)} county profiles, "
         f"{len(local_resources)} local resources, "
         f"{len(contract_names)} tool contracts."

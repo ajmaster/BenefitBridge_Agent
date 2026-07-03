@@ -9,9 +9,10 @@ Candidates:
 - HealthCare.gov Content API: health coverage glossary/article snapshots.
 - HUD Housing Counselor search: housing counselor discovery.
 - DataSF/Socrata: San Francisco dataset mechanics and optional refresh.
-- Google Maps/Places/Routes: future enrichment only, after privacy review.
+- Google Maps Geocoding/Places: optional gated contact/location enrichment only;
+  exact-address and safety-sensitive gates run before calls.
+- Google Routes: future link-out/directions helper only after privacy review.
 - Cloud Translation: future translation productionization after QA.
 - Cloud DLP: future server-side PII detection, not needed for prototype tests.
 
 Run `scripts/smoke_public_apis.sh` only when network use is explicitly approved.
-
