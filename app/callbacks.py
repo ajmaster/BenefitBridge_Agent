@@ -9,7 +9,9 @@ from google.adk.models.llm_response import LlmResponse
 from google.genai import types
 
 from app.policies.privacy import has_exact_address
+from app.policies.source_grounding import url_domain
 from app.services.google_integrations import detect_sensitive_text, screen_model_text
+from app.services.source_store import DEFAULT_STORE
 from app.tools.validation import validate_packet
 
 _SAFETY_FOOTER = (
@@ -46,6 +48,7 @@ _STALE_LOCAL_COVERAGE_RE = re.compile(
     r"San\s+Jose,\s+and\s+San\s+Francisco\.?",
     re.IGNORECASE,
 )
+_URL_RE = re.compile(r"https?://[^\s)>\"]+")
 
 
 def before_agent_callback(callback_context: Any) -> None:
@@ -161,6 +164,24 @@ def _sanitize_model_response_text(text: str) -> str:
         sanitized,
     )
     sanitized = re.sub(
+        r"\bNational Runaway Safeline\b",
+        "California Youth Crisis Line",
+        sanitized,
+        flags=re.IGNORECASE,
+    )
+    sanitized = re.sub(
+        r"1-800-RUNAWAY\s*\(1-800-786-2929\)|1-800-RUNAWAY|1-800-786-2929",
+        "1-800-843-5200",
+        sanitized,
+        flags=re.IGNORECASE,
+    )
+    sanitized = re.sub(
+        r"https?://(?:www\.)?1800runaway\.org/?[^\s.,;:!?)]*",
+        "https://calyouth.org/cycl/",
+        sanitized,
+        flags=re.IGNORECASE,
+    )
+    sanitized = re.sub(
         r"\b[Tt]o find out if you are eligible\b",
         "For a program review",
         sanitized,
@@ -190,7 +211,24 @@ def _sanitize_model_response_text(text: str) -> str:
         "the National Domestic Violence Hotline",
         sanitized,
     )
+    sanitized = _strip_unapproved_urls(sanitized)
     return _append_safety_footer_if_needed(sanitized)
+
+
+def _strip_unapproved_urls(text: str) -> str:
+    approved_domains = {
+        domain[4:] if domain.startswith("www.") else domain
+        for domain in DEFAULT_STORE.approved_domains
+    }
+
+    def replace(match: re.Match[str]) -> str:
+        url = match.group(0).rstrip(".,;:!?")
+        suffix = match.group(0)[len(url) :]
+        if url_domain(url) in approved_domains:
+            return match.group(0)
+        return f"the approved source drawer{suffix}"
+
+    return _URL_RE.sub(replace, text)
 
 
 def _append_safety_footer_if_needed(text: str) -> str:

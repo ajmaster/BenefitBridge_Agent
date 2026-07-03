@@ -52,7 +52,9 @@ def test_chat_workflow_returns_source_backed_a2ui_packet() -> None:
     assert "Call before going" in resources_template["body"]
 
     document_kit = next(
-        template for template in result["ui_templates"] if template["type"] == "document_kit"
+        template
+        for template in result["ui_templates"]
+        if template["type"] == "document_kit"
     )
     assert "Official agencies decide eligibility and amounts" in document_kit["body"]
     assert {item["label"] for item in document_kit["items"]} >= {
@@ -86,7 +88,9 @@ def test_chat_workflow_answers_general_question_from_approved_sources() -> None:
     )
 
     assert result["route"] == "source_answer"
-    assert "eligibility" not in result["message"].lower().replace("decide eligibility", "")
+    assert "eligibility" not in result["message"].lower().replace(
+        "decide eligibility", ""
+    )
     assert any(
         citation["source_id"] == "cdss_ihss_home"
         for template in result["ui_templates"]
@@ -180,7 +184,9 @@ def test_chat_workflow_treats_bay_area_as_ambiguous_location() -> None:
 
     assert result["route"] == "intake"
     assert not result["snapshot"]["location_text"]
-    assert any("city, county, or ZIP" in question for question in result["next_questions"])
+    assert any(
+        "city, county, or ZIP" in question for question in result["next_questions"]
+    )
 
 
 def test_chat_workflow_supports_statewide_core_county() -> None:

@@ -178,7 +178,9 @@ def match_benefit_paths(
             missing = list(area.prep_questions[:3])
         if program_id == "legal_aid_handoff":
             status = "local_handoff_recommended"
-            warnings.append("AidAtlasCA provides legal information handoffs, not legal advice.")
+            warnings.append(
+                "AidAtlasCA provides legal information handoffs, not legal advice."
+            )
         if program_id == "housing_homelessness":
             status = "local_handoff_recommended"
             warnings.append("No live shelter or resource availability is claimed.")
@@ -218,8 +220,13 @@ def _explicit_program_area_ids(
         if isinstance(item, str):
             candidate = item
         elif isinstance(item, dict):
-            candidate = item.get("program_area_id") or item.get("id") or item.get("area")
-        if isinstance(candidate, str) and candidate in DEFAULT_STORE.program_areas_by_id:
+            candidate = (
+                item.get("program_area_id") or item.get("id") or item.get("area")
+            )
+        if (
+            isinstance(candidate, str)
+            and candidate in DEFAULT_STORE.program_areas_by_id
+        ):
             ids.append(candidate)
     return list(dict.fromkeys(ids))
 

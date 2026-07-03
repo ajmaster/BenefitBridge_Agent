@@ -203,8 +203,7 @@ def test_county_profile_returns_statewide_core_for_fresno() -> None:
     assert profile["coverage_level"] == "statewide_core"
     assert profile["source_citations"]
     assert any(
-        handoff["source_id"] == "ca_211_home"
-        for handoff in profile["food_handoff"]
+        handoff["source_id"] == "ca_211_home" for handoff in profile["food_handoff"]
     )
 
 
@@ -264,12 +263,16 @@ def test_benefit_matching_supports_expanded_statewide_prep_paths() -> None:
         "legal_aid_handoff",
         "ihss_in_home_support",
     }.issubset(areas)
-    assert all(path["status_label"] in {
-        "likely_worth_checking",
-        "needs_more_information",
-        "local_handoff_recommended",
-        "not_enough_evidence",
-    } for path in paths)
+    assert all(
+        path["status_label"]
+        in {
+            "likely_worth_checking",
+            "needs_more_information",
+            "local_handoff_recommended",
+            "not_enough_evidence",
+        }
+        for path in paths
+    )
     assert all(path["source_citations"] for path in paths)
 
 

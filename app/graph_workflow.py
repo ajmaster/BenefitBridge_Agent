@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from google.adk.workflow import Edge, FunctionNode, START, Workflow
+from typing import Any
+
+from google.adk.workflow import START, Edge, FunctionNode, Workflow
 
 EXPECTED_GRAPH_NODE_NAMES: set[str] = {
     "consent_privacy",
@@ -93,7 +95,9 @@ def graph_workflow_readiness_summary() -> dict[str, Any]:
     """Expose graph topology and safe routes for readiness and eval gates."""
 
     workflow = build_benefitbridge_workflow()
-    node_names = sorted(node.name for node in (workflow.graph.nodes if workflow.graph else []))
+    node_names = sorted(
+        node.name for node in (workflow.graph.nodes if workflow.graph else [])
+    )
     return {
         "workflow_name": workflow.name,
         "node_count": len(node_names),

@@ -140,6 +140,59 @@ def test_after_model_callback_updates_stale_local_coverage_phrase() -> None:
     assert "Local coverage is source-backed statewide" in text
 
 
+def test_after_model_callback_normalizes_unsupported_runaway_safeline_url() -> None:
+    response = LlmResponse(
+        content=types.Content(
+            role="model",
+            parts=[
+                types.Part(
+                    text=(
+                        "For youth support, contact the National Runaway Safeline "
+                        "at 1-800-RUNAWAY (1-800-786-2929) or visit "
+                        "https://www.1800runaway.org."
+                    )
+                )
+            ],
+        )
+    )
+
+    sanitized = after_model_callback(callback_context=None, llm_response=response)
+
+    assert sanitized is not None
+    text = sanitized.content.parts[0].text
+    assert "1800runaway" not in text
+    assert "National Runaway Safeline" not in text
+    assert "California Youth Crisis Line" in text
+    assert "1-800-843-5200" in text
+    assert "https://calyouth.org/cycl/" in text
+
+
+def test_after_model_callback_strips_unapproved_urls_but_keeps_approved() -> None:
+    response = LlmResponse(
+        content=types.Content(
+            role="model",
+            parts=[
+                types.Part(
+                    text=(
+                        "Use https://www.kerncounty.com/government/departments/human-services "
+                        "and https://unapproved.example.com/resource "
+                        "and https://www.cdss.ca.gov/in-home-supportive-services for IHSS."
+                    )
+                )
+            ],
+        )
+    )
+
+    sanitized = after_model_callback(callback_context=None, llm_response=response)
+
+    assert sanitized is not None
+    text = sanitized.content.parts[0].text
+    assert "unapproved.example.com" not in text
+    assert "https://www.kerncounty.com/government/departments/human-services" in text
+    assert "the approved source drawer" in text
+    assert "https://www.cdss.ca.gov/in-home-supportive-services" in text
+
+
 def test_after_model_callback_sanitizes_dv_hotline_url_punctuation() -> None:
     response = LlmResponse(
         content=types.Content(

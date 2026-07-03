@@ -1,6 +1,5 @@
 from app.services.source_store import DEFAULT_STORE
 
-
 EXPECTED_BAY_AREA_COUNTY_FIPS = {
     "Alameda County": "06001",
     "Contra Costa County": "06013",

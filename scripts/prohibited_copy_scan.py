@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 DEFAULT_EXTENSIONS = {".html", ".txt"}
 IGNORED_DIR_NAMES = {".git", ".next", "_next", "node_modules", "test-results"}
@@ -42,7 +42,10 @@ PROHIBITED_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ),
     (
         "credential_request",
-        re.compile(r"\b(?:send|enter|share)\s+(?:your\s+)?(?:password|pin|login|username)\b", re.I),
+        re.compile(
+            r"\b(?:send|enter|share)\s+(?:your\s+)?(?:password|pin|login|username)\b",
+            re.I,
+        ),
     ),
     (
         "benefit_amount_prediction",

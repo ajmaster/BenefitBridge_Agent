@@ -10,7 +10,6 @@ from typing import Any
 
 from app.config import SOURCE_PACK_ROOT
 
-
 SAN_JOSE_ZIPS = {
     "95110",
     "95112",
@@ -191,8 +190,10 @@ class GeographyDecision:
 def classify_location(location_text: str) -> GeographyDecision:
     text = location_text.lower()
 
-    if "reno" in text or ", nv" in text or (
-        "nevada" in text and "nevada county" not in text
+    if (
+        "reno" in text
+        or ", nv" in text
+        or ("nevada" in text and "nevada county" not in text)
     ):
         return GeographyDecision(
             state="NV",
@@ -258,7 +259,9 @@ def classify_location(location_text: str) -> GeographyDecision:
             confidence=0.82,
             in_pilot=False,
             scope_note="statewide_core",
-            coverage_level=str(statewide_county.get("coverage_level", "statewide_core")),
+            coverage_level=str(
+                statewide_county.get("coverage_level", "statewide_core")
+            ),
         )
 
     if "california" in text or ", ca" in text:
