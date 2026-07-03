@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 320" role="img" aria-labelledby="title">
+  <title id="title">AidAtlasCA logo lockup</title>
+  <rect width="1180" height="320" fill="none"/>
+  <g transform="translate(46 24) scale(.53)">
+    <circle cx="256" cy="256" r="184" fill="#eaf5ff" stroke="#07183f" stroke-width="22"/>
+    <path d="M256 28l20 64h-40l20-64Z" fill="#0756d9"/>
+    <path d="M484 256l-64 20v-40l64 20Z" fill="#0756d9"/>
+    <path d="M256 484l-20-64h40l-20 64Z" fill="#008260"/>
+    <path d="M28 256l64-20v40l-64-20Z" fill="#0756d9"/>
+    <path d="M228 86c-18 22-31 44-38 66-11 35 16 54 10 81-6 28-46 42-44 72 2 31 52 38 67 74 11 25 22 43 56 38 46-7 24-63 55-91 32-29 41-49 27-74-14-26-52-22-72-46-21-24-20-54-61-120Z" fill="#008260"/>
+    <path d="M190 155c34 25 38 69 72 90 24 15 64 1 85 28" fill="none" stroke="#fff" stroke-dasharray="2 34" stroke-linecap="round" stroke-width="22"/>
+    <path d="M334 91c47 0 86 38 86 85 0 63-86 116-86 116s-86-53-86-116c0-47 39-85 86-85Z" fill="#e55343"/>
+    <circle cx="334" cy="176" r="31" fill="#fff"/>
+    <path d="M352 285c36 0 65 29 65 65v38h-94c-25 0-45-20-45-45v-58h74Z" fill="#0756d9"/>
+    <rect x="303" y="316" width="90" height="48" rx="24" fill="#fff"/>
+    <rect x="318" y="329" width="60" height="22" rx="11" fill="#07183f"/>
+    <circle cx="337" cy="340" r="5" fill="#eaf5ff"/>
+    <circle cx="360" cy="340" r="5" fill="#eaf5ff"/>
+  </g>
+  <text x="340" y="139" fill="#07183f" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="800" letter-spacing="-2">AidAtlas</text>
+  <rect x="714" y="83" width="106" height="72" rx="18" fill="#008260"/>
+  <text x="732" y="139" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800">CA</text>
+  <path d="M342 182h312" fill="none" stroke="#008260" stroke-width="9" stroke-linecap="round"/>
+  <text x="342" y="235" fill="#233252" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="600">Your AI navigator for benefits and local resources.</text>
+</svg>

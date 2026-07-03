@@ -66,7 +66,7 @@ const DEMO_FLOWS: DemoFlowCard[] = [
     id: "ConversationAtlasDemo",
     slug: "conversation-atlas",
     title: "Conversation Atlas Demo",
-    subtitle: "Sidepanel chat, maps, official sources, packet prep, and Spanish UI",
+    subtitle: "Voice/chat agent, safe maps, reminders, official sources, and Spanish UI",
     audience: "Public demo scenario",
     accent: "#0f766e",
     assetsPresent: true,

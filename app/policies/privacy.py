@@ -1,4 +1,4 @@
-"""Privacy and data-minimization rules for BenefitBridge CA."""
+"""Privacy and data-minimization rules for AidAtlasCA."""
 
 from __future__ import annotations
 

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Language icon</title>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="#eaf5ff"/>
+  <path d="M104 130h190c30 0 54 24 54 54v58c0 30-24 54-54 54h-94l-72 60v-60h-24c-30 0-54-24-54-54v-58c0-30 24-54 54-54Z" fill="#0756d9"/>
+  <path d="M214 238h194c30 0 54 24 54 54v38c0 30-24 54-54 54h-22v58l-70-58H214c-30 0-54-24-54-54v-38c0-30 24-54 54-54Z" fill="#008260"/>
+  <text x="112" y="234" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">EN</text>
+  <text x="270" y="344" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">ES</text>
+  <path d="M396 114l14 30 30 14-30 14-14 30-14-30-30-14 30-14 14-30Z" fill="#ffa800"/>
+</svg>

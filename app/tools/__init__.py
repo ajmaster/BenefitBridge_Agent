@@ -1,4 +1,4 @@
-"""ADK tool exports for BenefitBridge CA."""
+"""ADK tool exports for AidAtlasCA."""
 
 from app.tools.benefits import get_benefit_program_area, match_benefit_paths
 from app.tools.export import export_packet

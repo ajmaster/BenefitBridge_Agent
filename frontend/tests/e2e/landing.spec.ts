@@ -7,15 +7,35 @@ import { expect, test } from "@playwright/test";
 // `workspace.spec.ts` instead. See that file's header comment for the full
 // coverage map.
 
+async function continueAsGuestIfNeeded(page: import("@playwright/test").Page) {
+  const guestButton = page.getByRole("button", { name: "Continue as Guest" });
+  if (
+    await guestButton
+      .waitFor({ state: "visible", timeout: 5_000 })
+      .then(() => true)
+      .catch(() => false)
+  ) {
+    await guestButton.click();
+    await expect(guestButton).toBeHidden({ timeout: 15_000 });
+  }
+}
+
 test("hero renders headline and primary CTA navigates to the chat workspace", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Benefits prep, made clear." }),
+    page.getByRole("heading", {
+      name: "Ask AidAtlasCA. Find help nearby.",
+    }),
   ).toBeVisible();
+  await expect(page.getByText("Voice agent")).toBeVisible();
+  await expect(page.getByText("Maps", { exact: true })).toBeVisible();
+  await expect(page.getByText("Places handoffs")).toBeVisible();
+  await expect(page.getByText("Calendar reminders", { exact: true })).toBeVisible();
 
-  await page.getByRole("link", { name: "Start the conversation" }).first().click();
+  await page.getByRole("link", { name: "Ask AidAtlasCA" }).first().click();
   await page.waitForURL(/\/app\/chat\/?$/);
+  await continueAsGuestIfNeeded(page);
   await expect(page.getByTestId("chat-sidepanel")).toBeVisible();
 });
 
@@ -58,7 +78,9 @@ test("supports mobile landing layout without horizontal overflow", async ({ page
 
   expect(overflow).toBe(false);
   await expect(
-    page.getByRole("heading", { name: "Benefits prep, made clear." }),
+    page.getByRole("heading", {
+      name: "Ask AidAtlasCA. Find help nearby.",
+    }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Start the conversation" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Ask AidAtlasCA" }).first()).toBeVisible();
 });

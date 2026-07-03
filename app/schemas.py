@@ -1,4 +1,4 @@
-"""Typed runtime contracts for BenefitBridge CA.
+"""Typed runtime contracts for AidAtlasCA.
 
 These dataclasses mirror the JSON contracts in the source pack without making the
 deterministic code depend on a specific validation framework.
@@ -129,6 +129,8 @@ class LocalResource:
     languages: list[str] = field(default_factory=list)
     eligibility_notes: str | None = None
     call_before_going: bool = True
+    coverage_level: str = "reviewed_local"
+    coverage_label: str = "Reviewed local resources"
     source_citations: list[SourceCitation] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:

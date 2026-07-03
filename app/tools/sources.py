@@ -40,6 +40,9 @@ def search_source_snapshot(
     jurisdiction: str | None = None,
     program_area: str | None = None,
     source_type: str | None = None,
+    owner_type: str | None = None,
+    freshness_state: str | None = None,
+    coverage_level: str | None = None,
 ) -> list[dict[str, object]]:
     """Search the approved fixture source corpus."""
 
@@ -48,4 +51,7 @@ def search_source_snapshot(
         jurisdiction=jurisdiction,
         program_area=program_area,
         source_type=source_type,
+        owner_type=owner_type,
+        freshness_state=freshness_state,
+        coverage_level=coverage_level,
     )

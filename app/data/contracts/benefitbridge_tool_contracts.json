@@ -1,9 +1,9 @@
 [
   {
     "name": "lookup_county_from_location",
-    "purpose": "Map ZIP/city or optional session-only address to county/state/FIPS.",
+    "purpose": "Map ZIP/city/county to California county/state/FIPS and statewide coverage level; exact addresses remain blocked unless explicitly session-consented.",
     "input": "{ location_text, granularity_preference, user_consented_exact_address:false }",
-    "output": "Jurisdiction { state, county, city, zip?, fips?, confidence, source_citations[] }",
+    "output": "Jurisdiction { state, county, city?, zip?, fips?, confidence, coverage_level, source_citations[] }",
     "errors": [
       "OUT_OF_SCOPE_GEOGRAPHY",
       "EXACT_ADDRESS_BLOCKED",
@@ -16,9 +16,9 @@
   },
   {
     "name": "get_county_profile",
-    "purpose": "Return local pilot profile for Santa Clara, San José, or San Francisco.",
+    "purpose": "Return reviewed local or statewide-core California county profile for source-backed benefits prep and handoffs.",
     "input": "{ county_or_city }",
-    "output": "CountyProfile { offices, phones, food_handoff, shelter_handoff, wic_handoff, source_citations[] }",
+    "output": "CountyProfile { coverage_level, offices, phones, food_handoff, shelter_handoff, wic_handoff, source_citations[] }",
     "errors": [
       "COUNTY_NOT_SUPPORTED",
       "SOURCE_STALE"
@@ -44,8 +44,8 @@
   {
     "name": "search_source_snapshot",
     "purpose": "Search approved source corpus by program area, jurisdiction, or need.",
-    "input": "{ query, jurisdiction?, program_area?, source_type? }",
-    "output": "SourceMetadata[]",
+    "input": "{ query, jurisdiction?, program_area?, source_type?, owner_type?, freshness_state?, coverage_level? }",
+    "output": "SourceMetadata[] with freshness_state and coverage_level",
     "errors": [
       "NO_APPROVED_SOURCE",
       "QUERY_TOO_BROAD"
@@ -82,14 +82,14 @@
   },
   {
     "name": "find_local_resources",
-    "purpose": "Return curated local resources for food, housing, WIC, 211, offices, HUD counselors.",
+    "purpose": "Return reviewed local resources when curated, otherwise source-backed statewide locator handoffs for California counties.",
     "input": "{ jurisdiction, need_type, radius?, language? }",
-    "output": "LocalResource[] { name, category, phone, address_or_area, call_before_going, source_citations[] }",
+    "output": "LocalResource[] { name, category, phone, address_or_area, coverage_level, coverage_label, call_before_going, source_citations[] }",
     "errors": [
       "NO_LOCAL_FIXTURE",
       "RESOURCE_STALE"
     ],
-    "cache": "Curated HSDS-style fixture; optional Maps/Places enrichment session-only.",
+    "cache": "Curated HSDS-style fixture plus generated statewide locator handoffs; optional Maps/Places enrichment only for reviewed local resources.",
     "timeout_ms": 1000,
     "freshness": "Urgent resources: 7 days or mark call_before_going/source_refresh_needed."
   },

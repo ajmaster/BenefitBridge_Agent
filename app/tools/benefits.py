@@ -15,6 +15,21 @@ NEED_TO_PROGRAMS = {
     "health coverage": ["health_medi_cal_chip_marketplace"],
     "utilities": ["utilities_liheap_lifeline"],
     "utility": ["utilities_liheap_lifeline"],
+    "phone": ["phone_lifeline"],
+    "lifeline": ["phone_lifeline"],
+    "internet": ["phone_lifeline"],
+    "child care": ["child_care_support"],
+    "childcare": ["child_care_support"],
+    "day care": ["child_care_support"],
+    "school meals": ["school_meals"],
+    "school lunch": ["school_meals"],
+    "school breakfast": ["school_meals"],
+    "ihss": ["ihss_in_home_support"],
+    "in-home support": ["ihss_in_home_support"],
+    "caregiver": ["ihss_in_home_support"],
+    "legal": ["legal_aid_handoff"],
+    "lawyer": ["legal_aid_handoff"],
+    "eviction papers": ["legal_aid_handoff"],
     "housing": ["housing_homelessness"],
     "shelter": ["housing_homelessness"],
     "cash": ["cash_family_adult_assistance"],
@@ -23,7 +38,7 @@ NEED_TO_PROGRAMS = {
 
 
 def get_benefit_program_area(program_area_id: str) -> dict[str, object]:
-    """Return deterministic prep/handoff logic for a BenefitBridge program area."""
+    """Return deterministic prep/handoff logic for an AidAtlasCA program area."""
 
     if program_area_id not in DEFAULT_STORE.program_areas_by_id:
         return ToolError(
@@ -60,6 +75,8 @@ def _program_ids_for_snapshot(snapshot: HouseholdSnapshot) -> list[str]:
             ids.extend(program_ids)
     if snapshot.children_ages or "child" in joined_needs or "kids" in joined_needs:
         ids.append("food_wic")
+    if "school" in joined_needs and snapshot.children_ages:
+        ids.append("school_meals")
     if snapshot.utilities_need:
         ids.append("utilities_liheap_lifeline")
     if snapshot.food_need_today:
@@ -70,16 +87,14 @@ def _program_ids_for_snapshot(snapshot: HouseholdSnapshot) -> list[str]:
 def match_benefit_paths(
     household_snapshot: dict[str, Any],
     county_profile: dict[str, Any] | None = None,
-    benefit_program_areas: list[dict[str, Any]] | None = None,
+    benefit_program_areas: (
+        list[dict[str, Any] | str] | dict[str, Any] | str | None
+    ) = None,
 ) -> list[dict[str, object]]:
     """Produce potential benefit paths without determining eligibility."""
 
     snapshot = _snapshot_from_input(household_snapshot)
-    explicit_ids = [
-        area.get("program_area_id")
-        for area in benefit_program_areas or []
-        if area.get("program_area_id")
-    ]
+    explicit_ids = _explicit_program_area_ids(benefit_program_areas)
     program_ids = explicit_ids or _program_ids_for_snapshot(snapshot)
     paths: list[dict[str, object]] = []
 
@@ -155,6 +170,15 @@ def match_benefit_paths(
         ]
         if program_id == "food_wic" and not snapshot.children_ages:
             status = "needs_more_information"
+        if program_id == "child_care_support" and not snapshot.children_ages:
+            status = "needs_more_information"
+        if program_id == "school_meals" and not snapshot.children_ages:
+            status = "needs_more_information"
+        if program_id == "ihss_in_home_support":
+            missing = list(area.prep_questions[:3])
+        if program_id == "legal_aid_handoff":
+            status = "local_handoff_recommended"
+            warnings.append("AidAtlasCA provides legal information handoffs, not legal advice.")
         if program_id == "housing_homelessness":
             status = "local_handoff_recommended"
             warnings.append("No live shelter or resource availability is claimed.")
@@ -176,6 +200,28 @@ def match_benefit_paths(
         )
         paths.append(path.to_dict())
     return paths
+
+
+def _explicit_program_area_ids(
+    benefit_program_areas: list[dict[str, Any] | str] | dict[str, Any] | str | None,
+) -> list[str]:
+    if benefit_program_areas is None:
+        return []
+    if isinstance(benefit_program_areas, (str, dict)):
+        items: list[dict[str, Any] | str] = [benefit_program_areas]
+    else:
+        items = benefit_program_areas
+
+    ids: list[str] = []
+    for item in items:
+        candidate = None
+        if isinstance(item, str):
+            candidate = item
+        elif isinstance(item, dict):
+            candidate = item.get("program_area_id") or item.get("id") or item.get("area")
+        if isinstance(candidate, str) and candidate in DEFAULT_STORE.program_areas_by_id:
+            ids.append(candidate)
+    return list(dict.fromkeys(ids))
 
 
 def _county_contacts(profile: dict[str, Any] | None) -> list[str]:

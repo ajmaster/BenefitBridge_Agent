@@ -62,6 +62,108 @@ class ChatRequest(BaseModel):
     snapshot: HouseholdSnapshotInput = Field(default_factory=HouseholdSnapshotInput)
 
 
+class A2UILink(BaseModel):
+    """Link rendered inside a validated A2UI item."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    label: str = Field(..., min_length=1, max_length=120)
+    href: str = Field(..., min_length=1, max_length=1000)
+
+
+class A2UIAction(BaseModel):
+    """Allowlisted client action emitted by the agent."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal[
+        "open_packet",
+        "open_sources",
+        "open_resources",
+        "copy_call_script",
+        "download_markdown",
+        "download_calendar",
+        "open_resource_url",
+        "open_maps_search",
+    ]
+    label: str = Field(..., min_length=1, max_length=120)
+    href: str | None = Field(default=None, max_length=1000)
+    target: str | None = Field(default=None, max_length=120)
+
+
+class A2UICitation(BaseModel):
+    """Source citation attached to an A2UI card."""
+
+    model_config = ConfigDict(extra="allow")
+
+    source_id: str = Field(..., min_length=1, max_length=160)
+    source_title: str | None = None
+    agency_owner: str | None = None
+    source_type: str | None = None
+    url: str | None = None
+    last_checked: str | None = None
+    freshness_state: str | None = None
+
+
+class A2UIItem(BaseModel):
+    """Single row/card inside an A2UI template."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    label: str | None = None
+    value: str | None = None
+    title: str | None = None
+    subtitle: str | None = None
+    body: str | None = None
+    badges: list[str] = Field(default_factory=list, max_length=12)
+    links: list[A2UILink] = Field(default_factory=list, max_length=8)
+
+
+class A2UITemplate(BaseModel):
+    """Validated `application/json+a2ui` template returned by `/api/chat`."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    id: str
+    type: str
+    title: str
+    tone: Literal["neutral", "info", "success", "warning", "danger", "accent", "source"]
+    subtitle: str | None = None
+    body: str | None = None
+    items: list[A2UIItem] = Field(default_factory=list, max_length=40)
+    actions: list[A2UIAction] = Field(default_factory=list, max_length=12)
+    citations: list[A2UICitation] = Field(default_factory=list, max_length=20)
+
+
+class ChatWorkflowResponse(BaseModel):
+    """Normalized guided-chat response shape, including blocked safety routes."""
+
+    model_config = ConfigDict(extra="allow")
+
+    route: str
+    message: str
+    events: list[str] = Field(default_factory=list)
+    snapshot: HouseholdSnapshotInput
+    snapshot_patch: dict[str, Any] = Field(default_factory=dict)
+    next_questions: list[str] = Field(default_factory=list)
+    ui_templates: list[A2UITemplate] = Field(default_factory=list)
+
+
+class VoiceTurnRequest(BaseModel):
+    """Voice turn request: base64 WEBM/Opus audio plus existing chat context.
+
+    Audio is carried as base64 JSON (not multipart) to match the rest of this
+    API's plain-JSON contract. The clip is expected to be a single short
+    utterance, not a continuous stream.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    audio_base64: str = Field(..., min_length=1, max_length=4_000_000)
+    messages: list[ChatMessage] = Field(default_factory=list, max_length=24)
+    snapshot: HouseholdSnapshotInput = Field(default_factory=HouseholdSnapshotInput)
+
+
 class PacketRequest(BaseModel):
     """Request containing a packet payload produced by `/api/prepare`."""
 
@@ -75,10 +177,11 @@ class PacketRequest(BaseModel):
 class ExportRequest(PacketRequest):
     """Session-only export request."""
 
-    formats: list[Literal["html", "json", "md", "pdf"]] = Field(
+    formats: list[Literal["html", "json", "md", "pdf", "ics"]] = Field(
         default_factory=lambda: ["html", "json", "md"],
         max_length=4,
     )
+    resources: list[dict[str, Any]] | None = None
 
 
 class TranslateRequest(PacketRequest):

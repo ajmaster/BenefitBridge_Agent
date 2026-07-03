@@ -35,6 +35,13 @@ const expected = [
     minDuration: 24,
     maxDuration: 30,
   },
+  {
+    id: "DocumentKitDemo",
+    video: "document-kit-demo.mp4",
+    still: "document-kit-demo-poster.png",
+    minDuration: 24,
+    maxDuration: 32,
+  },
 ];
 
 const failures = [];

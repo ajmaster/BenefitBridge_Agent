@@ -84,7 +84,9 @@
       "scc_osh_temporary_emergency_shelter",
       "second_harvest_sv_get_food",
       "second_harvest_sv_contact"
-    ]
+    ],
+    "county_name": "Santa Clara County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "san_jose_city",
@@ -120,7 +122,9 @@
       "sanjose_food_family_resources",
       "scc_apply_public_benefits",
       "scc_osh_temporary_emergency_shelter"
-    ]
+    ],
+    "county_name": "Santa Clara County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "san_francisco_county",
@@ -230,7 +234,9 @@
     "cities_in_scope": [
       "San Francisco",
       "San Francisco County"
-    ]
+    ],
+    "county_name": "San Francisco County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "alameda_county",
@@ -281,7 +287,9 @@
       "cdph_wic_office_grocer_locator",
       "alameda_food_bank_get_food",
       "ca_211_home"
-    ]
+    ],
+    "county_name": "Alameda County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "contra_costa_county",
@@ -332,7 +340,9 @@
       "cdph_wic_office_grocer_locator",
       "food_bank_ccs_find_food",
       "ca_211_home"
-    ]
+    ],
+    "county_name": "Contra Costa County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "marin_county",
@@ -381,7 +391,9 @@
       "cdph_wic_office_grocer_locator",
       "sf_marin_food_bank_find_food",
       "marin_211_bayarea"
-    ]
+    ],
+    "county_name": "Marin County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "napa_county",
@@ -430,7 +442,9 @@
       "cdph_wic_office_grocer_locator",
       "canv_food_bank",
       "napa_211_bayarea"
-    ]
+    ],
+    "county_name": "Napa County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "san_mateo_county",
@@ -483,7 +497,9 @@
       "cdph_wic_office_grocer_locator",
       "second_harvest_sv_get_food",
       "san_mateo_211_bayarea"
-    ]
+    ],
+    "county_name": "San Mateo County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "solano_county",
@@ -534,7 +550,9 @@
       "cdph_wic_office_grocer_locator",
       "food_bank_ccs_find_food",
       "solano_211_bayarea"
-    ]
+    ],
+    "county_name": "Solano County",
+    "coverage_level": "reviewed_local"
   },
   {
     "id": "sonoma_county",
@@ -585,6 +603,3807 @@
       "cdph_wic_office_grocer_locator",
       "redwood_empire_food_bank_find_food",
       "ca_211_home"
+    ],
+    "county_name": "Sonoma County",
+    "coverage_level": "reviewed_local"
+  },
+  {
+    "id": "alpine_county",
+    "name": "Alpine County",
+    "county_name": "Alpine County",
+    "state": "CA",
+    "fips_hint": "06003",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Alpine County",
+      "Markleeville"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "amador_county",
+    "name": "Amador County",
+    "county_name": "Amador County",
+    "state": "CA",
+    "fips_hint": "06005",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Amador County",
+      "Jackson",
+      "Ione",
+      "Sutter Creek"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "butte_county",
+    "name": "Butte County",
+    "county_name": "Butte County",
+    "state": "CA",
+    "fips_hint": "06007",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Butte County",
+      "Chico",
+      "Oroville",
+      "Paradise"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "calaveras_county",
+    "name": "Calaveras County",
+    "county_name": "Calaveras County",
+    "state": "CA",
+    "fips_hint": "06009",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Calaveras County",
+      "San Andreas",
+      "Angels Camp"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "colusa_county",
+    "name": "Colusa County",
+    "county_name": "Colusa County",
+    "state": "CA",
+    "fips_hint": "06011",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Colusa County",
+      "Colusa",
+      "Williams"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "del_norte_county",
+    "name": "Del Norte County",
+    "county_name": "Del Norte County",
+    "state": "CA",
+    "fips_hint": "06015",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Del Norte County",
+      "Crescent City"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "el_dorado_county",
+    "name": "El Dorado County",
+    "county_name": "El Dorado County",
+    "state": "CA",
+    "fips_hint": "06017",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "El Dorado County",
+      "Placerville",
+      "South Lake Tahoe"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "fresno_county",
+    "name": "Fresno County",
+    "county_name": "Fresno County",
+    "state": "CA",
+    "fips_hint": "06019",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Fresno County",
+      "Fresno",
+      "Clovis",
+      "Sanger",
+      "Reedley"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "glenn_county",
+    "name": "Glenn County",
+    "county_name": "Glenn County",
+    "state": "CA",
+    "fips_hint": "06021",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Glenn County",
+      "Willows",
+      "Orland"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "humboldt_county",
+    "name": "Humboldt County",
+    "county_name": "Humboldt County",
+    "state": "CA",
+    "fips_hint": "06023",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Humboldt County",
+      "Eureka",
+      "Arcata",
+      "Fortuna"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "imperial_county",
+    "name": "Imperial County",
+    "county_name": "Imperial County",
+    "state": "CA",
+    "fips_hint": "06025",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Imperial County",
+      "El Centro",
+      "Calexico",
+      "Brawley"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "inyo_county",
+    "name": "Inyo County",
+    "county_name": "Inyo County",
+    "state": "CA",
+    "fips_hint": "06027",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Inyo County",
+      "Bishop",
+      "Independence"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "kern_county",
+    "name": "Kern County",
+    "county_name": "Kern County",
+    "state": "CA",
+    "fips_hint": "06029",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Kern County",
+      "Bakersfield",
+      "Delano",
+      "Ridgecrest"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "kings_county",
+    "name": "Kings County",
+    "county_name": "Kings County",
+    "state": "CA",
+    "fips_hint": "06031",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Kings County",
+      "Hanford",
+      "Lemoore"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "lake_county",
+    "name": "Lake County",
+    "county_name": "Lake County",
+    "state": "CA",
+    "fips_hint": "06033",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Lake County",
+      "Lakeport",
+      "Clearlake"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "lassen_county",
+    "name": "Lassen County",
+    "county_name": "Lassen County",
+    "state": "CA",
+    "fips_hint": "06035",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Lassen County",
+      "Susanville"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "los_angeles_county",
+    "name": "Los Angeles County",
+    "county_name": "Los Angeles County",
+    "state": "CA",
+    "fips_hint": "06037",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Los Angeles County",
+      "Los Angeles",
+      "Long Beach",
+      "Pasadena",
+      "Pomona",
+      "Lancaster"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "madera_county",
+    "name": "Madera County",
+    "county_name": "Madera County",
+    "state": "CA",
+    "fips_hint": "06039",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Madera County",
+      "Madera",
+      "Chowchilla"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "mariposa_county",
+    "name": "Mariposa County",
+    "county_name": "Mariposa County",
+    "state": "CA",
+    "fips_hint": "06043",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Mariposa County",
+      "Mariposa"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "mendocino_county",
+    "name": "Mendocino County",
+    "county_name": "Mendocino County",
+    "state": "CA",
+    "fips_hint": "06045",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Mendocino County",
+      "Ukiah",
+      "Fort Bragg",
+      "Willits"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "merced_county",
+    "name": "Merced County",
+    "county_name": "Merced County",
+    "state": "CA",
+    "fips_hint": "06047",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Merced County",
+      "Merced",
+      "Los Banos",
+      "Atwater"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "modoc_county",
+    "name": "Modoc County",
+    "county_name": "Modoc County",
+    "state": "CA",
+    "fips_hint": "06049",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Modoc County",
+      "Alturas"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "mono_county",
+    "name": "Mono County",
+    "county_name": "Mono County",
+    "state": "CA",
+    "fips_hint": "06051",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Mono County",
+      "Mammoth Lakes",
+      "Bridgeport"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "monterey_county",
+    "name": "Monterey County",
+    "county_name": "Monterey County",
+    "state": "CA",
+    "fips_hint": "06053",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Monterey County",
+      "Salinas",
+      "Monterey",
+      "Seaside"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "nevada_county",
+    "name": "Nevada County",
+    "county_name": "Nevada County",
+    "state": "CA",
+    "fips_hint": "06057",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Nevada County",
+      "Grass Valley",
+      "Nevada City",
+      "Truckee"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "orange_county",
+    "name": "Orange County",
+    "county_name": "Orange County",
+    "state": "CA",
+    "fips_hint": "06059",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Orange County",
+      "Santa Ana",
+      "Anaheim",
+      "Irvine",
+      "Fullerton"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "placer_county",
+    "name": "Placer County",
+    "county_name": "Placer County",
+    "state": "CA",
+    "fips_hint": "06061",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Placer County",
+      "Roseville",
+      "Auburn",
+      "Rocklin"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "plumas_county",
+    "name": "Plumas County",
+    "county_name": "Plumas County",
+    "state": "CA",
+    "fips_hint": "06063",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Plumas County",
+      "Quincy",
+      "Portola"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "riverside_county",
+    "name": "Riverside County",
+    "county_name": "Riverside County",
+    "state": "CA",
+    "fips_hint": "06065",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Riverside County",
+      "Riverside",
+      "Moreno Valley",
+      "Corona",
+      "Palm Springs"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "sacramento_county",
+    "name": "Sacramento County",
+    "county_name": "Sacramento County",
+    "state": "CA",
+    "fips_hint": "06067",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Sacramento County",
+      "Sacramento",
+      "Elk Grove",
+      "Citrus Heights",
+      "Folsom"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "san_benito_county",
+    "name": "San Benito County",
+    "county_name": "San Benito County",
+    "state": "CA",
+    "fips_hint": "06069",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "San Benito County",
+      "Hollister",
+      "San Juan Bautista"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "san_bernardino_county",
+    "name": "San Bernardino County",
+    "county_name": "San Bernardino County",
+    "state": "CA",
+    "fips_hint": "06071",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "San Bernardino County",
+      "San Bernardino",
+      "Fontana",
+      "Ontario",
+      "Victorville"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "san_diego_county",
+    "name": "San Diego County",
+    "county_name": "San Diego County",
+    "state": "CA",
+    "fips_hint": "06073",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "San Diego County",
+      "San Diego",
+      "Chula Vista",
+      "Oceanside",
+      "Escondido"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "san_joaquin_county",
+    "name": "San Joaquin County",
+    "county_name": "San Joaquin County",
+    "state": "CA",
+    "fips_hint": "06077",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "San Joaquin County",
+      "Stockton",
+      "Tracy",
+      "Lodi",
+      "Manteca"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "san_luis_obispo_county",
+    "name": "San Luis Obispo County",
+    "county_name": "San Luis Obispo County",
+    "state": "CA",
+    "fips_hint": "06079",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "San Luis Obispo County",
+      "San Luis Obispo",
+      "Paso Robles",
+      "Atascadero"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "santa_barbara_county",
+    "name": "Santa Barbara County",
+    "county_name": "Santa Barbara County",
+    "state": "CA",
+    "fips_hint": "06083",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Santa Barbara County",
+      "Santa Barbara",
+      "Santa Maria",
+      "Lompoc"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "santa_cruz_county",
+    "name": "Santa Cruz County",
+    "county_name": "Santa Cruz County",
+    "state": "CA",
+    "fips_hint": "06087",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Santa Cruz County",
+      "Santa Cruz",
+      "Watsonville",
+      "Capitola"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "shasta_county",
+    "name": "Shasta County",
+    "county_name": "Shasta County",
+    "state": "CA",
+    "fips_hint": "06089",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Shasta County",
+      "Redding",
+      "Anderson"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "sierra_county",
+    "name": "Sierra County",
+    "county_name": "Sierra County",
+    "state": "CA",
+    "fips_hint": "06091",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Sierra County",
+      "Downieville",
+      "Loyalton"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "siskiyou_county",
+    "name": "Siskiyou County",
+    "county_name": "Siskiyou County",
+    "state": "CA",
+    "fips_hint": "06093",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Siskiyou County",
+      "Yreka",
+      "Mount Shasta"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "stanislaus_county",
+    "name": "Stanislaus County",
+    "county_name": "Stanislaus County",
+    "state": "CA",
+    "fips_hint": "06099",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Stanislaus County",
+      "Modesto",
+      "Turlock",
+      "Ceres"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "sutter_county",
+    "name": "Sutter County",
+    "county_name": "Sutter County",
+    "state": "CA",
+    "fips_hint": "06101",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Sutter County",
+      "Yuba City"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "tehama_county",
+    "name": "Tehama County",
+    "county_name": "Tehama County",
+    "state": "CA",
+    "fips_hint": "06103",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Tehama County",
+      "Red Bluff",
+      "Corning"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "trinity_county",
+    "name": "Trinity County",
+    "county_name": "Trinity County",
+    "state": "CA",
+    "fips_hint": "06105",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Trinity County",
+      "Weaverville"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "tulare_county",
+    "name": "Tulare County",
+    "county_name": "Tulare County",
+    "state": "CA",
+    "fips_hint": "06107",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Tulare County",
+      "Visalia",
+      "Tulare",
+      "Porterville"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "tuolumne_county",
+    "name": "Tuolumne County",
+    "county_name": "Tuolumne County",
+    "state": "CA",
+    "fips_hint": "06109",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Tuolumne County",
+      "Sonora"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "ventura_county",
+    "name": "Ventura County",
+    "county_name": "Ventura County",
+    "state": "CA",
+    "fips_hint": "06111",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Ventura County",
+      "Ventura",
+      "Oxnard",
+      "Thousand Oaks",
+      "Simi Valley"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "yolo_county",
+    "name": "Yolo County",
+    "county_name": "Yolo County",
+    "state": "CA",
+    "fips_hint": "06113",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Yolo County",
+      "Woodland",
+      "Davis",
+      "West Sacramento"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ]
+  },
+  {
+    "id": "yuba_county",
+    "name": "Yuba County",
+    "county_name": "Yuba County",
+    "state": "CA",
+    "fips_hint": "06115",
+    "coverage_level": "statewide_core",
+    "cities_in_scope": [
+      "Yuba County",
+      "Marysville"
+    ],
+    "primary_notes": [
+      "Statewide core profile: use official statewide/county locators; local resource cards are not fully curated for this county yet.",
+      "Do not claim live office, shelter, food, WIC, legal-aid, or appointment availability."
+    ],
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    },
+    "food_handoff": [
+      {
+        "label": "CDSS Food Banks list",
+        "source_id": "cdss_food_banks"
+      },
+      {
+        "label": "California Association of Food Banks members",
+        "source_id": "cafoodbanks_members"
+      },
+      {
+        "label": "211 California",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "shelter_handoff": [
+      {
+        "label": "211 California housing and shelter navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      },
+      {
+        "label": "HUD housing counselor search",
+        "source_id": "hud_housing_counselor_api"
+      }
+    ],
+    "wic_handoff": [
+      {
+        "label": "California WIC locator",
+        "phone": "1-800-852-5770",
+        "source_id": "cdph_wic_office_grocer_locator"
+      }
+    ],
+    "legal_handoff": [
+      {
+        "label": "211 California resource navigation",
+        "phone": "211",
+        "source_id": "ca_211_home"
+      }
+    ],
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
     ]
   }
 ]

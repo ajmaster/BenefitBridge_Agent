@@ -1,6 +1,6 @@
-# BenefitBridge CA
+# AidAtlasCA
 
-BenefitBridge CA is a Google ADK / agents-cli prototype for a California-only
+AidAtlasCA is a Google ADK / agents-cli prototype for a California-only
 benefits preparation and handoff assistant. It helps synthetic or
 privacy-preserving profiles prepare source-backed packets for official benefit
 conversations.
@@ -34,14 +34,34 @@ origin, for example `http://127.0.0.1:8080`.
 
 Google Maps embeds are optional. Use
 `NEXT_PUBLIC_ENABLE_GOOGLE_MAPS_EMBED=true` plus a browser-restricted
-`NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY` to render iframe embeds. Set
+`NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY` to render iframe embeds. For local
+frontend dev, also set `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_ALLOWED_ORIGINS` to the
+exact browser origins you authorized on the Maps browser key, for example
+`http://127.0.0.1:3002,http://localhost:3002`. Set
 `ENABLE_GOOGLE_MAPS_EMBED=true` on FastAPI when it serves the frontend so CSP
-allows Google Maps frames. Without those values, the UI shows the stylized map
-and safe Google Maps search links only.
+allows Google Maps frames. Without matching values, the UI shows the stylized
+map and safe Google Maps search links only.
+
+Google Places enrichment is also optional and backend-only. Set
+`ENABLE_GOOGLE_MAPS=true` plus `GOOGLE_MAPS_API_KEY` or
+`GOOGLE_MAPS_API_KEY_SECRET` to enrich curated resource cards. The default
+`GOOGLE_MAPS_PLACES_FIELD_TIER=pro` requests place name, formatted address,
+business status, and Google Maps URI. Use `ids_only` for the lowest-cost
+lookup or `enterprise` when the deployment intentionally wants phone, website,
+and rating fields within the current Google free usage caps. Do not request
+opening-hours fields or show live availability.
+
+Voice is optional and requires both server and frontend flags:
+`ENABLE_VOICE=true` for `/api/voice/turn` and `NEXT_PUBLIC_ENABLE_VOICE=true`
+for the browser recorder. The server uses Google Cloud Speech-to-Text and
+Text-to-Speech when the libraries and credentials are available, then routes the
+transcript through the same safety path as text chat.
 
 Routes:
 
 - `GET /healthz`
+- `POST /api/chat`
+- `POST /api/voice/turn`
 - `POST /api/prepare`
 - `POST /api/validate`
 - `POST /api/export`
@@ -56,11 +76,12 @@ Routes:
 agents-cli info
 uv run pytest -p no:cacheprovider tests/unit tests/integration
 uv run python scripts/validate_source_pack.py
+python3 scripts/sync_frontend_data.py --check
 agents-cli lint
 agents-cli eval metric list
-agents-cli eval grade --traces artifacts/traces --config tests/eval/eval_config.yaml --output /tmp/benefitbridge-grade-local
+agents-cli eval grade --traces artifacts/traces --config tests/eval/eval_config.yaml --output /tmp/aidatlasca-grade-local
 cd frontend && npm ci && npm run typecheck && npm run lint && npm run build && npm run test:e2e && npm audit --audit-level=moderate
-docker build -t benefitbridge-ca:local .
+docker build -t aidatlasca:local .
 ```
 
 `agents-cli eval generate`, managed eval submit/results, live public API smoke,

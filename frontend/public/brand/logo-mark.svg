@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">AidAtlasCA mark</title>
+  <defs>
+    <linearGradient id="atlasOcean" x1="86" x2="409" y1="82" y2="438" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eaf5ff"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="atlasRoute" x1="181" x2="341" y1="150" y2="352" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00a87a"/>
+      <stop offset="1" stop-color="#008260"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="184" fill="url(#atlasOcean)" stroke="#07183f" stroke-width="22"/>
+  <path d="M256 28l20 64h-40l20-64Z" fill="#0756d9"/>
+  <path d="M484 256l-64 20v-40l64 20Z" fill="#0756d9"/>
+  <path d="M256 484l-20-64h40l-20 64Z" fill="#008260"/>
+  <path d="M28 256l64-20v40l-64-20Z" fill="#0756d9"/>
+  <path d="M174 98c70-40 173-12 218 56" fill="none" stroke="#bcc8db" stroke-linecap="round" stroke-width="18"/>
+  <path d="M119 345c-34-60-27-134 16-187" fill="none" stroke="#bcc8db" stroke-linecap="round" stroke-width="18"/>
+  <path
+    d="M228 86c-18 22-31 44-38 66-11 35 16 54 10 81-6 28-46 42-44 72 2 31 52 38 67 74 11 25 22 43 56 38 46-7 24-63 55-91 32-29 41-49 27-74-14-26-52-22-72-46-21-24-20-54-61-120Z"
+    fill="#008260"
+  />
+  <path
+    d="M190 155c34 25 38 69 72 90 24 15 64 1 85 28 23 30-8 73-54 78"
+    fill="none"
+    stroke="#ffffff"
+    stroke-dasharray="2 34"
+    stroke-linecap="round"
+    stroke-width="22"
+  />
+  <path d="M334 91c47 0 86 38 86 85 0 63-86 116-86 116s-86-53-86-116c0-47 39-85 86-85Z" fill="#e55343"/>
+  <circle cx="334" cy="176" r="31" fill="#ffffff"/>
+  <path d="M352 285c36 0 65 29 65 65v38h-94c-25 0-45-20-45-45v-58h74Z" fill="#0756d9"/>
+  <rect x="303" y="316" width="90" height="48" rx="24" fill="#ffffff"/>
+  <rect x="318" y="329" width="60" height="22" rx="11" fill="#07183f"/>
+  <circle cx="337" cy="340" r="5" fill="#eaf5ff"/>
+  <circle cx="360" cy="340" r="5" fill="#eaf5ff"/>
+  <path d="M416 323c16 9 27 27 27 48" fill="none" stroke="#008260" stroke-linecap="round" stroke-width="16"/>
+  <path d="M446 310c23 17 38 44 38 76" fill="none" stroke="#008260" stroke-linecap="round" stroke-width="14"/>
+</svg>

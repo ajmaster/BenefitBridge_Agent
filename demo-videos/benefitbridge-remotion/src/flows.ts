@@ -76,7 +76,7 @@ export const flows: DemoFlow[] = [
         7,
       ),
       caption(
-        "BenefitBridge turns broad facts into source-backed answer cards, without asking for SSNs or documents.",
+        "AidAtlasCA turns broad facts into source-backed answer cards, without asking for SSNs or documents.",
         8,
         15,
       ),
@@ -204,7 +204,7 @@ export const flows: DemoFlow[] = [
         7,
       ),
       caption(
-        "BenefitBridge responds with safe handoff language and keeps live availability claims out of the answer.",
+        "AidAtlasCA responds with safe handoff language and keeps live availability claims out of the answer.",
         8,
         15,
       ),
@@ -449,7 +449,7 @@ export const flows: DemoFlow[] = [
     id: "ConversationAtlasDemo",
     capturePrefix: "sanjose",
     title: "Conversation Atlas Demo",
-    subtitle: "Sidepanel chat, maps, official sources, packet prep, and Spanish UI",
+    subtitle: "Voice/chat agent, safe maps, reminders, official sources, and Spanish UI",
     audience: "Public demo scenario",
     accent: "#0f766e",
     durationSeconds: ATLAS_DURATION_SECONDS,

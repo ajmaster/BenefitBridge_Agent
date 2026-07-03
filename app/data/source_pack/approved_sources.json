@@ -19,7 +19,7 @@
     ],
     "safe_claims": [
       "BenefitsCal is California's online portal for applying for and managing public benefits such as CalFresh, Medi-Cal, CalWORKs, and other county benefit programs.",
-      "BenefitBridge may link users to BenefitsCal but must not submit applications for them."
+      "AidAtlasCA may link users to BenefitsCal but must not submit applications for them."
     ],
     "caveats": [
       "Do not collect BenefitsCal credentials.",
@@ -126,7 +126,7 @@
     ],
     "safe_claims": [
       "GetCalFresh explains the CalFresh process and directs users to BenefitsCal to apply.",
-      "GetCalFresh can support users with questions before/during/after the process, but BenefitBridge should still cite official state/federal sources for program facts."
+      "GetCalFresh can support users with questions before/during/after the process, but AidAtlasCA should still cite official state/federal sources for program facts."
     ],
     "caveats": [
       "Partner/support site; not the final agency determination source."
@@ -182,7 +182,7 @@
       "Only local WIC office staff can officially confirm WIC eligibility."
     ],
     "caveats": [
-      "BenefitBridge should label WIC as 'needs more information' when pregnancy/postpartum/breastfeeding or child age facts are missing."
+      "AidAtlasCA should label WIC as 'needs more information' when pregnancy/postpartum/breastfeeding or child age facts are missing."
     ],
     "last_checked": "2026-06-28"
   },
@@ -1591,7 +1591,7 @@
       "988 offers call, text, and chat support for mental health struggles, emotional distress, alcohol/drug use concerns, or needing someone to talk to."
     ],
     "caveats": [
-      "In imminent danger, advise 911/emergency services. BenefitBridge is not crisis counseling."
+      "In imminent danger, advise 911/emergency services. AidAtlasCA is not crisis counseling."
     ],
     "last_checked": "2026-06-28"
   },
@@ -1618,7 +1618,7 @@
       "SAMHSA National Helpline is free, confidential, 24/7/365, in English and Spanish; 1-800-662-HELP (4357)."
     ],
     "caveats": [
-      "BenefitBridge should not provide treatment advice."
+      "AidAtlasCA should not provide treatment advice."
     ],
     "last_checked": "2026-06-28"
   },
@@ -2022,5 +2022,141 @@
       "Food pantry schedules and availability can change; call before going."
     ],
     "last_checked": "2026-07-01"
+  },
+  {
+    "id": "cdss_calworks_home",
+    "name": "CDSS CalWORKs",
+    "url": "https://www.cdss.ca.gov/inforesources/calworks",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "cash_assistance",
+      "families",
+      "calworks"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "CalWORKs family cash-aid preparation path"
+    ],
+    "safe_claims": [
+      "CDSS describes CalWORKs as cash aid and services for California families in need, operated locally by county welfare departments in all 58 counties."
+    ],
+    "caveats": [
+      "Do not determine eligibility or estimate monthly assistance amounts."
+    ],
+    "last_checked": "2026-07-03",
+    "coverage_level": "statewide_core"
+  },
+  {
+    "id": "cdss_ihss_home",
+    "name": "CDSS In-Home Supportive Services",
+    "url": "https://www.cdss.ca.gov/in-home-supportive-services",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "ihss",
+      "in_home_support",
+      "disability",
+      "older_adults"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "IHSS preparation and county-office handoff"
+    ],
+    "safe_claims": [
+      "CDSS describes IHSS as in-home assistance for aged, blind, and disabled individuals as an alternative to out-of-home care."
+    ],
+    "caveats": [
+      "Do not decide IHSS eligibility, authorized services, hours, rates, or medical need."
+    ],
+    "last_checked": "2026-07-03",
+    "coverage_level": "statewide_core"
+  },
+  {
+    "id": "cdss_child_care_development",
+    "name": "CDSS Child Care and Development Division",
+    "url": "https://www.cdss.ca.gov/inforesources/child-care-and-development",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "child_care",
+      "families",
+      "development"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Child care support preparation and official program overview"
+    ],
+    "safe_claims": [
+      "CDSS describes California child care and development programs as part of a statewide child care and development system."
+    ],
+    "caveats": [
+      "Do not claim subsidy eligibility or provider availability."
+    ],
+    "last_checked": "2026-07-03",
+    "coverage_level": "statewide_core"
+  },
+  {
+    "id": "cde_school_nutrition_home",
+    "name": "California Department of Education School Nutrition",
+    "url": "https://www.cde.ca.gov/ls/nu/sn/",
+    "jurisdiction": "California",
+    "level": "state",
+    "category": [
+      "school_meals",
+      "nutrition",
+      "children"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "School meals and child nutrition preparation handoff"
+    ],
+    "safe_claims": [
+      "The California Department of Education maintains school nutrition program information for California schools."
+    ],
+    "caveats": [
+      "Do not claim a specific school meal status; route families to the school or district for current participation details."
+    ],
+    "last_checked": "2026-07-03",
+    "coverage_level": "statewide_core"
+  },
+  {
+    "id": "california_courts_self_help",
+    "name": "California Courts Self-Help Guide",
+    "url": "https://selfhelp.courts.ca.gov/",
+    "jurisdiction": "California",
+    "level": "state_judicial",
+    "category": [
+      "legal_information",
+      "self_help",
+      "court_forms"
+    ],
+    "owner_type": "state_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "General legal information and self-help-center handoff"
+    ],
+    "safe_claims": [
+      "California Courts provides self-help information, forms, and self-help center routing."
+    ],
+    "caveats": [
+      "Do not provide legal advice or interpret what a user should do in a case."
+    ],
+    "last_checked": "2026-07-03",
+    "coverage_level": "statewide_core"
   }
 ]

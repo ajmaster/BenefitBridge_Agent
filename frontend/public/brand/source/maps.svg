@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Maps icon</title>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="#eaf5ff"/>
+  <path d="M100 142l105-42 102 42 105-42v270l-105 42-102-42-105 42V142Z" fill="#fff" stroke="#07183f" stroke-width="20" stroke-linejoin="round"/>
+  <path d="M205 100v270M307 142v270" stroke="#0756d9" stroke-width="18" stroke-linecap="round"/>
+  <path d="M128 300c58-78 118 54 182-24 26-31 49-57 82-63" fill="none" stroke="#008260" stroke-width="24" stroke-linecap="round" stroke-dasharray="1 44"/>
+  <path d="M382 112c38 0 70 31 70 69 0 52-70 110-70 110s-70-58-70-110c0-38 32-69 70-69Z" fill="#e55343"/>
+  <circle cx="382" cy="181" r="23" fill="#fff"/>
+</svg>

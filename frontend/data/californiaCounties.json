@@ -1,0 +1,2267 @@
+[
+  {
+    "id": "alameda",
+    "name": "Alameda County",
+    "state": "CA",
+    "fips": "06001",
+    "aliases": [
+      "alameda",
+      "alameda county"
+    ],
+    "major_cities": [
+      "Oakland",
+      "Berkeley",
+      "Fremont",
+      "Hayward",
+      "Alameda"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "alameda_county",
+    "source_ids": [
+      "alameda_county_social_services",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "alameda_food_bank_get_food",
+      "ca_211_home"
+    ],
+    "source_count": 7,
+    "local_resource_count": 2,
+    "primary_benefits_office": {
+      "organization": "Alameda County Social Services Agency",
+      "source_id": "alameda_county_social_services"
+    }
+  },
+  {
+    "id": "alpine",
+    "name": "Alpine County",
+    "state": "CA",
+    "fips": "06003",
+    "aliases": [
+      "alpine",
+      "alpine county"
+    ],
+    "major_cities": [
+      "Markleeville"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "alpine_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "amador",
+    "name": "Amador County",
+    "state": "CA",
+    "fips": "06005",
+    "aliases": [
+      "amador",
+      "amador county"
+    ],
+    "major_cities": [
+      "Jackson",
+      "Ione",
+      "Sutter Creek"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "amador_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "butte",
+    "name": "Butte County",
+    "state": "CA",
+    "fips": "06007",
+    "aliases": [
+      "butte",
+      "butte county"
+    ],
+    "major_cities": [
+      "Chico",
+      "Oroville",
+      "Paradise"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "butte_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "calaveras",
+    "name": "Calaveras County",
+    "state": "CA",
+    "fips": "06009",
+    "aliases": [
+      "calaveras",
+      "calaveras county"
+    ],
+    "major_cities": [
+      "San Andreas",
+      "Angels Camp"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "calaveras_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "colusa",
+    "name": "Colusa County",
+    "state": "CA",
+    "fips": "06011",
+    "aliases": [
+      "colusa",
+      "colusa county"
+    ],
+    "major_cities": [
+      "Colusa",
+      "Williams"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "colusa_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "contra_costa",
+    "name": "Contra Costa County",
+    "state": "CA",
+    "fips": "06013",
+    "aliases": [
+      "contra costa",
+      "contra costa county"
+    ],
+    "major_cities": [
+      "Concord",
+      "Richmond",
+      "Antioch",
+      "Walnut Creek",
+      "Pittsburg"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "contra_costa_county",
+    "source_ids": [
+      "contra_costa_ehsd",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "food_bank_ccs_find_food",
+      "ca_211_home"
+    ],
+    "source_count": 7,
+    "local_resource_count": 2,
+    "primary_benefits_office": {
+      "organization": "Contra Costa County Employment & Human Services Department",
+      "source_id": "contra_costa_ehsd"
+    }
+  },
+  {
+    "id": "del_norte",
+    "name": "Del Norte County",
+    "state": "CA",
+    "fips": "06015",
+    "aliases": [
+      "del norte",
+      "del norte county"
+    ],
+    "major_cities": [
+      "Crescent City"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "del_norte_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "el_dorado",
+    "name": "El Dorado County",
+    "state": "CA",
+    "fips": "06017",
+    "aliases": [
+      "el dorado",
+      "el dorado county"
+    ],
+    "major_cities": [
+      "Placerville",
+      "South Lake Tahoe"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "el_dorado_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "fresno",
+    "name": "Fresno County",
+    "state": "CA",
+    "fips": "06019",
+    "aliases": [
+      "fresno",
+      "fresno county"
+    ],
+    "major_cities": [
+      "Fresno",
+      "Clovis",
+      "Sanger",
+      "Reedley"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "fresno_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "glenn",
+    "name": "Glenn County",
+    "state": "CA",
+    "fips": "06021",
+    "aliases": [
+      "glenn",
+      "glenn county"
+    ],
+    "major_cities": [
+      "Willows",
+      "Orland"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "glenn_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "humboldt",
+    "name": "Humboldt County",
+    "state": "CA",
+    "fips": "06023",
+    "aliases": [
+      "humboldt",
+      "humboldt county"
+    ],
+    "major_cities": [
+      "Eureka",
+      "Arcata",
+      "Fortuna"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "humboldt_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "imperial",
+    "name": "Imperial County",
+    "state": "CA",
+    "fips": "06025",
+    "aliases": [
+      "imperial",
+      "imperial county"
+    ],
+    "major_cities": [
+      "El Centro",
+      "Calexico",
+      "Brawley"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "imperial_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "inyo",
+    "name": "Inyo County",
+    "state": "CA",
+    "fips": "06027",
+    "aliases": [
+      "inyo",
+      "inyo county"
+    ],
+    "major_cities": [
+      "Bishop",
+      "Independence"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "inyo_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "kern",
+    "name": "Kern County",
+    "state": "CA",
+    "fips": "06029",
+    "aliases": [
+      "kern",
+      "kern county"
+    ],
+    "major_cities": [
+      "Bakersfield",
+      "Delano",
+      "Ridgecrest"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "kern_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "kings",
+    "name": "Kings County",
+    "state": "CA",
+    "fips": "06031",
+    "aliases": [
+      "kings",
+      "kings county"
+    ],
+    "major_cities": [
+      "Hanford",
+      "Lemoore"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "kings_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "lake",
+    "name": "Lake County",
+    "state": "CA",
+    "fips": "06033",
+    "aliases": [
+      "lake",
+      "lake county",
+      "lake county california"
+    ],
+    "major_cities": [
+      "Lakeport",
+      "Clearlake"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "lake_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "lassen",
+    "name": "Lassen County",
+    "state": "CA",
+    "fips": "06035",
+    "aliases": [
+      "lassen",
+      "lassen county"
+    ],
+    "major_cities": [
+      "Susanville"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "lassen_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "los_angeles",
+    "name": "Los Angeles County",
+    "state": "CA",
+    "fips": "06037",
+    "aliases": [
+      "l.a. county",
+      "la county",
+      "los angeles",
+      "los angeles county"
+    ],
+    "major_cities": [
+      "Los Angeles",
+      "Long Beach",
+      "Pasadena",
+      "Pomona",
+      "Lancaster"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "los_angeles_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "madera",
+    "name": "Madera County",
+    "state": "CA",
+    "fips": "06039",
+    "aliases": [
+      "madera",
+      "madera county"
+    ],
+    "major_cities": [
+      "Madera",
+      "Chowchilla"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "madera_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "marin",
+    "name": "Marin County",
+    "state": "CA",
+    "fips": "06041",
+    "aliases": [
+      "marin",
+      "marin county"
+    ],
+    "major_cities": [
+      "San Rafael",
+      "Novato",
+      "Mill Valley",
+      "Sausalito"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "marin_county",
+    "source_ids": [
+      "cdss_county_offices",
+      "benefitscal_info",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "sf_marin_food_bank_find_food",
+      "marin_211_bayarea"
+    ],
+    "source_count": 6,
+    "local_resource_count": 3,
+    "primary_benefits_office": {
+      "organization": "Marin County Health and Human Services",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "mariposa",
+    "name": "Mariposa County",
+    "state": "CA",
+    "fips": "06043",
+    "aliases": [
+      "mariposa",
+      "mariposa county"
+    ],
+    "major_cities": [
+      "Mariposa"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "mariposa_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "mendocino",
+    "name": "Mendocino County",
+    "state": "CA",
+    "fips": "06045",
+    "aliases": [
+      "mendocino",
+      "mendocino county"
+    ],
+    "major_cities": [
+      "Ukiah",
+      "Fort Bragg",
+      "Willits"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "mendocino_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "merced",
+    "name": "Merced County",
+    "state": "CA",
+    "fips": "06047",
+    "aliases": [
+      "merced",
+      "merced county"
+    ],
+    "major_cities": [
+      "Merced",
+      "Los Banos",
+      "Atwater"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "merced_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "modoc",
+    "name": "Modoc County",
+    "state": "CA",
+    "fips": "06049",
+    "aliases": [
+      "modoc",
+      "modoc county"
+    ],
+    "major_cities": [
+      "Alturas"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "modoc_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "mono",
+    "name": "Mono County",
+    "state": "CA",
+    "fips": "06051",
+    "aliases": [
+      "mono",
+      "mono county"
+    ],
+    "major_cities": [
+      "Mammoth Lakes",
+      "Bridgeport"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "mono_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "monterey",
+    "name": "Monterey County",
+    "state": "CA",
+    "fips": "06053",
+    "aliases": [
+      "monterey",
+      "monterey county"
+    ],
+    "major_cities": [
+      "Salinas",
+      "Monterey",
+      "Seaside"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "monterey_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "napa",
+    "name": "Napa County",
+    "state": "CA",
+    "fips": "06055",
+    "aliases": [
+      "napa",
+      "napa county"
+    ],
+    "major_cities": [
+      "Napa",
+      "American Canyon",
+      "Calistoga",
+      "St. Helena"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "napa_county",
+    "source_ids": [
+      "cdss_county_offices",
+      "benefitscal_info",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "canv_food_bank",
+      "napa_211_bayarea"
+    ],
+    "source_count": 6,
+    "local_resource_count": 2,
+    "primary_benefits_office": {
+      "organization": "Napa County Health and Human Services Agency",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "nevada",
+    "name": "Nevada County",
+    "state": "CA",
+    "fips": "06057",
+    "aliases": [
+      "nevada",
+      "nevada county",
+      "nevada county california"
+    ],
+    "major_cities": [
+      "Grass Valley",
+      "Nevada City",
+      "Truckee"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "nevada_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "orange",
+    "name": "Orange County",
+    "state": "CA",
+    "fips": "06059",
+    "aliases": [
+      "oc california",
+      "orange",
+      "orange county",
+      "orange county california"
+    ],
+    "major_cities": [
+      "Santa Ana",
+      "Anaheim",
+      "Irvine",
+      "Fullerton"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "orange_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "placer",
+    "name": "Placer County",
+    "state": "CA",
+    "fips": "06061",
+    "aliases": [
+      "placer",
+      "placer county"
+    ],
+    "major_cities": [
+      "Roseville",
+      "Auburn",
+      "Rocklin"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "placer_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "plumas",
+    "name": "Plumas County",
+    "state": "CA",
+    "fips": "06063",
+    "aliases": [
+      "plumas",
+      "plumas county"
+    ],
+    "major_cities": [
+      "Quincy",
+      "Portola"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "plumas_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "riverside",
+    "name": "Riverside County",
+    "state": "CA",
+    "fips": "06065",
+    "aliases": [
+      "riverside",
+      "riverside county"
+    ],
+    "major_cities": [
+      "Riverside",
+      "Moreno Valley",
+      "Corona",
+      "Palm Springs"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "riverside_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "sacramento",
+    "name": "Sacramento County",
+    "state": "CA",
+    "fips": "06067",
+    "aliases": [
+      "sac county",
+      "sacramento",
+      "sacramento county"
+    ],
+    "major_cities": [
+      "Sacramento",
+      "Elk Grove",
+      "Citrus Heights",
+      "Folsom"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "sacramento_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "san_benito",
+    "name": "San Benito County",
+    "state": "CA",
+    "fips": "06069",
+    "aliases": [
+      "san benito",
+      "san benito county"
+    ],
+    "major_cities": [
+      "Hollister",
+      "San Juan Bautista"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "san_benito_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "san_bernardino",
+    "name": "San Bernardino County",
+    "state": "CA",
+    "fips": "06071",
+    "aliases": [
+      "san bernardino",
+      "san bernardino county"
+    ],
+    "major_cities": [
+      "San Bernardino",
+      "Fontana",
+      "Ontario",
+      "Victorville"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "san_bernardino_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "san_diego",
+    "name": "San Diego County",
+    "state": "CA",
+    "fips": "06073",
+    "aliases": [
+      "san diego",
+      "san diego county"
+    ],
+    "major_cities": [
+      "San Diego",
+      "Chula Vista",
+      "Oceanside",
+      "Escondido"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "san_diego_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "san_francisco",
+    "name": "San Francisco County",
+    "state": "CA",
+    "fips": "06075",
+    "aliases": [
+      "san francisco",
+      "san francisco city and county",
+      "san francisco county",
+      "sf"
+    ],
+    "major_cities": [
+      "San Francisco"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "san_francisco_county",
+    "source_ids": [
+      "sfhsa_home",
+      "sfhsa_benefitscal",
+      "sfhsa_calfresh_apply",
+      "sfhsa_medi_cal",
+      "sfhsa_caap",
+      "sfhsa_calworks_apply",
+      "sf_wic_clinic_hours_locations",
+      "sfhsa_free_food_locations",
+      "sf_hsh_department",
+      "sf_coordinated_entry"
+    ],
+    "source_count": 10,
+    "local_resource_count": 13,
+    "primary_benefits_office": {
+      "organization": "San Francisco Human Services Agency",
+      "general_phone": "415-557-5000",
+      "calfresh_medi_cal_phone": "855-355-5757",
+      "calworks_phone": "855-557-5100",
+      "source_id": "sfhsa_home"
+    }
+  },
+  {
+    "id": "san_joaquin",
+    "name": "San Joaquin County",
+    "state": "CA",
+    "fips": "06077",
+    "aliases": [
+      "san joaquin",
+      "san joaquin county"
+    ],
+    "major_cities": [
+      "Stockton",
+      "Tracy",
+      "Lodi",
+      "Manteca"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "san_joaquin_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "san_luis_obispo",
+    "name": "San Luis Obispo County",
+    "state": "CA",
+    "fips": "06079",
+    "aliases": [
+      "san luis obispo",
+      "san luis obispo county",
+      "slo county"
+    ],
+    "major_cities": [
+      "San Luis Obispo",
+      "Paso Robles",
+      "Atascadero"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "san_luis_obispo_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "san_mateo",
+    "name": "San Mateo County",
+    "state": "CA",
+    "fips": "06081",
+    "aliases": [
+      "san mateo",
+      "san mateo county"
+    ],
+    "major_cities": [
+      "San Mateo",
+      "Redwood City",
+      "Daly City",
+      "South San Francisco"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "san_mateo_county",
+    "source_ids": [
+      "san_mateo_hsa",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "second_harvest_sv_get_food",
+      "san_mateo_211_bayarea"
+    ],
+    "source_count": 7,
+    "local_resource_count": 3,
+    "primary_benefits_office": {
+      "organization": "San Mateo County Human Services Agency",
+      "source_id": "san_mateo_hsa"
+    }
+  },
+  {
+    "id": "santa_barbara",
+    "name": "Santa Barbara County",
+    "state": "CA",
+    "fips": "06083",
+    "aliases": [
+      "santa barbara",
+      "santa barbara county"
+    ],
+    "major_cities": [
+      "Santa Barbara",
+      "Santa Maria",
+      "Lompoc"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "santa_barbara_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "santa_clara",
+    "name": "Santa Clara County",
+    "state": "CA",
+    "fips": "06085",
+    "aliases": [
+      "santa clara",
+      "santa clara county",
+      "silicon valley"
+    ],
+    "major_cities": [
+      "San Jose",
+      "San José",
+      "Santa Clara",
+      "Sunnyvale",
+      "Palo Alto",
+      "Mountain View",
+      "Gilroy"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "santa_clara_county",
+    "source_ids": [
+      "scc_apply_public_benefits",
+      "scc_calfresh_page",
+      "scc_general_assistance",
+      "scc_wic_apply",
+      "scc_211_bayarea",
+      "scc_osh_temporary_emergency_shelter",
+      "second_harvest_sv_get_food",
+      "second_harvest_sv_contact"
+    ],
+    "source_count": 8,
+    "local_resource_count": 7,
+    "primary_benefits_office": {
+      "organization": "Santa Clara County Social Services Agency",
+      "phone": "408-758-3800",
+      "fax": "408-295-9248",
+      "mail": "PO Box 11018, San Jose, CA 95103",
+      "source_id": "scc_apply_public_benefits"
+    }
+  },
+  {
+    "id": "santa_cruz",
+    "name": "Santa Cruz County",
+    "state": "CA",
+    "fips": "06087",
+    "aliases": [
+      "santa cruz",
+      "santa cruz county"
+    ],
+    "major_cities": [
+      "Santa Cruz",
+      "Watsonville",
+      "Capitola"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "santa_cruz_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "shasta",
+    "name": "Shasta County",
+    "state": "CA",
+    "fips": "06089",
+    "aliases": [
+      "shasta",
+      "shasta county"
+    ],
+    "major_cities": [
+      "Redding",
+      "Anderson"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "shasta_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "sierra",
+    "name": "Sierra County",
+    "state": "CA",
+    "fips": "06091",
+    "aliases": [
+      "sierra",
+      "sierra county",
+      "sierra county california"
+    ],
+    "major_cities": [
+      "Downieville",
+      "Loyalton"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "sierra_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "siskiyou",
+    "name": "Siskiyou County",
+    "state": "CA",
+    "fips": "06093",
+    "aliases": [
+      "siskiyou",
+      "siskiyou county"
+    ],
+    "major_cities": [
+      "Yreka",
+      "Mount Shasta"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "siskiyou_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "solano",
+    "name": "Solano County",
+    "state": "CA",
+    "fips": "06095",
+    "aliases": [
+      "solano",
+      "solano county"
+    ],
+    "major_cities": [
+      "Fairfield",
+      "Vallejo",
+      "Vacaville",
+      "Benicia"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "solano_county",
+    "source_ids": [
+      "solano_hss",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "food_bank_ccs_find_food",
+      "solano_211_bayarea"
+    ],
+    "source_count": 7,
+    "local_resource_count": 3,
+    "primary_benefits_office": {
+      "organization": "Solano County Health and Social Services",
+      "source_id": "solano_hss"
+    }
+  },
+  {
+    "id": "sonoma",
+    "name": "Sonoma County",
+    "state": "CA",
+    "fips": "06097",
+    "aliases": [
+      "sonoma",
+      "sonoma county"
+    ],
+    "major_cities": [
+      "Santa Rosa",
+      "Petaluma",
+      "Rohnert Park",
+      "Sonoma"
+    ],
+    "coverage_level": "reviewed_local",
+    "coverage_label": "Reviewed local resources",
+    "profile_id": "sonoma_county",
+    "source_ids": [
+      "sonoma_human_services_economic_assistance",
+      "benefitscal_info",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdph_wic_office_grocer_locator",
+      "redwood_empire_food_bank_find_food",
+      "ca_211_home"
+    ],
+    "source_count": 7,
+    "local_resource_count": 2,
+    "primary_benefits_office": {
+      "organization": "Sonoma County Human Services Economic Assistance",
+      "source_id": "sonoma_human_services_economic_assistance"
+    }
+  },
+  {
+    "id": "stanislaus",
+    "name": "Stanislaus County",
+    "state": "CA",
+    "fips": "06099",
+    "aliases": [
+      "stanislaus",
+      "stanislaus county"
+    ],
+    "major_cities": [
+      "Modesto",
+      "Turlock",
+      "Ceres"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "stanislaus_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "sutter",
+    "name": "Sutter County",
+    "state": "CA",
+    "fips": "06101",
+    "aliases": [
+      "sutter",
+      "sutter county"
+    ],
+    "major_cities": [
+      "Yuba City"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "sutter_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "tehama",
+    "name": "Tehama County",
+    "state": "CA",
+    "fips": "06103",
+    "aliases": [
+      "tehama",
+      "tehama county"
+    ],
+    "major_cities": [
+      "Red Bluff",
+      "Corning"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "tehama_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "trinity",
+    "name": "Trinity County",
+    "state": "CA",
+    "fips": "06105",
+    "aliases": [
+      "trinity",
+      "trinity county"
+    ],
+    "major_cities": [
+      "Weaverville"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "trinity_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "tulare",
+    "name": "Tulare County",
+    "state": "CA",
+    "fips": "06107",
+    "aliases": [
+      "tulare",
+      "tulare county"
+    ],
+    "major_cities": [
+      "Visalia",
+      "Tulare",
+      "Porterville"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "tulare_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "tuolumne",
+    "name": "Tuolumne County",
+    "state": "CA",
+    "fips": "06109",
+    "aliases": [
+      "tuolumne",
+      "tuolumne county"
+    ],
+    "major_cities": [
+      "Sonora"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "tuolumne_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "ventura",
+    "name": "Ventura County",
+    "state": "CA",
+    "fips": "06111",
+    "aliases": [
+      "ventura",
+      "ventura county"
+    ],
+    "major_cities": [
+      "Ventura",
+      "Oxnard",
+      "Thousand Oaks",
+      "Simi Valley"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "ventura_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "yolo",
+    "name": "Yolo County",
+    "state": "CA",
+    "fips": "06113",
+    "aliases": [
+      "yolo",
+      "yolo county"
+    ],
+    "major_cities": [
+      "Woodland",
+      "Davis",
+      "West Sacramento"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "yolo_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  },
+  {
+    "id": "yuba",
+    "name": "Yuba County",
+    "state": "CA",
+    "fips": "06115",
+    "aliases": [
+      "yuba",
+      "yuba county"
+    ],
+    "major_cities": [
+      "Marysville"
+    ],
+    "coverage_level": "statewide_core",
+    "coverage_label": "Statewide core",
+    "profile_id": "yuba_county",
+    "source_ids": [
+      "benefitscal_info",
+      "benefitscal_login",
+      "cdss_county_offices",
+      "dhcs_county_offices",
+      "cdss_calfresh_home",
+      "dhcs_medi_cal_apply",
+      "covered_ca_get_started",
+      "csd_liheap_program",
+      "caliheapapply_home",
+      "cdph_wic_office_grocer_locator",
+      "cdss_food_banks",
+      "cafoodbanks_members",
+      "ca_211_home",
+      "hud_housing_counselor_api"
+    ],
+    "source_count": 14,
+    "local_resource_count": 0,
+    "primary_benefits_office": {
+      "organization": "County benefits office via CDSS County Offices",
+      "source_id": "cdss_county_offices"
+    }
+  }
+]

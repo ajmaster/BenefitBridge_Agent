@@ -8,7 +8,7 @@ from collections.abc import Iterable
 from app.schemas import BenefitPath, HouseholdSnapshot, PrepPacket, SourceCitation
 
 SAFETY_NOTICE_EN = (
-    "BenefitBridge helps you prepare. Official agencies decide eligibility and "
+    "AidAtlasCA helps you prepare. Official agencies decide eligibility and "
     "benefit amounts. Do not upload SSNs or sensitive documents in this demo. "
     "Local resources can change. Call before going."
 )

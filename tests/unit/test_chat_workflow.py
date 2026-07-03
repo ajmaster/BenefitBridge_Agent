@@ -27,6 +27,13 @@ def test_chat_workflow_returns_source_backed_a2ui_packet() -> None:
         "local_resources",
         "source_links",
         "packet_summary",
+        "document_kit",
+        "document_summary",
+        "document_checklist",
+        "caseworker_questions",
+        "call_script",
+        "local_handoff_sheet",
+        "source_sheet",
     }.issubset(template_types)
 
     benefit_template = next(
@@ -44,6 +51,19 @@ def test_chat_workflow_returns_source_backed_a2ui_packet() -> None:
     )
     assert "Call before going" in resources_template["body"]
 
+    document_kit = next(
+        template for template in result["ui_templates"] if template["type"] == "document_kit"
+    )
+    assert "Official agencies decide eligibility and amounts" in document_kit["body"]
+    assert {item["label"] for item in document_kit["items"]} >= {
+        "Summary",
+        "Checklist",
+        "Questions",
+        "Call script",
+        "Handoffs",
+        "Sources",
+    }
+
 
 def test_chat_workflow_collects_missing_facts_before_packet() -> None:
     result = run_chat_workflow(
@@ -57,6 +77,22 @@ def test_chat_workflow_collects_missing_facts_before_packet() -> None:
     assert any(
         template["type"] == "question_set" for template in result["ui_templates"]
     )
+
+
+def test_chat_workflow_answers_general_question_from_approved_sources() -> None:
+    result = run_chat_workflow(
+        [{"role": "user", "content": "What is IHSS in California?"}],
+        {"language": "en"},
+    )
+
+    assert result["route"] == "source_answer"
+    assert "eligibility" not in result["message"].lower().replace("decide eligibility", "")
+    assert any(
+        citation["source_id"] == "cdss_ihss_home"
+        for template in result["ui_templates"]
+        for citation in template["citations"]
+    )
+    assert result["next_questions"]
 
 
 def test_chat_workflow_latest_location_updates_prefilled_snapshot() -> None:
@@ -145,3 +181,27 @@ def test_chat_workflow_treats_bay_area_as_ambiguous_location() -> None:
     assert result["route"] == "intake"
     assert not result["snapshot"]["location_text"]
     assert any("city, county, or ZIP" in question for question in result["next_questions"])
+
+
+def test_chat_workflow_supports_statewide_core_county() -> None:
+    result = run_chat_workflow(
+        [
+            {
+                "role": "user",
+                "content": (
+                    "I am in Fresno County with 4 people and need food and "
+                    "utility help."
+                ),
+            }
+        ],
+        {"language": "en"},
+    )
+
+    assert result["route"] == "packet_ready"
+    assert result["jurisdiction"]["county"] == "Fresno County"
+    assert result["jurisdiction"]["coverage_level"] == "statewide_core"
+    assert result["resources"]
+    assert all(
+        resource["coverage_level"] == "statewide_locator"
+        for resource in result["resources"]
+    )

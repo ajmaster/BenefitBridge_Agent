@@ -42,7 +42,7 @@ export const DemoVideo = ({ flowId }: DemoVideoProps) => {
       <div style={styles.header}>
         <div style={{ ...styles.logo, background: flow.accent }}>BB</div>
         <div>
-          <div style={styles.kicker}>BenefitBridge CA demo</div>
+          <div style={styles.kicker}>AidAtlasCA demo</div>
           <h1 style={styles.title}>{flow.title}</h1>
           <p style={styles.subtitle}>{flow.subtitle}</p>
         </div>
@@ -101,7 +101,7 @@ const ScreenShowcase = ({ flow, beat }: { flow: DemoFlow; beat: Beat }) => {
         <span style={styles.dotRed} />
         <span style={styles.dotAmber} />
         <span style={styles.dotGreen} />
-        <div style={styles.urlBar}>BenefitBridge CA public demo</div>
+        <div style={styles.urlBar}>AidAtlasCA public demo</div>
       </div>
       <div style={styles.screenViewport}>
         <Img
@@ -201,7 +201,7 @@ const CaptionBar = ({
     <div style={{ ...styles.captionBar, borderColor: accent, opacity }}>
       <span style={{ ...styles.captionBullet, background: accent }} />
       <p style={styles.captionText}>
-        {caption?.text ?? "BenefitBridge helps users prepare for official benefits conversations."}
+        {caption?.text ?? "AidAtlasCA helps users prepare for official benefits conversations."}
       </p>
     </div>
   );

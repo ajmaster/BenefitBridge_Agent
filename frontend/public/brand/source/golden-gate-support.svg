@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title">
+  <title id="title">AidAtlasCA Golden Gate support illustration</title>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eaf5ff"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" rx="44" fill="url(#sky)"/>
+  <path d="M0 380c155-88 285-87 390-35 118 58 237 53 360 8 136-49 263-37 450 48v119H0V380Z" fill="#dcefff"/>
+  <path d="M0 434c192-67 340-67 506-22 130 36 246 28 344-12 96-38 202-45 350 2v118H0v-86Z" fill="#b9dcff"/>
+  <path d="M145 370h910" stroke="#e55343" stroke-width="18" stroke-linecap="round"/>
+  <path d="M292 138v282M908 138v282" stroke="#e55343" stroke-width="30" stroke-linecap="round"/>
+  <path d="M244 190h96M860 190h96" stroke="#e55343" stroke-width="20" stroke-linecap="round"/>
+  <path d="M292 152c122 142 493 142 616 0" fill="none" stroke="#e55343" stroke-width="14"/>
+  <path d="M342 192v178M408 232v138M474 258v112M540 273v97M606 273v97M672 258v112M738 232v138M804 192v178" stroke="#e55343" stroke-width="7"/>
+  <path d="M80 432c118-66 252-82 397-28 110 41 211 43 310 11 96-32 204-44 333 12v93H80v-88Z" fill="#008260" opacity=".25"/>
+  <path d="M792 118c44 0 79 35 79 78 0 58-79 106-79 106s-79-48-79-106c0-43 35-78 79-78Z" fill="#0756d9"/>
+  <circle cx="792" cy="196" r="27" fill="#fff"/>
+</svg>
