@@ -51,8 +51,7 @@ def find_local_resources(
         map_query = _safe_map_query(result)
         result["map_query"] = map_query
         result["maps_url"] = (
-            "https://www.google.com/maps/search/?api=1&query="
-            f"{quote_plus(map_query)}"
+            f"https://www.google.com/maps/search/?api=1&query={quote_plus(map_query)}"
         )
         if not safety_sensitive:
             enrichment = maps_place_enrichment(

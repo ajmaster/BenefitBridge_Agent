@@ -1,14 +1,15 @@
-from pathlib import Path
 import json
+from pathlib import Path
 
 import yaml
-
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_statewide_expansion_eval_dataset_has_at_least_75_new_cases() -> None:
-    path = ROOT / "tests" / "eval" / "datasets" / "benefitbridge_statewide_expansion.json"
+    path = (
+        ROOT / "tests" / "eval" / "datasets" / "benefitbridge_statewide_expansion.json"
+    )
     data = json.loads(path.read_text(encoding="utf-8"))
     cases = data["eval_cases"]
 

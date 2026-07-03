@@ -304,7 +304,9 @@ def test_chat_treats_generic_bay_area_as_too_broad() -> None:
     assert response.status_code == 200
     assert body["route"] == "intake"
     assert body["snapshot"].get("location_text") in (None, "")
-    assert any("city, county, or ZIP" in question for question in body["next_questions"])
+    assert any(
+        "city, county, or ZIP" in question for question in body["next_questions"]
+    )
 
 
 def test_chat_blocks_exact_address_from_current_message() -> None:
@@ -400,7 +402,9 @@ def test_export_includes_enriched_resources_outside_source_citations() -> None:
     assert response.status_code == 200
     assert "maps.google.com" not in str(body["source_citations_json"])
     markdown = next(
-        artifact["content"] for artifact in body["artifacts"] if artifact["format"] == "md"
+        artifact["content"]
+        for artifact in body["artifacts"]
+        if artifact["format"] == "md"
     )
     assert "## Local Handoffs" in markdown
     assert "Google Maps contact/location detail" in markdown
@@ -473,7 +477,12 @@ def test_california_counties_endpoint_returns_statewide_summary() -> None:
 
 
 def test_california_resources_return_statewide_locator_for_core_counties() -> None:
-    for county in ["Fresno County", "Los Angeles County", "San Diego County", "Alpine County"]:
+    for county in [
+        "Fresno County",
+        "Los Angeles County",
+        "San Diego County",
+        "Alpine County",
+    ]:
         response = client.get(
             "/api/california/resources",
             params={"county": county, "need_type": "food"},

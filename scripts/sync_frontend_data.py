@@ -134,10 +134,11 @@ def _california_county_summaries() -> list[dict[str, object]]:
 
 def _expected_files() -> dict[Path, str]:
     approved_sources = _load_json(SOURCE_ROOT / "approved_sources.json")
-    california_counties = _load_json(SOURCE_ROOT / "california_counties.json")
     return {
         FRONTEND_DATA / "approvedSources.json": _json_text(approved_sources),
-        FRONTEND_DATA / "californiaCounties.json": _json_text(_california_county_summaries()),
+        FRONTEND_DATA / "californiaCounties.json": _json_text(
+            _california_county_summaries()
+        ),
     }
 
 

@@ -197,7 +197,9 @@ class SourceStore:
                 *[str(city) for city in profile.get("cities_in_scope", [])],
             ]
             normalized_names = [_normalize_key(name) for name in names if name]
-            if needle in normalized_names or any(needle in name for name in normalized_names):
+            if needle in normalized_names or any(
+                needle in name for name in normalized_names
+            ):
                 return profile
         return None
 
@@ -262,10 +264,14 @@ class SourceStore:
         return {
             "total_counties": len(summaries),
             "reviewed_local": sum(
-                1 for county in summaries if county["coverage_level"] == "reviewed_local"
+                1
+                for county in summaries
+                if county["coverage_level"] == "reviewed_local"
             ),
             "statewide_core": sum(
-                1 for county in summaries if county["coverage_level"] == "statewide_core"
+                1
+                for county in summaries
+                if county["coverage_level"] == "statewide_core"
             ),
             "approved_sources": len(self.approved_sources),
             "local_resources": len(self.local_resources),
@@ -367,7 +373,8 @@ def _source_coverage_level(source: dict[str, Any]) -> str:
     level = str(source.get("level", "")).lower()
     jurisdiction = str(source.get("jurisdiction", "")).lower()
     if level.startswith(("county", "city", "regional")) or (
-        jurisdiction and jurisdiction not in {"california", "united states", "global/standard"}
+        jurisdiction
+        and jurisdiction not in {"california", "united states", "global/standard"}
     ):
         return "reviewed_local"
     return "general"

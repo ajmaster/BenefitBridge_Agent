@@ -32,7 +32,11 @@ def test_voice_turn_disabled_by_default() -> None:
 def test_voice_turn_rejects_bad_base64(enable_voice: None) -> None:
     response = client.post(
         "/api/voice/turn",
-        json={"audio_base64": "not-valid-base64!!", "messages": [], "snapshot": {"language": "en"}},
+        json={
+            "audio_base64": "not-valid-base64!!",
+            "messages": [],
+            "snapshot": {"language": "en"},
+        },
     )
 
     assert response.status_code == 400
@@ -95,7 +99,9 @@ def test_voice_turn_returns_packet_and_audio_for_full_request(
             "and utility help."
         ),
     )
-    monkeypatch.setattr(fast_api_module, "synthesize_speech", lambda *_a, **_kw: b"fake-mp3-bytes")
+    monkeypatch.setattr(
+        fast_api_module, "synthesize_speech", lambda *_a, **_kw: b"fake-mp3-bytes"
+    )
 
     response = client.post("/api/voice/turn", json=_voice_payload())
 
@@ -104,4 +110,6 @@ def test_voice_turn_returns_packet_and_audio_for_full_request(
     assert body["route"] == "packet_ready"
     assert body["transcript"].startswith("I am in San Jose")
     assert body["audio_base64"] == base64.b64encode(b"fake-mp3-bytes").decode("ascii")
-    assert body["voice_mode"]["provider"] == "disabled"  # ENABLE_VOICE flag lives in app.config
+    assert (
+        body["voice_mode"]["provider"] == "disabled"
+    )  # ENABLE_VOICE flag lives in app.config

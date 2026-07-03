@@ -110,15 +110,21 @@ def _packet_markdown(
                 "",
             ]
         )
-        _append_list(lines, "Why this may be relevant", path.get("why_this_is_relevant", []))
+        _append_list(
+            lines, "Why this may be relevant", path.get("why_this_is_relevant", [])
+        )
         _append_list(lines, "Missing facts", path.get("missing_facts", []))
-        _append_list(lines, "Documents to prepare", path.get("documents_to_prepare", []))
+        _append_list(
+            lines, "Documents to prepare", path.get("documents_to_prepare", [])
+        )
         _append_list(lines, "Warnings", path.get("warnings", []))
         _append_list(lines, "Official links", path.get("official_links", []))
     _append_list(lines, "## Documents To Bring", packet.get("document_checklist", []))
     _append_list(lines, "## Questions To Ask", packet.get("caseworker_questions", []))
     lines.extend(["", "## Call Script", packet.get("call_script", ""), ""])
-    _append_list(lines, "## Immediate Help Notes", packet.get("immediate_help_notes", []))
+    _append_list(
+        lines, "## Immediate Help Notes", packet.get("immediate_help_notes", [])
+    )
     if resources:
         lines.extend(_resource_markdown(resources))
     lines.extend(_source_markdown(packet))
@@ -253,9 +259,7 @@ def _maps_enrichment_markdown(enrichment: dict[str, Any]) -> list[str]:
         lines.append(f"Website from Google: {enrichment['website_uri']}")
     if enrichment.get("rating"):
         lines.append(f"Google user rating: {enrichment['rating']}")
-    lines.append(
-        str(enrichment.get("availability_notice") or _MAPS_EXPORT_NOTICE)
-    )
+    lines.append(str(enrichment.get("availability_notice") or _MAPS_EXPORT_NOTICE))
     return lines
 
 
@@ -273,11 +277,17 @@ def _packet_ics(packet: dict[str, Any]) -> str:
     now = datetime.now(UTC)
     reminder_start = now + timedelta(days=1)
 
-    events = [_ics_event(reminder_start, "AidAtlasCA prep reminder", packet.get("call_script", ""))]
+    events = [
+        _ics_event(
+            reminder_start, "AidAtlasCA prep reminder", packet.get("call_script", "")
+        )
+    ]
     for offset, path in enumerate(packet.get("potential_benefit_paths", []), start=1):
         program_name = path.get("program_name", "Benefit path")
         description_lines = ["Missing facts:", *path.get("missing_facts", [])]
-        description_lines.extend(["Documents to prepare:", *path.get("documents_to_prepare", [])])
+        description_lines.extend(
+            ["Documents to prepare:", *path.get("documents_to_prepare", [])]
+        )
         events.append(
             _ics_event(
                 reminder_start + timedelta(hours=offset),

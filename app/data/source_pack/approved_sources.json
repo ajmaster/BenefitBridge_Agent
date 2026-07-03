@@ -2158,5 +2158,33 @@
     ],
     "last_checked": "2026-07-03",
     "coverage_level": "statewide_core"
+  },
+  {
+    "id": "kern_county_dhs",
+    "name": "Kern County Department of Human Services",
+    "url": "https://www.kcdhs.org/home-dhs",
+    "jurisdiction": "Kern County",
+    "level": "county",
+    "category": [
+      "benefits",
+      "county_contact",
+      "human_services",
+      "medi_cal"
+    ],
+    "owner_type": "local_official",
+    "integration": "source_fixture_link_out",
+    "no_key": true,
+    "refresh_frequency": "monthly_manual_check",
+    "use_for": [
+      "Kern County human-services and benefits office routing"
+    ],
+    "safe_claims": [
+      "Kern County Department of Human Services provides county human-services and public-benefits routing."
+    ],
+    "caveats": [
+      "Do not claim office availability, appointment availability, or current hours; call before going."
+    ],
+    "last_checked": "2026-07-03",
+    "coverage_level": "statewide_core"
   }
 ]

@@ -603,7 +603,9 @@ def _normalize_finding_counts(
     return dict(sorted(normalized.items())) or _finding_counts(fallback_findings)
 
 
-def _merge_counts(first: dict[str, int], second: dict[str, int] | object) -> dict[str, int]:
+def _merge_counts(
+    first: dict[str, int], second: dict[str, int] | object
+) -> dict[str, int]:
     merged = dict(first)
     if not isinstance(second, dict):
         return dict(sorted(merged.items()))
@@ -721,7 +723,9 @@ def _coarse_geocode_result(raw: dict[str, object]) -> dict[str, Any]:
             "provider": raw.get("provider", "google_geocoding"),
             "live": True,
             "status": raw.get("status", "OK"),
-            "types": list(raw.get("types", [])) if isinstance(raw.get("types"), list) else [],
+            "types": list(raw.get("types", []))
+            if isinstance(raw.get("types"), list)
+            else [],
             "state": raw.get("state"),
             "county": raw.get("county"),
             "city": raw.get("city"),
@@ -755,13 +759,17 @@ def _coarse_geocode_result(raw: dict[str, object]) -> dict[str, Any]:
     if not isinstance(components, list):
         components = []
     result_types = first.get("types")
-    types = [str(item) for item in result_types] if isinstance(result_types, list) else []
+    types = (
+        [str(item) for item in result_types] if isinstance(result_types, list) else []
+    )
     return {
         "provider": "google_geocoding",
         "live": True,
         "status": status,
         "types": types,
-        "state": _address_component(components, "administrative_area_level_1", short=True),
+        "state": _address_component(
+            components, "administrative_area_level_1", short=True
+        ),
         "county": _address_component(components, "administrative_area_level_2"),
         "city": _address_component(components, "locality")
         or _address_component(components, "postal_town")
@@ -915,9 +923,7 @@ class _GoogleFirestoreMetadataProvider:
         from google.cloud import firestore
 
         self._client = firestore.Client(project=os.getenv("GOOGLE_CLOUD_PROJECT"))
-        self._collection = os.getenv(
-            "FIRESTORE_SESSION_COLLECTION", "session_metadata"
-        )
+        self._collection = os.getenv("FIRESTORE_SESSION_COLLECTION", "session_metadata")
 
     def write_metadata(self, metadata: dict[str, object], *, ttl_hours: int) -> str:
         ttl_expires_at = datetime.now(UTC) + timedelta(hours=ttl_hours)

@@ -34,8 +34,8 @@ from app.config import (
 from app.graph import run_benefitbridge_graph
 from app.graph_workflow import graph_workflow_readiness_summary
 from app.policies.privacy import redact_pii
-from app.services.auth import verify_firebase_id_token
 from app.services.a2ui_contract import a2ui_readiness_summary, validate_a2ui_templates
+from app.services.auth import verify_firebase_id_token
 from app.services.chat_workflow import run_chat_workflow
 from app.services.google_integrations import (
     detect_sensitive_text,
