@@ -18,7 +18,7 @@ SCHEMAS_ROOT = DATA_ROOT / "schemas"
 PROMPTS_ROOT = APP_ROOT / "prompts"
 
 SOURCE_PACK_VERSION = os.getenv("SOURCE_PACK_VERSION", "2026-06-28")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 APP_ENV = os.getenv("APP_ENV", "local")
 
 ENABLE_LIVE_PUBLIC_APIS = (
