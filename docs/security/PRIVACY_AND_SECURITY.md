@@ -16,7 +16,6 @@ Controls:
 Sensitive content should be blocked or reduced to safe buckets. The only
 permitted telemetry fields are listed in `llm_wiki/safety/privacy-and-pii.md`.
 
-If future deployment adds Cloud Run, Firestore, Cloud Storage, BigQuery, DLP, or
-Maps integrations, revisit data retention, encryption, IAM, audit logging,
-abuse reporting, and user-data deletion before enabling them.
-
+If future deployment adds Cloud Run, Cloud Storage, BigQuery, DLP, or Maps
+integrations, revisit data retention, encryption, IAM, audit logging, abuse
+reporting, and user-data deletion before enabling them.

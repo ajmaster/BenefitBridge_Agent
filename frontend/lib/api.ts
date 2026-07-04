@@ -1,24 +1,23 @@
-import { authEnabled, getFirebaseAuth } from "./firebase";
 import type {
   CaliforniaCountiesResponse,
   CaliforniaResourceCoverageFilter,
   CaliforniaResourcesResponse,
   ChatMessage,
   ChatResponse,
+  ChatStreamEvent,
   HouseholdSnapshotInput,
   LocalResource,
   PrepareResult,
   PrepPacket,
   ReadinessResult,
+  VoiceStatus,
   VoiceTurnResponse,
 } from "./types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
-async function authHeaders(): Promise<Record<string, string>> {
-  if (!authEnabled) return {};
-  const token = await getFirebaseAuth().currentUser?.getIdToken();
-  return token ? { authorization: `Bearer ${token}` } : {};
+function apiChatMessages(messages: ChatMessage[]): Array<Pick<ChatMessage, "role" | "content">> {
+  return messages.map(({ role, content }) => ({ role, content }));
 }
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
@@ -26,7 +25,6 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
     headers: {
       "content-type": "application/json",
-      ...(await authHeaders()),
       ...(init?.headers ?? {}),
     },
   });
@@ -64,8 +62,69 @@ export async function sendChatMessage(
 ): Promise<ChatResponse> {
   return apiFetch<ChatResponse>("/api/chat", {
     method: "POST",
-    body: JSON.stringify({ messages, snapshot }),
+    body: JSON.stringify({ messages: apiChatMessages(messages), snapshot }),
   });
+}
+
+export async function streamChatMessage(
+  messages: ChatMessage[],
+  snapshot: HouseholdSnapshotInput,
+  handlers: {
+    onStatus?: (event: Extract<ChatStreamEvent, { type: "status" }>["payload"]) => void;
+    onDelta?: (text: string) => void;
+    onFinal?: (response: ChatResponse) => void;
+  },
+): Promise<ChatResponse> {
+  const response = await fetch(`${API_BASE}/api/chat/stream`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ messages: apiChatMessages(messages), snapshot }),
+  });
+
+  if (!response.ok || !response.body) {
+    return sendChatMessage(messages, snapshot);
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let finalResponse: ChatResponse | null = null;
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const parts = buffer.split("\n\n");
+    buffer = parts.pop() ?? "";
+    for (const part of parts) {
+      const event = parseStreamEvent(part);
+      if (!event) continue;
+      if (event.type === "status") handlers.onStatus?.(event.payload);
+      if (event.type === "delta") handlers.onDelta?.(event.payload.text);
+      if (event.type === "final") {
+        finalResponse = event.payload;
+        handlers.onFinal?.(event.payload);
+      }
+    }
+  }
+
+  if (!finalResponse) {
+    throw new Error("Chat stream ended before the final response.");
+  }
+  return finalResponse;
+}
+
+function parseStreamEvent(raw: string): ChatStreamEvent | null {
+  const line = raw
+    .split("\n")
+    .map((item) => item.trim())
+    .find((item) => item.startsWith("data: "));
+  if (!line) return null;
+  try {
+    return JSON.parse(line.slice("data: ".length)) as ChatStreamEvent;
+  } catch {
+    return null;
+  }
 }
 
 export async function sendVoiceTurn(
@@ -75,8 +134,12 @@ export async function sendVoiceTurn(
 ): Promise<VoiceTurnResponse> {
   return apiFetch<VoiceTurnResponse>("/api/voice/turn", {
     method: "POST",
-    body: JSON.stringify({ audio_base64: audioBase64, messages, snapshot }),
+    body: JSON.stringify({ audio_base64: audioBase64, messages: apiChatMessages(messages), snapshot }),
   });
+}
+
+export async function fetchVoiceStatus(): Promise<VoiceStatus> {
+  return apiFetch<VoiceStatus>("/api/voice/status");
 }
 
 export async function preparePacket(

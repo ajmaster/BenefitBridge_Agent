@@ -12,7 +12,7 @@ Single-service target:
 Approval-gated commands:
 
 ```bash
-gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com secretmanager.googleapis.com aiplatform.googleapis.com logging.googleapis.com monitoring.googleapis.com cloudtrace.googleapis.com translate.googleapis.com dlp.googleapis.com firestore.googleapis.com storage.googleapis.com
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com secretmanager.googleapis.com aiplatform.googleapis.com logging.googleapis.com monitoring.googleapis.com cloudtrace.googleapis.com translate.googleapis.com dlp.googleapis.com storage.googleapis.com
 agents-cli deploy --deployment-target cloud_run --project benefitsnav --region us-central1 --service-name benefitbridge-ca --port 8080 --memory 1Gi --cpu 1 --min-instances 0 --max-instances 3 --concurrency 40 --update-env-vars GOOGLE_CLOUD_PROJECT=benefitsnav,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=true,APP_ENV=cloud_run
 gcloud run services add-iam-policy-binding benefitbridge-ca --project benefitsnav --region us-central1 --member allUsers --role roles/run.invoker
 ```
@@ -29,5 +29,5 @@ curl -fsS http://127.0.0.1:8080/healthz
 ```
 
 Do not deploy with `.env` values. Use Secret Manager or Cloud Run secret env
-vars for all secrets. Packet exports are session-local by default; Firestore and
-Cloud Storage must remain opt-in for redacted metadata or non-sensitive artifacts.
+vars for all secrets. Packet exports are session-local by default; Cloud Storage
+must remain opt-in for non-sensitive artifacts.

@@ -1,8 +1,11 @@
+import json
+
 from fastapi.testclient import TestClient
 
 import app.services.google_integrations as google_integrations
 from app.fast_api_app import app
 from app.graph import run_benefitbridge_graph
+from app.services.chat_llm import reset_chat_llm_provider, set_chat_llm_provider
 
 client = TestClient(app)
 
@@ -43,6 +46,50 @@ class _MapsPlacesProvider:
             "formatted_address": "Public service location",
             "google_maps_uri": "https://maps.google.com/?cid=test",
         }
+
+
+class _FakeChatLlmProvider:
+    model_name = "fake-gemini"
+
+    def __init__(self, text: str = "Here is the concise LLM answer.") -> None:
+        self.text = text
+        self.calls: list[dict] = []
+
+    def generate(
+        self,
+        *,
+        messages: list[dict[str, str]],
+        snapshot: dict,
+        deterministic_result: dict,
+    ) -> str:
+        self.calls.append(
+            {
+                "messages": messages,
+                "snapshot": snapshot,
+                "deterministic_result": deterministic_result,
+            }
+        )
+        return self.text
+
+
+class _FailingChatLlmProvider(_FakeChatLlmProvider):
+    model_name = "fake-gemini-failing"
+
+    def generate(
+        self,
+        *,
+        messages: list[dict[str, str]],
+        snapshot: dict,
+        deterministic_result: dict,
+    ) -> str:
+        self.calls.append(
+            {
+                "messages": messages,
+                "snapshot": snapshot,
+                "deterministic_result": deterministic_result,
+            }
+        )
+        raise RuntimeError("model unavailable")
 
 
 def _valid_packet() -> dict:
@@ -171,6 +218,234 @@ def test_prepare_uses_dlp_block_without_echoing_raw_text(monkeypatch) -> None:
 
 
 def test_chat_returns_a2ui_templates_and_packet() -> None:
+    provider = _FakeChatLlmProvider(
+        "I can help you prepare for food, health coverage, and utility conversations in San Jose."
+    )
+    set_chat_llm_provider(provider)
+    try:
+        response = client.post(
+            "/api/chat",
+            json={
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": (
+                            "I am in San Jose with 3 people and need food, "
+                            "health coverage, and utility help."
+                        ),
+                    }
+                ],
+                "snapshot": {"language": "en"},
+            },
+        )
+    finally:
+        reset_chat_llm_provider()
+
+    body = response.json()
+    assert response.status_code == 200
+    assert body["route"] == "packet_ready"
+    assert body["message"].startswith("I can help you prepare")
+    assert body["response_mode"] == "llm"
+    assert body["llm_invoked"] is True
+    assert body["model_name"] == "fake-gemini"
+    assert body["fallback_reason"] is None
+    assert provider.calls
+    assert provider.calls[0]["deterministic_result"]["route"] == "packet_ready"
+    assert body["packet"]["potential_benefit_paths"]
+    assert body["resources"]
+    assert body["validation"]["pass"] is True
+
+    template_types = {template["type"] for template in body["ui_templates"]}
+    assert template_types == {
+        "fact_summary",
+        "question_set",
+        "benefit_paths",
+        "local_resources",
+        "source_links",
+    }
+    assert not {
+        "packet_summary",
+        "document_kit",
+        "document_summary",
+        "document_checklist",
+        "caseworker_questions",
+        "call_script",
+        "local_handoff_sheet",
+        "source_sheet",
+    }.intersection(template_types)
+    assert any(
+        item["links"]
+        for template in body["ui_templates"]
+        if template["type"] == "benefit_paths"
+        for item in template["items"]
+    )
+
+
+def test_chat_disabled_llm_reports_fallback_code() -> None:
+    response = client.post(
+        "/api/chat",
+        json={
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "I am in Fresno County and need food help.",
+                }
+            ],
+            "snapshot": {"language": "en"},
+        },
+    )
+
+    body = response.json()
+    assert response.status_code == 200
+    assert body["response_mode"] == "deterministic_fallback"
+    assert body["llm_invoked"] is False
+    assert body["fallback_code"] == "llm_disabled"
+    assert body["diagnostics"]["fallback_code"] == "llm_disabled"
+
+
+def test_chat_falls_back_when_llm_generation_fails() -> None:
+    provider = _FailingChatLlmProvider()
+    set_chat_llm_provider(provider)
+    try:
+        response = client.post(
+            "/api/chat",
+            json={
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "I am in Fresno County and need food help.",
+                    }
+                ],
+                "snapshot": {"language": "en"},
+            },
+        )
+    finally:
+        reset_chat_llm_provider()
+
+    body = response.json()
+    assert response.status_code == 200
+    assert body["route"] == "packet_ready"
+    assert body["response_mode"] == "deterministic_fallback"
+    assert body["llm_invoked"] is True
+    assert body["model_name"] == "fake-gemini-failing"
+    assert body["fallback_code"] == "provider_error"
+    assert body["diagnostics"]["fallback_code"] == "provider_error"
+    assert "model unavailable" in body["fallback_reason"]
+    assert body["message"]
+    assert "I prepared source-backed directions" not in body["message"]
+    assert "Fresno County" in body["message"]
+    assert provider.calls
+
+
+def test_chat_fallback_code_marks_quota_errors() -> None:
+    class _QuotaProvider(_FailingChatLlmProvider):
+        model_name = "fake-gemini-quota"
+
+        def generate(
+            self,
+            *,
+            messages: list[dict[str, str]],
+            snapshot: dict,
+            deterministic_result: dict,
+        ) -> str:
+            self.calls.append(
+                {
+                    "messages": messages,
+                    "snapshot": snapshot,
+                    "deterministic_result": deterministic_result,
+                }
+            )
+            raise RuntimeError("429 RESOURCE_EXHAUSTED quota exceeded")
+
+    provider = _QuotaProvider()
+    set_chat_llm_provider(provider)
+    try:
+        response = client.post(
+            "/api/chat",
+            json={
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "I am in Fresno County and need food help.",
+                    }
+                ],
+                "snapshot": {"language": "en"},
+            },
+        )
+    finally:
+        reset_chat_llm_provider()
+
+    body = response.json()
+    assert response.status_code == 200
+    assert body["response_mode"] == "deterministic_fallback"
+    assert body["llm_invoked"] is True
+    assert body["fallback_code"] == "quota_exceeded"
+
+
+def test_chat_privacy_block_does_not_invoke_llm() -> None:
+    provider = _FakeChatLlmProvider()
+    set_chat_llm_provider(provider)
+    try:
+        response = client.post(
+            "/api/chat",
+            json={
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "My SSN is 123-45-6789 and I need CalFresh.",
+                    }
+                ],
+                "snapshot": {"language": "en", "location_text": "San Jose, CA"},
+            },
+        )
+    finally:
+        reset_chat_llm_provider()
+
+    body = response.json()
+    assert response.status_code == 200
+    assert body["route"] == "privacy_block"
+    assert body["response_mode"] == "deterministic_block"
+    assert body["llm_invoked"] is False
+    assert body["model_name"] is None
+    assert provider.calls == []
+    assert "123-45-6789" not in str(body)
+
+
+def test_chat_stream_emits_status_delta_and_final_payload() -> None:
+    provider = _FakeChatLlmProvider("Streamed concise answer.")
+    set_chat_llm_provider(provider)
+    try:
+        with client.stream(
+            "POST",
+            "/api/chat/stream",
+            json={
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "I am in San Jose and need CalFresh prep.",
+                    }
+                ],
+                "snapshot": {"language": "en"},
+            },
+        ) as response:
+            lines = [
+                line for line in response.iter_lines() if line.startswith("data: ")
+            ]
+    finally:
+        reset_chat_llm_provider()
+
+    assert response.status_code == 200
+    event_types = [json.loads(line.removeprefix("data: "))["type"] for line in lines]
+    assert event_types[0] == "status"
+    assert "delta" in event_types
+    assert event_types[-1] == "final"
+
+    final = json.loads(lines[-1].removeprefix("data: "))["payload"]
+    assert final["message"] == "Streamed concise answer."
+    assert final["response_mode"] == "llm"
+
+
+def test_legacy_chat_shape_still_contains_packet_fields() -> None:
     response = client.post(
         "/api/chat",
         json={
@@ -199,8 +474,17 @@ def test_chat_returns_a2ui_templates_and_packet() -> None:
         "benefit_paths",
         "local_resources",
         "source_links",
-        "packet_summary",
     }.issubset(template_types)
+    assert "packet_summary" not in template_types
+    assert not {
+        "document_kit",
+        "document_summary",
+        "document_checklist",
+        "caseworker_questions",
+        "call_script",
+        "local_handoff_sheet",
+        "source_sheet",
+    }.intersection(template_types)
     assert any(
         item["links"]
         for template in body["ui_templates"]

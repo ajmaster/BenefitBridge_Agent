@@ -1,19 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   exportPacket,
+  fetchVoiceStatus,
   fetchReadiness,
   fetchResources,
   preparePacket,
   sendChatMessage,
   sendVoiceTurn,
+  streamChatMessage,
   translatePacket,
 } from "../../lib/api";
 import { blobToBase64, playAudioBase64 } from "../../lib/audio";
 import type {
   A2UITemplate,
+  ChatDiagnostics,
   ChatMessage,
   HouseholdSnapshotInput,
   Language,
@@ -21,6 +24,7 @@ import type {
   PrepareResult,
   ReadinessResult,
   SyntheticProfile,
+  VoiceStatus,
 } from "../../lib/types";
 import { fallbackResult, syntheticProfiles } from "../../data/syntheticProfiles";
 import { getStoredLocale } from "@/lib/locale-storage";
@@ -73,6 +77,22 @@ export type AtlasSection =
   | "packet"
   | "california";
 
+const COMPACT_CHAT_TEMPLATE_TYPES = new Set([
+  "fact_summary",
+  "question_set",
+  "benefit_paths",
+  "local_resources",
+  "source_links",
+  "privacy_notice",
+  "safety_handoff",
+  "route_status",
+  "voice_status",
+]);
+
+function compactChatTemplates(templates: A2UITemplate[]): A2UITemplate[] {
+  return templates.filter((template) => COMPACT_CHAT_TEMPLATE_TYPES.has(template.type));
+}
+
 export function useBenefitBridgeController() {
   const [selectedProfileId, setSelectedProfileId] = useState(syntheticProfiles[0].id);
   const [snapshot, setSnapshot] = useState<HouseholdSnapshotInput>(() => ({
@@ -83,16 +103,17 @@ export function useBenefitBridgeController() {
   const [result, setResult] = useState<PrepareResult>(fallbackResult);
   const [resources, setResources] = useState<LocalResource[]>(fallbackResources);
   const [readiness, setReadiness] = useState<ReadinessResult | null>(null);
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(() => [
-    {
-      role: "assistant",
-      content: copyFor(getStoredLocale() ?? "en").chatStarter,
-    },
-  ]);
+  const [voiceStatus, setVoiceStatus] = useState<VoiceStatus>({
+    enabled: false,
+    available: false,
+    provider: "disabled",
+    live: false,
+    reason: "loading",
+  });
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [chatTemplates, setChatTemplates] = useState<A2UITemplate[]>([]);
-  const [chatInput, setChatInput] = useState(
-    "I am in San Jose and need food, health coverage, and utility help.",
-  );
+  const [chatDiagnostics, setChatDiagnostics] = useState<ChatDiagnostics | null>(null);
+  const [chatInput, setChatInput] = useState("");
   const [notice, setNotice] = useState<Notice>(() => ({
     kind: "ready",
     text: copyFor(getStoredLocale() ?? "en").noticeReady,
@@ -100,6 +121,7 @@ export function useBenefitBridgeController() {
   const [busy, setBusy] = useState(false);
   const [chatBusy, setChatBusy] = useState(false);
   const [activeSection, setActiveSection] = useState<AtlasSection>("chat");
+  const chatMessageCounterRef = useRef(0);
 
   const packet = result.packet ?? fallbackResult.packet;
   const validationPass = result.validation?.pass ?? false;
@@ -110,6 +132,20 @@ export function useBenefitBridgeController() {
       .then(setReadiness)
       .catch(() => {
         setReadiness(null);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchVoiceStatus()
+      .then(setVoiceStatus)
+      .catch(() => {
+        setVoiceStatus({
+          enabled: false,
+          available: false,
+          provider: "disabled",
+          live: false,
+          reason: "api_unavailable",
+        });
       });
   }, []);
 
@@ -140,7 +176,7 @@ export function useBenefitBridgeController() {
         kind: "warn",
         text:
           error instanceof Error
-            ? `API unavailable: ${error.message}. Showing deterministic demo packet.`
+            ? `API unavailable: ${error.message}. Showing a local prep packet.`
             : text.noticeFallback,
       });
     } finally {
@@ -152,56 +188,116 @@ export function useBenefitBridgeController() {
     const content = (messageText ?? chatInput).trim();
     if (!content || chatBusy) return;
 
-    const nextMessages: ChatMessage[] = [...chatMessages, { role: "user", content }];
+    const nextMessages: ChatMessage[] = [...chatMessages, createChatMessage("user", content)];
+    const assistantMessage = createChatMessage("assistant", "");
     setChatMessages(nextMessages);
     setChatInput("");
     setChatBusy(true);
     setNotice({ kind: "ready", text: copyFor(snapshot.language).noticeChat });
 
     try {
-      const response = await sendChatMessage(nextMessages, snapshot);
-      setChatMessages([...nextMessages, { role: "assistant", content: response.message }]);
-      setChatTemplates(response.ui_templates);
-      setSnapshot(response.snapshot);
-
-      if (response.packet) {
-        setResult({
-          route: response.route,
-          events: response.events,
-          packet: response.packet,
-          validation: response.validation,
+      let streamedText = "";
+      setChatMessages([...nextMessages, assistantMessage]);
+      const response = await streamChatMessage(nextMessages, snapshot, {
+        onStatus: (status) => {
+          setNotice({ kind: "ready", text: status.message });
+        },
+        onDelta: (text) => {
+          streamedText += text;
+          updateChatMessage(assistantMessage.client_id, streamedText.trim());
+        },
+      });
+      applyChatResponse(nextMessages, response, assistantMessage.client_id);
+    } catch (error) {
+      try {
+        const response = await sendChatMessage(nextMessages, snapshot);
+        applyChatResponse(nextMessages, response, assistantMessage.client_id);
+      } catch (fallbackError) {
+        const message =
+          fallbackError instanceof Error
+            ? `Chat workflow unavailable: ${fallbackError.message}`
+            : "Chat workflow unavailable.";
+        updateChatMessage(assistantMessage.client_id, message);
+        setNotice({
+          kind: "error",
+          text: message,
         });
       }
-      if (response.resources && response.resources.length > 0) {
-        setResources(response.resources);
-      }
-
-      setNotice({
-        kind: response.route === "privacy_block" ? "warn" : "ready",
-        text:
-          response.route === "privacy_block"
-            ? copyFor(response.snapshot.language).noticeChatBlocked
-            : copyFor(response.snapshot.language).noticeChatUpdated,
-      });
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? `Chat workflow unavailable: ${error.message}`
-          : "Chat workflow unavailable.";
-      setChatMessages([
-        ...nextMessages,
-        {
-          role: "assistant",
-          content: message,
-        },
-      ]);
-      setNotice({
-        kind: "error",
-        text: message,
-      });
     } finally {
       setChatBusy(false);
     }
+  }
+
+  function createChatMessage(role: ChatMessage["role"], content: string): ChatMessage {
+    chatMessageCounterRef.current += 1;
+    return {
+      role,
+      content,
+      client_id: `message-${Date.now()}-${chatMessageCounterRef.current}`,
+    };
+  }
+
+  function updateChatMessage(clientId: string | undefined, content: string) {
+    if (!clientId) return;
+    setChatMessages((messages) =>
+      messages.map((message) =>
+        message.client_id === clientId ? { ...message, content } : message,
+      ),
+    );
+  }
+
+  function applyChatResponse(
+    nextMessages: ChatMessage[],
+    response: Awaited<ReturnType<typeof sendChatMessage>>,
+    assistantClientId?: string,
+  ) {
+    const assistantMessage = createChatMessage("assistant", response.message);
+    if (assistantClientId) {
+      setChatMessages((messages) =>
+        messages.map((message) =>
+          message.client_id === assistantClientId
+            ? { ...message, content: response.message }
+            : message,
+        ),
+      );
+    } else {
+      setChatMessages([...nextMessages, assistantMessage]);
+    }
+    setChatTemplates(compactChatTemplates(response.ui_templates));
+    setChatDiagnostics(
+      response.diagnostics ??
+        (response.response_mode
+          ? {
+              response_mode: response.response_mode,
+              llm_invoked: Boolean(response.llm_invoked),
+              model_name: response.model_name,
+              fallback_reason: response.fallback_reason,
+              fallback_code: response.fallback_code,
+              graph_events: response.events,
+            }
+          : null),
+    );
+    setSnapshot(response.snapshot);
+
+    if (response.packet) {
+      setResult({
+        route: response.route,
+        events: response.events,
+        packet: response.packet,
+        validation: response.validation,
+      });
+    }
+    if (response.resources && response.resources.length > 0) {
+      setResources(response.resources);
+    }
+
+    setNotice({
+      kind: response.route === "privacy_block" ? "warn" : "ready",
+      text:
+        response.route === "privacy_block"
+          ? copyFor(response.snapshot.language).noticeChatBlocked
+          : copyFor(response.snapshot.language).noticeChatUpdated,
+    });
   }
 
   async function runVoiceTurn(audioBlob: Blob) {
@@ -214,11 +310,11 @@ export function useBenefitBridgeController() {
       const response = await sendVoiceTurn(audioBase64, chatMessages, snapshot);
       const nextMessages: ChatMessage[] = [
         ...chatMessages,
-        { role: "user", content: response.transcript },
-        { role: "assistant", content: response.message },
+        createChatMessage("user", response.transcript),
+        createChatMessage("assistant", response.message),
       ];
       setChatMessages(nextMessages);
-      setChatTemplates(response.ui_templates);
+      setChatTemplates(compactChatTemplates(response.ui_templates));
       setSnapshot(response.snapshot);
 
       if (response.packet) {
@@ -244,6 +340,12 @@ export function useBenefitBridgeController() {
             : copyFor(response.snapshot.language).noticeChatUpdated,
       });
     } catch (error) {
+      setVoiceStatus((current) => ({
+        ...current,
+        available: false,
+        live: false,
+        reason: error instanceof Error ? error.message : "voice_turn_failed",
+      }));
       setNotice({
         kind: "error",
         text:
@@ -251,16 +353,6 @@ export function useBenefitBridgeController() {
             ? `Voice turn unavailable: ${error.message}`
             : "Voice turn unavailable.",
       });
-      setChatMessages((messages) => [
-        ...messages,
-        {
-          role: "assistant",
-          content:
-            error instanceof Error
-              ? `Voice turn unavailable: ${error.message}`
-              : "Voice turn unavailable.",
-        },
-      ]);
     } finally {
       setChatBusy(false);
     }
@@ -428,12 +520,6 @@ export function useBenefitBridgeController() {
 
   function setLanguage(language: Language) {
     setSnapshot((current) => ({ ...current, language }));
-    setChatMessages((messages) => {
-      if (messages.length === 1 && messages[0].role === "assistant") {
-        return [{ role: "assistant", content: copyFor(language).chatStarter }];
-      }
-      return messages;
-    });
     setNotice({ kind: "ready", text: copyFor(language).noticeReady });
   }
 
@@ -460,6 +546,7 @@ export function useBenefitBridgeController() {
     activeSection,
     busy,
     chatBusy,
+    chatDiagnostics,
     chatInput,
     chatMessages,
     chatTemplates,
@@ -488,5 +575,6 @@ export function useBenefitBridgeController() {
     updateSnapshot,
     userText,
     validationPass,
+    voiceStatus,
   };
 }

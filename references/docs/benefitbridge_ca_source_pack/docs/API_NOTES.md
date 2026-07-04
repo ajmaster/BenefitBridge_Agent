@@ -17,7 +17,7 @@
 - Google Maps Geocoding/Places/Routes: contact/location enrichment.
 - Cloud Translation: English/Spanish MVP.
 - Sensitive Data Protection: PII detection/redaction.
-- Cloud Storage/Firestore/BigQuery/Cloud Run/Secret Manager: deployment and telemetry.
+- Cloud Storage/BigQuery/Cloud Run/Secret Manager: deployment and telemetry.
 
 ## Excluded from MVP
 

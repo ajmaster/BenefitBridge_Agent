@@ -29,7 +29,6 @@ ENABLE_GOOGLE_MAPS_EMBED = (
     os.getenv("ENABLE_GOOGLE_MAPS_EMBED", str(ENABLE_GOOGLE_MAPS)).lower() == "true"
 )
 ENABLE_TRANSLATION = os.getenv("ENABLE_TRANSLATION", "false").lower() == "true"
-ENABLE_AUTH = os.getenv("ENABLE_AUTH", "false").lower() == "true"
 ENABLE_VOICE = os.getenv("ENABLE_VOICE", "false").lower() == "true"
 
 

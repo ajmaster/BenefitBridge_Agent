@@ -30,26 +30,13 @@ import { expect, test } from "@playwright/test";
 // section navigation, since `BenefitBridgeProvider` now lives at the
 // `(workspace)` layout level so the controller survives route changes.
 
-async function continueAsGuestIfNeeded(page: import("@playwright/test").Page) {
-  const guestButton = page.getByRole("button", { name: "Continue as Guest" });
-  if (
-    await guestButton
-      .waitFor({ state: "visible", timeout: 5_000 })
-      .then(() => true)
-      .catch(() => false)
-  ) {
-    await guestButton.click();
-    await expect(guestButton).toBeHidden({ timeout: 15_000 });
-  }
-}
-
-test("workspace shell renders sidebar sections, chat side panel, and boundary reminders", async ({
+test("workspace shell renders sidebar sections, main chat surface, and boundary reminders", async ({
   page,
 }) => {
   await page.goto("/app/chat/");
-  await continueAsGuestIfNeeded(page);
 
-  await expect(page.getByTestId("chat-sidepanel")).toBeVisible();
+  await expect(page.getByTestId("chat-main-surface")).toBeVisible();
+  await expect(page.getByTestId("chat-rail-surface")).toHaveCount(0);
   await expect(page.getByTestId("chat-input")).toBeVisible();
 
   for (const section of ["Chat", "Prepare", "Sources", "Resources", "Packet", "California"]) {
@@ -72,7 +59,6 @@ test("workspace shell renders sidebar sections, chat side panel, and boundary re
 
 test("build prep documents transitions into the Prep Documents workspace", async ({ page }) => {
   await page.goto("/app/prepare/");
-  await continueAsGuestIfNeeded(page);
 
   await expect(page.getByRole("heading", { name: "Document Studio" })).toBeVisible();
   await expect(page.getByTestId("prepare-button")).toContainText("Build prep documents");
@@ -87,13 +73,16 @@ test("build prep documents transitions into the Prep Documents workspace", async
   await expect(page.getByRole("button", { name: "Print / save PDF" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Copy call script" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Add reminders to calendar (.ics)" })).toBeVisible();
+  await expect(page.getByTestId("calendar-reminder-editor")).toBeVisible();
+  await expect(page.getByTestId("calendar-reminder-row").first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Download selected reminders" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Export packet" })).toHaveCount(0);
 });
 
 test("language selector in Prepare updates section copy and chat controls", async ({ page }) => {
   await page.goto("/app/prepare/");
-  await continueAsGuestIfNeeded(page);
 
+  await expect(page.getByTestId("chat-rail-surface")).toBeVisible();
   await expect(page.getByTestId("chat-input")).toHaveAttribute(
     "placeholder",
     "Type your question or use Speak...",
@@ -120,7 +109,6 @@ test("language selector in Prepare updates section copy and chat controls", asyn
 
 test("resource maps render a Google Maps embed or safe fallback", async ({ page }) => {
   await page.goto("/app/resources/");
-  await continueAsGuestIfNeeded(page);
 
   const mapPanel = page.getByTestId("resource-map-panel");
   await expect(mapPanel).toBeVisible();
@@ -139,7 +127,6 @@ test("california explorer renders statewide county filters and locator handoffs"
   page,
 }) => {
   await page.goto("/app/california/");
-  await continueAsGuestIfNeeded(page);
 
   await expect(page.getByRole("heading", { name: "California Resource Explorer" })).toBeVisible();
   await expect(page.getByTestId("california-map-panel")).toBeVisible();
@@ -182,7 +169,6 @@ test("california explorer renders statewide county filters and locator handoffs"
 
 test("bay area compatibility route renders the california explorer", async ({ page }) => {
   await page.goto("/app/bay-area/");
-  await continueAsGuestIfNeeded(page);
 
   await expect(page.getByRole("heading", { name: "California Resource Explorer" })).toBeVisible();
   await expect(page.getByRole("link", { name: "California", exact: true })).toBeVisible();
@@ -191,7 +177,6 @@ test("bay area compatibility route renders the california explorer", async ({ pa
 
 test("sources tab shows current citations and the full approved source library", async ({ page }) => {
   await page.goto("/app/sources/");
-  await continueAsGuestIfNeeded(page);
 
   await expect(page.getByRole("heading", { name: "Used in this conversation" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Approved source library" })).toBeVisible();
@@ -205,7 +190,6 @@ test("sources tab shows current citations and the full approved source library",
 test("supports mobile workspace layout without horizontal overflow", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/app/chat/");
-  await continueAsGuestIfNeeded(page);
 
   const overflow = await page.evaluate(
     () => document.documentElement.scrollWidth > window.innerWidth,
@@ -213,29 +197,265 @@ test("supports mobile workspace layout without horizontal overflow", async ({ pa
 
   expect(overflow).toBe(false);
   await expect(page.getByRole("link", { name: "Prepare", exact: true })).toBeVisible();
-  await expect(page.getByTestId("chat-sidepanel")).toBeVisible();
+  await expect(page.getByTestId("chat-main-surface")).toBeVisible();
+  await expect(page.getByTestId("chat-rail-surface")).toHaveCount(0);
 });
 
 test("chat history persists across section navigation", async ({ page }) => {
   await page.goto("/app/chat/");
-  await continueAsGuestIfNeeded(page);
   const message = "I need help with food assistance";
   await page.getByTestId("chat-input").fill(message);
   await page.getByRole("button", { name: "Send" }).click();
 
-  // The user's own message is appended to the transcript synchronously (it
-  // does not depend on a live backend responding), so this is a reliable
-  // signal that the send actually went through. The same frontend-only e2e
-  // environment has no backend behind `/api/*`, so the UI should also surface
-  // that as an assistant-visible unavailable state instead of appearing inert.
-  await expect(page.getByTestId("chat-sidepanel")).toContainText(message);
-  await expect(page.getByTestId("chat-sidepanel")).toContainText("Chat workflow unavailable");
+  await expect(page.getByTestId("chat-main-surface")).toContainText(message);
+  await expect(page.getByTestId("chat-main-surface")).toContainText(/city|county|ZIP|food/i);
 
   await page.getByRole("link", { name: "Prepare", exact: true }).click();
   await page.waitForURL(/\/app\/prepare\/?$/);
+  await expect(page.getByTestId("chat-rail-surface")).toContainText(message);
 
   await page.getByRole("link", { name: "Chat", exact: true }).click();
   await page.waitForURL(/\/app\/chat\/?$/);
 
-  await expect(page.getByTestId("chat-sidepanel")).toContainText(message);
+  await expect(page.getByTestId("chat-main-surface")).toContainText(message);
+});
+
+test("desktop chat response stays inside the conversation scroll region", async (
+  { page },
+  testInfo,
+) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only scroll containment check.");
+  const finalResponse = {
+    type: "final",
+    payload: {
+      route: "packet_ready",
+      message: Array.from({ length: 18 }, (_, index) =>
+        `Step ${index + 1}: For Fresno, start with CalFresh preparation and ask the county office what documents they want before you go. Official agencies decide eligibility and amounts, and local resource details can change.`,
+      ).join("\n"),
+      events: ["chat_received", "deterministic_graph"],
+      snapshot: {
+        language: "en",
+        location_text: "Fresno, CA",
+        children_ages: [],
+        needs: ["food"],
+        housing_status: "unknown",
+        utilities_need: false,
+        food_need_today: false,
+        safety_sensitive: false,
+      },
+      snapshot_patch: { location_text: "Fresno, CA", needs: ["food"] },
+      next_questions: ["How many people are in the household?"],
+      ui_templates: [
+        {
+          id: "facts",
+          type: "fact_summary",
+          title: "Conversation Intake",
+          tone: "info",
+          items: [
+            { label: "Location", value: "Fresno, CA" },
+            { label: "Needs", value: "food" },
+            { label: "Household", value: "Needed" },
+          ],
+          actions: [],
+          citations: [],
+        },
+        {
+          id: "paths",
+          type: "benefit_paths",
+          title: "Benefit paths",
+          tone: "accent",
+          items: Array.from({ length: 8 }, (_, index) => ({
+            title: `Food prep path ${index + 1}`,
+            body: "Ask what documents to bring, then call before going to confirm current availability.",
+            badges: ["likely worth checking"],
+          })),
+          actions: [{ type: "open_sources", label: "Open sources" }],
+          citations: [
+            {
+              source_id: "calfresh_state",
+              source_title: "California CalFresh official site",
+              url: "https://www.cdss.ca.gov/calfresh",
+            },
+          ],
+        },
+        {
+          id: "resources",
+          type: "local_resources",
+          title: "Local handoffs",
+          tone: "source",
+          items: Array.from({ length: 6 }, (_, index) => ({
+            title: `Fresno locator ${index + 1}`,
+            subtitle: "Statewide locator handoff",
+            body: "Call before going to confirm current availability.",
+          })),
+          actions: [{ type: "open_resources", label: "Open resources" }],
+          citations: [],
+        },
+      ],
+      packet: undefined,
+      resources: [],
+      validation: { pass: true, failures: [], blocking_failures: [] },
+      response_mode: "deterministic_fallback",
+      llm_invoked: false,
+      model_name: "gemini-2.5-flash",
+      fallback_reason: "Gemini chat synthesis is not configured for this local run.",
+      fallback_code: "llm_disabled",
+      diagnostics: {
+        response_mode: "deterministic_fallback",
+        llm_invoked: false,
+        model_name: "gemini-2.5-flash",
+        fallback_reason: "Gemini chat synthesis is not configured for this local run.",
+        fallback_code: "llm_disabled",
+        graph_events: ["chat_received", "deterministic_graph"],
+      },
+    },
+  };
+  await page.route("**/api/chat/stream", async (route) => {
+    if (route.request().method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: { "access-control-allow-origin": "*", "access-control-allow-headers": "*" },
+      });
+      return;
+    }
+    await route.fulfill({
+      status: 200,
+      headers: { "access-control-allow-origin": "*", "content-type": "text/event-stream" },
+      body: [
+        'data: {"type":"status","payload":{"message":"Checking privacy, sources, and answer mode.","response_mode":"deterministic_fallback"}}',
+        'data: {"type":"delta","payload":{"text":"For Fresno, start with CalFresh preparation."}}',
+        `data: ${JSON.stringify(finalResponse)}`,
+        "",
+      ].join("\n\n"),
+    });
+  });
+  await page.setViewportSize({ width: 1440, height: 720 });
+  await page.goto("/app/chat/");
+
+  await page
+    .getByTestId("chat-input")
+    .fill("I live in Fresno and need help with food benefits. What should I do next?");
+  await page.getByRole("button", { name: "Send" }).click();
+  await expect(page.getByTestId("chat-diagnostics")).toHaveCount(0);
+  await expect(page.getByTestId("chat-support-drawer")).toHaveCount(0);
+  await expect(page.getByTestId("chat-support-toggle")).toBeVisible();
+
+  const metrics = await page.evaluate(() => {
+    const scrollRegion = document.querySelector('[data-testid="chat-scroll-region"]');
+    const composer = document.querySelector('[data-testid="chat-composer"]');
+    const regionRect = scrollRegion?.getBoundingClientRect();
+    const composerRect = composer?.getBoundingClientRect();
+    return {
+      windowScrollY: window.scrollY,
+      documentScrollable: document.documentElement.scrollHeight > window.innerHeight + 8,
+      scrollRegion: scrollRegion
+        ? {
+            clientHeight: scrollRegion.clientHeight,
+            scrollHeight: scrollRegion.scrollHeight,
+          }
+        : null,
+      composerBottom: composerRect?.bottom ?? 0,
+      viewportHeight: window.innerHeight,
+      regionBottom: regionRect?.bottom ?? 0,
+    };
+  });
+
+  expect(metrics.windowScrollY).toBe(0);
+  expect(metrics.documentScrollable).toBe(false);
+  expect(metrics.scrollRegion).not.toBeNull();
+  expect(metrics.scrollRegion!.scrollHeight).toBeGreaterThan(metrics.scrollRegion!.clientHeight);
+  expect(metrics.composerBottom).toBeLessThanOrEqual(metrics.viewportHeight + 1);
+  expect(metrics.regionBottom).toBeLessThanOrEqual(metrics.composerBottom);
+});
+
+test("desktop chat preserves user scroll position until jump to latest", async (
+  { page },
+  testInfo,
+) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop-only scroll anchoring check.");
+  const finalResponse = {
+    type: "final",
+    payload: {
+      route: "packet_ready",
+      message: Array.from({ length: 40 }, (_, index) =>
+        `Step ${index + 1}: Ask the county office what documents they want before you go.`,
+      ).join("\n"),
+      events: ["chat_received", "deterministic_graph"],
+      snapshot: {
+        language: "en",
+        location_text: "Fresno, CA",
+        children_ages: [],
+        needs: ["food"],
+        housing_status: "unknown",
+        utilities_need: false,
+        food_need_today: false,
+        safety_sensitive: false,
+      },
+      snapshot_patch: { location_text: "Fresno, CA", needs: ["food"] },
+      next_questions: [],
+      ui_templates: [],
+      resources: [],
+      validation: { pass: true, failures: [], blocking_failures: [] },
+      response_mode: "deterministic_fallback",
+      llm_invoked: false,
+      model_name: "gemini-2.5-flash",
+      fallback_reason: "Gemini chat synthesis is not configured for this local run.",
+      fallback_code: "llm_disabled",
+      diagnostics: {
+        response_mode: "deterministic_fallback",
+        llm_invoked: false,
+        model_name: "gemini-2.5-flash",
+        fallback_reason: "Gemini chat synthesis is not configured for this local run.",
+        fallback_code: "llm_disabled",
+        graph_events: ["chat_received", "deterministic_graph"],
+      },
+    },
+  };
+  await page.route("**/api/chat/stream", async (route) => {
+    await route.fulfill({
+      status: 200,
+      headers: { "access-control-allow-origin": "*", "content-type": "text/event-stream" },
+      body: [
+        'data: {"type":"delta","payload":{"text":"Here are the next steps."}}',
+        `data: ${JSON.stringify(finalResponse)}`,
+        "",
+      ].join("\n\n"),
+    });
+  });
+  await page.setViewportSize({ width: 1440, height: 720 });
+  await page.goto("/app/chat/");
+  await page.getByTestId("chat-input").fill("I need food help in Fresno");
+  await page.getByRole("button", { name: "Send" }).click();
+  await expect(page.getByTestId("chat-main-surface")).toContainText("Step 40");
+
+  const beforeSecondTurn = await page.evaluate(() => {
+    const scrollRegion = document.querySelector('[data-testid="chat-scroll-region"]');
+    if (!scrollRegion) return null;
+    scrollRegion.scrollTop = 0;
+    scrollRegion.dispatchEvent(new Event("scroll", { bubbles: true }));
+    return { scrollTop: scrollRegion.scrollTop };
+  });
+  expect(beforeSecondTurn?.scrollTop).toBe(0);
+  await expect(page.getByTestId("jump-to-latest")).toBeVisible();
+
+  await page.getByTestId("chat-input").fill("What should I ask when I call?");
+  await page.getByRole("button", { name: "Send" }).click();
+  await expect(page.getByTestId("jump-to-latest")).toBeVisible();
+
+  const whileReading = await page.evaluate(() => {
+    const scrollRegion = document.querySelector('[data-testid="chat-scroll-region"]');
+    return scrollRegion?.scrollTop ?? -1;
+  });
+  expect(whileReading).toBeLessThan(40);
+
+  await page.getByTestId("jump-to-latest").click();
+  const afterJump = await page.evaluate(() => {
+    const scrollRegion = document.querySelector('[data-testid="chat-scroll-region"]');
+    if (!scrollRegion) return null;
+    return {
+      distanceFromBottom:
+        scrollRegion.scrollHeight - scrollRegion.scrollTop - scrollRegion.clientHeight,
+    };
+  });
+  expect(afterJump?.distanceFromBottom).toBeLessThan(12);
 });

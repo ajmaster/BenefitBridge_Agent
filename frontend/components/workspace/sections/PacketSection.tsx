@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import AtlasIcon, { type AtlasIconName } from "@/components/workspace/icons/AtlasIcon";
 import { copyFor } from "@/components/conversation-atlas/i18n";
 import { useBenefitBridgeContext } from "@/components/workspace/BenefitBridgeContext";
@@ -132,6 +132,8 @@ export function PacketSection() {
                 <p className="text-sm text-muted">{copy.noSources}</p>
               )}
             </DocumentCard>
+
+            <ReminderPlanner key={reminderPlannerKey(packet)} packet={packet} copy={copy} />
           </div>
         </section>
 
@@ -200,6 +202,222 @@ export function PacketSection() {
       </div>
     </div>
   );
+}
+
+type ReminderDraft = {
+  id: string;
+  selected: boolean;
+  title: string;
+  notes: string;
+  startLocal: string;
+};
+
+function ReminderPlanner({
+  packet,
+  copy,
+}: {
+  packet: PrepPacket;
+  copy: ReturnType<typeof copyFor>;
+}) {
+  const [drafts, setDrafts] = useState(() => buildReminderDrafts(packet));
+
+  if (drafts.length === 0) return null;
+
+  const selectedCount = drafts.filter((draft) => draft.selected).length;
+
+  function updateDraft(id: string, patch: Partial<ReminderDraft>) {
+    setDrafts((current) =>
+      current.map((draft) => (draft.id === id ? { ...draft, ...patch } : draft)),
+    );
+  }
+
+  function downloadSelectedReminders() {
+    const selected = drafts.filter((draft) => draft.selected && draft.title.trim());
+    if (selected.length === 0) return;
+    const blob = new Blob([buildReminderIcs(selected, packet)], {
+      type: "text/calendar;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "aidatlasca-custom-reminders.ics";
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return (
+    <DocumentCard icon="calendar" title={copy.reminderPlanTitle} tone="orange">
+      <p className="text-sm leading-6 text-muted">{copy.reminderPlanBody}</p>
+      <div className="grid gap-3" data-testid="calendar-reminder-editor">
+        {drafts.map((draft) => (
+          <div
+            key={draft.id}
+            className="grid gap-2 rounded-lg border border-line p-3"
+            data-testid="calendar-reminder-row"
+          >
+            <label className="flex items-start gap-2 text-sm font-semibold text-ink">
+              <input
+                type="checkbox"
+                checked={draft.selected}
+                onChange={(event) => updateDraft(draft.id, { selected: event.target.checked })}
+                className="mt-1 h-4 w-4"
+              />
+              <span>{copy.reminder}</span>
+            </label>
+            <label className="grid gap-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
+              {copy.reminderTitleLabel}
+              <input
+                value={draft.title}
+                onChange={(event) => updateDraft(draft.id, { title: event.target.value })}
+                className="rounded-lg border border-line bg-white px-3 py-2 text-sm font-normal normal-case tracking-normal text-ink"
+              />
+            </label>
+            <label className="grid gap-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
+              {copy.reminderTimeLabel}
+              <input
+                type="datetime-local"
+                value={draft.startLocal}
+                onChange={(event) => updateDraft(draft.id, { startLocal: event.target.value })}
+                className="rounded-lg border border-line bg-white px-3 py-2 text-sm font-normal normal-case tracking-normal text-ink"
+              />
+            </label>
+            <label className="grid gap-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
+              {copy.reminderNotesLabel}
+              <textarea
+                value={draft.notes}
+                rows={2}
+                onChange={(event) => updateDraft(draft.id, { notes: event.target.value })}
+                className="rounded-lg border border-line bg-white px-3 py-2 text-sm font-normal normal-case tracking-normal text-ink"
+              />
+            </label>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={downloadSelectedReminders}
+          disabled={selectedCount === 0}
+          data-testid="download-custom-calendar-button"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-orange px-3 py-2 text-sm font-semibold text-orange disabled:opacity-50"
+        >
+          <AtlasIcon name="calendar" className="h-4 w-4" />
+          {copy.downloadSelectedReminders}
+        </button>
+        <span className="text-sm text-muted">
+          {selectedCount} {copy.selectedReminders}
+        </span>
+      </div>
+      <p className="text-xs leading-5 text-muted">{copy.calendarNoAccount}</p>
+    </DocumentCard>
+  );
+}
+
+function buildReminderDrafts(packet: PrepPacket): ReminderDraft[] {
+  const drafts: ReminderDraft[] = [
+    {
+      id: "call-script",
+      selected: true,
+      title: "Call to confirm benefits prep next steps",
+      notes: packet.call_script,
+      startLocal: localDateTimeInputValue(0),
+    },
+  ];
+
+  packet.potential_benefit_paths.slice(0, 4).forEach((path, index) => {
+    drafts.push({
+      id: `benefit-${slugify(path.program_name)}-${index}`,
+      selected: index < 2,
+      title: `Prepare documents for ${path.program_name}`,
+      notes: [
+        ...path.documents_to_prepare.slice(0, 4),
+        "Call before going to confirm current availability.",
+      ].join("\n"),
+      startLocal: localDateTimeInputValue(index + 1),
+    });
+  });
+
+  return drafts;
+}
+
+function reminderPlannerKey(packet: PrepPacket) {
+  return [
+    packet.generated_at ?? "draft",
+    packet.call_script,
+    ...packet.potential_benefit_paths.map((path) => path.program_name),
+  ].join("|");
+}
+
+function localDateTimeInputValue(offset: number) {
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  date.setHours(9 + offset, 0, 0, 0);
+  const pad = (value: number) => String(value).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(
+    date.getHours(),
+  )}:${pad(date.getMinutes())}`;
+}
+
+function buildReminderIcs(reminders: ReminderDraft[], packet: PrepPacket) {
+  const now = icsDate(new Date());
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//AidAtlasCA//Benefit Reminders//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+  ];
+
+  reminders.forEach((reminder, index) => {
+    const start = validDateOrDefault(reminder.startLocal, index);
+    const end = new Date(start.getTime() + 30 * 60 * 1000);
+    lines.push(
+      "BEGIN:VEVENT",
+      `UID:${Date.now()}-${index}@aidatlasca.local`,
+      `DTSTAMP:${now}`,
+      `DTSTART:${icsDate(start)}`,
+      `DTEND:${icsDate(end)}`,
+      `SUMMARY:${icsEscape(reminder.title)}`,
+      `DESCRIPTION:${icsEscape(
+        [
+          reminder.notes,
+          packet.safety_notice,
+          "Call before going to confirm current availability.",
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      )}`,
+      "END:VEVENT",
+    );
+  });
+
+  lines.push("END:VCALENDAR");
+  return `${lines.join("\r\n")}\r\n`;
+}
+
+function validDateOrDefault(value: string, offset: number) {
+  const parsed = new Date(value);
+  if (!Number.isNaN(parsed.getTime())) return parsed;
+  const fallback = new Date();
+  fallback.setDate(fallback.getDate() + 1);
+  fallback.setHours(9 + offset, 0, 0, 0);
+  return fallback;
+}
+
+function icsDate(date: Date) {
+  return date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+}
+
+function icsEscape(value: string) {
+  return value
+    .replaceAll("\\", "\\\\")
+    .replaceAll(";", "\\;")
+    .replaceAll(",", "\\,")
+    .replace(/\r?\n/g, "\\n");
+}
+
+function slugify(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "path";
 }
 
 function DocumentCard({

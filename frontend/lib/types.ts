@@ -200,6 +200,7 @@ export type ChatRole = "user" | "assistant";
 export type ChatMessage = {
   role: ChatRole;
   content: string;
+  client_id?: string;
 };
 
 export type A2UILink = {
@@ -266,10 +267,48 @@ export type ChatResponse = {
   packet?: PrepPacket;
   resources?: LocalResource[];
   validation?: PrepareResult["validation"];
+  response_mode?: "llm" | "deterministic_fallback" | "deterministic_block" | string;
+  llm_invoked?: boolean;
+  model_name?: string | null;
+  fallback_reason?: string | null;
+  fallback_code?: string | null;
+  diagnostics?: ChatDiagnostics;
   redaction?: {
     findings: string[];
     blocked: boolean;
   };
+};
+
+export type ChatDiagnostics = {
+  response_mode: string;
+  llm_invoked: boolean;
+  model_name?: string | null;
+  fallback_reason?: string | null;
+  fallback_code?: string | null;
+  graph_events: string[];
+};
+
+export type ChatStreamEvent =
+  | {
+      type: "status";
+      payload: { message: string; response_mode?: string };
+    }
+  | {
+      type: "delta";
+      payload: { text: string };
+    }
+  | {
+      type: "final";
+      payload: ChatResponse;
+    };
+
+export type VoiceStatus = {
+  enabled: boolean;
+  available: boolean;
+  provider: string;
+  live: boolean;
+  reason?: string | null;
+  warning?: string;
 };
 
 export type VoiceTurnResponse = ChatResponse & {
