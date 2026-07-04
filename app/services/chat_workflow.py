@@ -167,10 +167,7 @@ def run_chat_workflow(
     return _finalize_chat_response(
         {
             "route": "packet_ready",
-            "message": (
-                "I prepared source-backed directions for the benefit areas worth checking. "
-                "Official agencies decide eligibility and amounts; call local resources before going."
-            ),
+            "message": _packet_ready_message(packet, resources, next_snapshot),
             "events": events + graph_result.get("events", []),
             "snapshot": next_snapshot,
             "snapshot_patch": snapshot_patch,
@@ -373,6 +370,25 @@ def _next_questions(snapshot: dict[str, Any]) -> list[str]:
 
 def _ready_for_packet(snapshot: dict[str, Any]) -> bool:
     return bool(snapshot.get("location_text") and snapshot.get("needs"))
+
+
+def _packet_ready_message(
+    packet: dict[str, Any], resources: list[dict[str, Any]], snapshot: dict[str, Any]
+) -> str:
+    location = snapshot.get("location_text") or "your area"
+    programs = [
+        str(path.get("program_name"))
+        for path in packet.get("potential_benefit_paths", [])
+        if path.get("program_name")
+    ][:3]
+    program_text = ", ".join(programs) if programs else "the benefits worth checking"
+    resource = resources[0]["organization"] if resources else "local resource handoffs"
+    return (
+        f"For {location}, the strongest prep paths are {program_text}. "
+        "I can help you prepare questions and documents for an agency conversation; "
+        "official agencies decide eligibility and amounts. "
+        f"For nearby handoffs like {resource}, call before going."
+    )
 
 
 def _general_source_answer(

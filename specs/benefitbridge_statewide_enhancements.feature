@@ -181,19 +181,19 @@ Feature: BenefitBridge statewide agent enhancements
     When the response is shown
     Then it includes "Call before going to confirm current availability."
 
-  Scenario: Firestore telemetry is redacted
+  Scenario: Telemetry remains redacted and local
     Given telemetry recording is enabled
-    When session metadata is stored
-    Then only allowed metadata fields are written
+    When session metadata is evaluated
+    Then raw user text and packet contents are not persisted
 
   Scenario: Cloud Storage artifacts are sanitized
     Given export artifacts are enabled
     When a packet is exported
     Then sensitive packet content is rejected before storage
 
-  Scenario: Firebase Auth does not add benefit logic
-    Given Firebase Auth is enabled
-    When a request is authenticated
+  Scenario: Public access does not add benefit logic
+    Given the public demo is open without account sign-in
+    When a request is submitted
     Then benefit decisions remain source-backed and deterministic
 
   Scenario: Voice transcript is privacy screened

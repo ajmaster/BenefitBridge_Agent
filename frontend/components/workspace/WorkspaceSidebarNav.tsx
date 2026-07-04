@@ -2,10 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "firebase/auth";
 import { cn } from "@/lib/utils";
-import { useAuthState } from "@/components/auth/AuthState";
-import { authEnabled, getFirebaseAuth } from "@/lib/firebase";
 import AtlasIcon from "@/components/workspace/icons/AtlasIcon";
 import { useBenefitBridgeContext } from "./BenefitBridgeContext";
 
@@ -21,7 +18,6 @@ const sections = [
 export function WorkspaceSidebarNav() {
   const pathname = usePathname();
   const { snapshot } = useBenefitBridgeContext();
-  const { user } = useAuthState();
   const locale = snapshot.language;
 
   return (
@@ -43,15 +39,6 @@ export function WorkspaceSidebarNav() {
         );
       })}
 
-      {authEnabled && user && (
-        <button
-          type="button"
-          onClick={() => signOut(getFirebaseAuth())}
-          className="mt-4 flex items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-ink-soft transition-colors hover:bg-sky/50"
-        >
-          Sign out ({user.email ?? "account"})
-        </button>
-      )}
     </nav>
   );
 }

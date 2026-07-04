@@ -9,11 +9,12 @@ import os
 import time
 from typing import Any
 
-from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from google.api_core.exceptions import GoogleAPIError
 
 from app.api_schemas import (
     ChatRequest,
@@ -24,10 +25,12 @@ from app.api_schemas import (
     TranslateRequest,
     VoiceTurnRequest,
 )
+from app.callbacks import sanitize_model_response_text
 from app.config import (
     APP_ENV,
     ENABLE_GOOGLE_MAPS_EMBED,
     ENABLE_VOICE,
+    GEMINI_MODEL,
     PROJECT_ROOT,
     SOURCE_PACK_VERSION,
 )
@@ -35,7 +38,16 @@ from app.graph import run_benefitbridge_graph
 from app.graph_workflow import graph_workflow_readiness_summary
 from app.policies.privacy import redact_pii
 from app.services.a2ui_contract import a2ui_readiness_summary, validate_a2ui_templates
-from app.services.auth import verify_firebase_id_token
+from app.services.chat_llm import (
+    BLOCKED_ROUTES,
+    _concise,
+    _with_diagnostics,
+    active_provider,
+    chat_llm_status,
+    compact_chat_templates,
+    fallback_code_for_error,
+    run_llm_first_chat_workflow,
+)
 from app.services.chat_workflow import run_chat_workflow
 from app.services.google_integrations import (
     detect_sensitive_text,
@@ -49,7 +61,7 @@ from app.tools.local_resources import find_local_resources
 from app.tools.sources import retrieve_approved_source, search_source_snapshot
 from app.tools.translation import translate_packet
 from app.tools.validation import validate_packet
-from app.tools.voice import synthesize_speech, transcribe_audio, voice_mode
+from app.tools.voice import synthesize_speech, transcribe_audio, voice_mode, voice_status
 
 REQUEST_SIZE_LIMIT_BYTES = int(os.getenv("REQUEST_SIZE_LIMIT_BYTES", "65536"))
 VOICE_REQUEST_SIZE_LIMIT_BYTES = int(
@@ -78,7 +90,7 @@ app.add_middleware(
     allow_origins=_cors_origins(),
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["content-type", "authorization"],
+    allow_headers=["content-type"],
 )
 
 _rate_limit_buckets: dict[str, list[float]] = {}
@@ -147,7 +159,7 @@ def healthz() -> dict[str, Any]:
     }
 
 
-@app.post("/api/prepare", dependencies=[Depends(verify_firebase_id_token)])
+@app.post("/api/prepare")
 def prepare(request: PrepareRequest) -> dict[str, Any]:
     snapshot = request.snapshot.model_dump()
     privacy_scan = _scan_payload_for_sensitive_text(
@@ -171,8 +183,140 @@ def prepare(request: PrepareRequest) -> dict[str, Any]:
     return result
 
 
-@app.post("/api/chat", dependencies=[Depends(verify_firebase_id_token)])
+@app.post("/api/chat")
 def chat(request: ChatRequest) -> dict[str, Any]:
+    return _screened_chat_response(request)
+
+
+@app.post("/api/chat/stream")
+def chat_stream(request: ChatRequest) -> StreamingResponse:
+    def events() -> Any:
+        messages = [message.model_dump() for message in request.messages]
+        snapshot = request.snapshot.model_dump()
+
+        # 1. Input Guardrails
+        privacy_scan = _scan_payload_for_sensitive_text(
+            {"messages": messages, "snapshot": snapshot}
+        )
+        if privacy_scan["blocked"]:
+            result = _privacy_block_response(privacy_scan, snapshot=snapshot)
+            yield _sse_event("final", result)
+            return
+
+        model_armor = _screen_payload_with_model_armor(
+            {"messages": messages, "snapshot": snapshot}, stage="input"
+        )
+        if model_armor["blocked"]:
+            result = _model_armor_block_response(model_armor, snapshot=snapshot)
+            yield _sse_event("final", result)
+            return
+
+        # 2. Run deterministic workflow
+        result = run_chat_workflow(messages, snapshot)
+        if result.get("route") in BLOCKED_ROUTES:
+            result = _with_diagnostics(
+                compact_chat_templates(result),
+                response_mode="deterministic_block",
+                llm_invoked=False,
+                model_name=None,
+                fallback_reason=None,
+                fallback_code=None,
+            )
+            yield _sse_event("final", result)
+            return
+
+        provider = active_provider()
+        if provider is None:
+            result = _with_diagnostics(
+                compact_chat_templates(result),
+                response_mode="deterministic_fallback",
+                llm_invoked=False,
+                model_name=GEMINI_MODEL,
+                fallback_reason="Gemini chat synthesis is not configured for this local run.",
+                fallback_code="llm_disabled",
+            )
+            yield _sse_event(
+                "status",
+                {
+                    "message": "Checking privacy, sources, and answer mode.",
+                    "response_mode": result.get("response_mode"),
+                },
+            )
+            for chunk in _stream_chunks(str(result.get("message", ""))):
+                yield _sse_event("delta", {"text": chunk})
+            yield _sse_event("final", result)
+            return
+
+        # 3. Stream from live Gemini provider
+        yield _sse_event(
+            "status",
+            {
+                "message": "Checking privacy, sources, and answer mode.",
+                "response_mode": "llm",
+            },
+        )
+
+        full_text_chunks = []
+        try:
+            if hasattr(provider, "generate_stream"):
+                for chunk in provider.generate_stream(
+                    messages=messages,
+                    snapshot=snapshot,
+                    deterministic_result=result,
+                ):
+                    full_text_chunks.append(chunk)
+                raw_text = "".join(full_text_chunks)
+            else:
+                raw_text = provider.generate(
+                    messages=messages,
+                    snapshot=snapshot,
+                    deterministic_result=result,
+                )
+        except Exception as exc:
+            result = _with_diagnostics(
+                compact_chat_templates(result),
+                response_mode="deterministic_fallback",
+                llm_invoked=True,
+                model_name=provider.model_name,
+                fallback_reason=str(exc) or exc.__class__.__name__,
+                fallback_code=fallback_code_for_error(exc),
+            )
+            for chunk in _stream_chunks(str(result.get("message", ""))):
+                yield _sse_event("delta", {"text": chunk})
+            yield _sse_event("final", result)
+            return
+
+        # 4. Output Guardrails and Sanitization
+        sanitized_text = _concise(sanitize_model_response_text(raw_text))
+        result["message"] = sanitized_text
+
+        result = _with_diagnostics(
+            compact_chat_templates(result),
+            response_mode="llm",
+            llm_invoked=True,
+            model_name=provider.model_name,
+            fallback_reason=None,
+            fallback_code=None,
+        )
+
+        output_screen = _screen_payload_with_model_armor(
+            {"message": sanitized_text}, stage="output"
+        )
+        if output_screen["blocked"]:
+            result = _model_armor_block_response(
+                output_screen, snapshot=result.get("snapshot", snapshot)
+            )
+            yield _sse_event("final", result)
+            return
+
+        for chunk in _stream_chunks(sanitized_text):
+            yield _sse_event("delta", {"text": chunk})
+        yield _sse_event("final", result)
+
+    return StreamingResponse(events(), media_type="text/event-stream")
+
+
+def _screened_chat_response(request: ChatRequest) -> dict[str, Any]:
     messages = [message.model_dump() for message in request.messages]
     snapshot = request.snapshot.model_dump()
     privacy_scan = _scan_payload_for_sensitive_text(
@@ -187,7 +331,7 @@ def chat(request: ChatRequest) -> dict[str, Any]:
     if model_armor["blocked"]:
         return _model_armor_block_response(model_armor, snapshot=snapshot)
 
-    result = run_chat_workflow(messages, snapshot)
+    result = run_llm_first_chat_workflow(messages, snapshot)
     output_screen = _screen_payload_with_model_armor(
         {"message": result.get("message", "")}, stage="output"
     )
@@ -198,7 +342,7 @@ def chat(request: ChatRequest) -> dict[str, Any]:
     return result
 
 
-@app.post("/api/voice/turn", dependencies=[Depends(verify_firebase_id_token)])
+@app.post("/api/voice/turn")
 def voice_turn(request: VoiceTurnRequest) -> dict[str, Any]:
     if not ENABLE_VOICE:
         raise HTTPException(
@@ -226,6 +370,14 @@ def voice_turn(request: VoiceTurnRequest) -> dict[str, Any]:
         raise HTTPException(
             status_code=503,
             detail={"code": "VOICE_UNAVAILABLE", "message": str(exc)},
+        ) from exc
+    except GoogleAPIError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "VOICE_UNAVAILABLE",
+                "message": _voice_google_error_message("Speech-to-Text", exc),
+            },
         ) from exc
 
     if not transcript:
@@ -258,7 +410,7 @@ def voice_turn(request: VoiceTurnRequest) -> dict[str, Any]:
     # is treated as an ordinary user message, not a privileged input.
     messages = [message.model_dump() for message in request.messages]
     messages.append({"role": "user", "content": transcript})
-    result = run_chat_workflow(messages, request.snapshot.model_dump())
+    result = run_llm_first_chat_workflow(messages, request.snapshot.model_dump())
 
     reply_text = str(result.get("message", ""))
     reply_language = str(result.get("snapshot", {}).get("language", "en"))
@@ -274,7 +426,12 @@ def voice_turn(request: VoiceTurnRequest) -> dict[str, Any]:
     return result
 
 
-@app.post("/api/validate", dependencies=[Depends(verify_firebase_id_token)])
+@app.get("/api/voice/status")
+def get_voice_status() -> dict[str, Any]:
+    return voice_status()
+
+
+@app.post("/api/validate")
 def validate(request: PacketRequest) -> dict[str, Any]:
     privacy_scan = _scan_payload_for_sensitive_text(request.packet)
     report = validate_packet(
@@ -293,7 +450,7 @@ def validate(request: PacketRequest) -> dict[str, Any]:
     return {"validation": report, "privacy_scan": _scan_public_fields(privacy_scan)}
 
 
-@app.post("/api/export", dependencies=[Depends(verify_firebase_id_token)])
+@app.post("/api/export")
 def export(request: ExportRequest) -> dict[str, Any]:
     privacy_scan = _scan_payload_for_sensitive_text(request.packet)
     if privacy_scan["blocked"]:
@@ -316,7 +473,7 @@ def export(request: ExportRequest) -> dict[str, Any]:
     return result
 
 
-@app.post("/api/translate", dependencies=[Depends(verify_firebase_id_token)])
+@app.post("/api/translate")
 def translate(request: TranslateRequest) -> dict[str, Any]:
     privacy_scan = _scan_payload_for_sensitive_text(request.packet)
     if privacy_scan["blocked"]:
@@ -350,7 +507,7 @@ def translate(request: TranslateRequest) -> dict[str, Any]:
     return translated
 
 
-@app.get("/api/sources", dependencies=[Depends(verify_firebase_id_token)])
+@app.get("/api/sources")
 def sources(
     source_id: str | None = Query(default=None, max_length=120),
     query: str = Query(default="", max_length=200),
@@ -383,7 +540,7 @@ def sources(
     }
 
 
-@app.get("/api/resources", dependencies=[Depends(verify_firebase_id_token)])
+@app.get("/api/resources")
 def resources(
     jurisdiction: str = Query(..., max_length=120),
     need_type: str = Query(default="", max_length=80),
@@ -409,7 +566,7 @@ def resources(
     }
 
 
-@app.get("/api/california/counties", dependencies=[Depends(verify_firebase_id_token)])
+@app.get("/api/california/counties")
 def california_counties() -> dict[str, Any]:
     """Return source-pack-derived California county coverage summaries."""
 
@@ -420,7 +577,7 @@ def california_counties() -> dict[str, Any]:
     }
 
 
-@app.get("/api/california/resources", dependencies=[Depends(verify_firebase_id_token)])
+@app.get("/api/california/resources")
 def california_resources(
     county: str = Query(..., max_length=120),
     need_type: str = Query(default="", max_length=80),
@@ -472,11 +629,7 @@ def california_resources(
     }
 
 
-@app.get(
-    "/api/eval/readiness",
-    response_model=ReadinessResponse,
-    dependencies=[Depends(verify_firebase_id_token)],
-)
+@app.get("/api/eval/readiness", response_model=ReadinessResponse)
 def readiness() -> dict[str, Any]:
     latest_grade = _latest_grade_summary()
     source_pack = {
@@ -529,6 +682,8 @@ def readiness() -> dict[str, Any]:
             ],
             "a2ui": a2ui,
             "graph_workflow": graph_workflow,
+            "chat_llm": chat_llm_status(),
+            "voice": voice_status(),
         },
         "source_pack": source_pack,
         "evals": evals,
@@ -701,6 +856,27 @@ def _blocked_chat_defaults(snapshot: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
+def _deterministic_block_diagnostics() -> dict[str, Any]:
+    diagnostics = {
+        "response_mode": "deterministic_block",
+        "llm_invoked": False,
+        "model_name": None,
+        "fallback_reason": None,
+        "fallback_code": None,
+        "graph_events": [],
+    }
+    return {**diagnostics, "diagnostics": diagnostics}
+
+
+def _voice_google_error_message(service_name: str, exc: BaseException) -> str:
+    text = str(exc)
+    if "SERVICE_DISABLED" in text or "has not been used" in text:
+        return f"{service_name} is not enabled for this Google Cloud project."
+    if "PERMISSION_DENIED" in text or "403" in text:
+        return f"{service_name} is not available with the current Google Cloud credentials."
+    return f"{service_name} is temporarily unavailable."
+
+
 def _privacy_block_response(
     scan: dict[str, Any], *, snapshot: dict[str, Any] | None = None
 ) -> dict[str, Any]:
@@ -710,6 +886,7 @@ def _privacy_block_response(
         "redaction": _scan_public_fields(scan),
         "events": ["consent_privacy"],
         **_blocked_chat_defaults(snapshot),
+        **_deterministic_block_diagnostics(),
     }
 
 
@@ -729,6 +906,7 @@ def _model_armor_block_response(
             "findings": model_armor["findings"],
         },
         **_blocked_chat_defaults(snapshot),
+        **_deterministic_block_diagnostics(),
     }
 
 
@@ -764,6 +942,20 @@ def _content_security_policy() -> str:
         "base-uri 'self'; "
         "form-action 'self'"
     )
+
+
+def _sse_event(event_type: str, payload: dict[str, Any]) -> str:
+    return f"data: {json.dumps({'type': event_type, 'payload': payload})}\n\n"
+
+
+def _stream_chunks(text: str) -> list[str]:
+    words = text.split()
+    if not words:
+        return []
+    chunks = []
+    for index in range(0, len(words), 8):
+        chunks.append(" ".join(words[index : index + 8]) + " ")
+    return chunks
 
 
 def _dataset_counts() -> dict[str, Any]:

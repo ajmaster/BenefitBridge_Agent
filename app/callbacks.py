@@ -215,6 +215,12 @@ def _sanitize_model_response_text(text: str) -> str:
     return _append_safety_footer_if_needed(sanitized)
 
 
+def sanitize_model_response_text(text: str) -> str:
+    """Public sanitizer for non-callback model text paths."""
+
+    return _sanitize_model_response_text(text)
+
+
 def _strip_unapproved_urls(text: str) -> str:
     approved_domains = {
         domain[4:] if domain.startswith("www.") else domain

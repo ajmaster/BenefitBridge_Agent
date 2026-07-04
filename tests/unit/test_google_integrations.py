@@ -39,15 +39,6 @@ class _BlockingModelArmorProvider:
         }
 
 
-class _FirestoreMetadataProvider:
-    def __init__(self) -> None:
-        self.writes: list[tuple[dict[str, object], int]] = []
-
-    def write_metadata(self, metadata: dict[str, object], *, ttl_hours: int) -> str:
-        self.writes.append((metadata, ttl_hours))
-        return "sessions/test-doc"
-
-
 class _ClosedMapsProvider:
     def enrich_place(
         self, *, query: str, jurisdiction: str | None = None
@@ -194,78 +185,6 @@ def test_model_armor_mode_off_overrides_enable_flag(
         "blocked": False,
         "findings": [],
     }
-
-
-def test_firestore_metadata_rejects_unapproved_fields(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    monkeypatch.setenv("ENABLE_FIRESTORE_TELEMETRY", "true")
-
-    result = google_integrations.record_redacted_session_metadata(
-        {"user_text": "I need food help."}
-    )
-
-    assert result["written"] is False
-    assert result["error"]["code"] == "UNSUPPORTED_TELEMETRY_FIELD"
-
-
-def test_firestore_metadata_rejects_sensitive_values_before_write(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    provider = _FirestoreMetadataProvider()
-    monkeypatch.setenv("ENABLE_FIRESTORE_TELEMETRY", "true")
-    google_integrations.set_firestore_metadata_provider(provider)
-
-    result = google_integrations.record_redacted_session_metadata(
-        {
-            "county": "Santa Clara County",
-            "language": "en",
-            "flow_step": "case number BenefitsCal ABC12345",
-        }
-    )
-
-    assert result["written"] is False
-    assert result["error"]["code"] == "SENSITIVE_METADATA_BLOCKED"
-    assert provider.writes == []
-    assert "ABC12345" not in str(result)
-
-
-def test_firestore_metadata_writes_allowed_metadata(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    provider = _FirestoreMetadataProvider()
-    monkeypatch.setenv("ENABLE_FIRESTORE_TELEMETRY", "true")
-    monkeypatch.setenv("FIRESTORE_SESSION_TTL_HOURS", "24")
-    google_integrations.set_firestore_metadata_provider(provider)
-
-    result = google_integrations.record_redacted_session_metadata(
-        {
-            "county": "Santa Clara County",
-            "language": "en",
-            "flow_step": "packet_ready",
-            "source_ids": ["cdss_calfresh_home"],
-            "redaction_counts": {"ssn": 1},
-        }
-    )
-
-    assert result == {
-        "provider": "firestore_metadata_provider",
-        "written": True,
-        "document_id": "sessions/test-doc",
-        "ttl_hours": 24,
-    }
-    assert provider.writes == [
-        (
-            {
-                "county": "Santa Clara County",
-                "language": "en",
-                "flow_step": "packet_ready",
-                "source_ids": ["cdss_calfresh_home"],
-                "redaction_counts": {"ssn": 1},
-            },
-            24,
-        )
-    ]
 
 
 def test_maps_enrichment_filters_non_operational_places(

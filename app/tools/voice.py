@@ -15,6 +15,13 @@ from typing import Any
 
 from app.config import ENABLE_VOICE
 
+try:  # pragma: no cover - exercised when Google client libraries are installed.
+    from google.api_core.exceptions import GoogleAPIError
+
+    _GOOGLE_API_ERRORS: tuple[type[BaseException], ...] = (GoogleAPIError,)
+except Exception:  # pragma: no cover - optional Google dependency fallback.
+    _GOOGLE_API_ERRORS = ()
+
 _LANGUAGE_CODES: dict[str, str] = {
     "en": "en-US",
     "es": "es-US",
@@ -41,6 +48,44 @@ def voice_mode() -> dict[str, Any]:
     return {"provider": "disabled", "live": False, "warning": "not_available"}
 
 
+def voice_status() -> dict[str, Any]:
+    """Return non-secret runtime voice readiness for the frontend."""
+
+    speech_library = _module_exists("google.cloud.speech")
+    tts_library = _module_exists("google.cloud.texttospeech")
+    if not ENABLE_VOICE:
+        return {
+            "enabled": False,
+            "available": False,
+            "provider": "disabled",
+            "live": False,
+            "reason": "voice_disabled",
+        }
+    if not speech_library:
+        return {
+            "enabled": True,
+            "available": False,
+            "provider": "disabled",
+            "live": False,
+            "reason": "speech_library_missing",
+        }
+    if not tts_library:
+        return {
+            "enabled": True,
+            "available": False,
+            "provider": "disabled",
+            "live": False,
+            "reason": "tts_library_missing",
+        }
+    return {
+        "enabled": True,
+        "available": True,
+        "provider": "google_cloud_speech_and_tts",
+        "live": True,
+        "reason": None,
+    }
+
+
 def transcribe_audio(audio_bytes: bytes, *, language: str = "en") -> str:
     """Transcribe a short WEBM/Opus speech clip using Cloud Speech-to-Text.
 
@@ -65,7 +110,10 @@ def transcribe_audio(audio_bytes: bytes, *, language: str = "en") -> str:
         alternative_language_codes=alternatives,
     )
     audio = speech.RecognitionAudio(content=audio_bytes)
-    response = client.recognize(config=config, audio=audio)
+    try:
+        response = client.recognize(config=config, audio=audio)
+    except _GOOGLE_API_ERRORS as exc:
+        raise RuntimeError(_voice_api_error_message("Speech-to-Text", exc)) from exc
     return " ".join(
         result.alternatives[0].transcript
         for result in response.results
@@ -96,7 +144,19 @@ def synthesize_speech(text: str, *, language: str = "en") -> bytes:
     audio_config = texttospeech.AudioConfig(
         audio_encoding=texttospeech.AudioEncoding.MP3
     )
-    response = client.synthesize_speech(
-        input=synthesis_input, voice=voice, audio_config=audio_config
-    )
+    try:
+        response = client.synthesize_speech(
+            input=synthesis_input, voice=voice, audio_config=audio_config
+        )
+    except _GOOGLE_API_ERRORS:
+        return b""
     return response.audio_content
+
+
+def _voice_api_error_message(service_name: str, exc: BaseException) -> str:
+    text = str(exc)
+    if "SERVICE_DISABLED" in text or "has not been used" in text:
+        return f"{service_name} is not enabled for this Google Cloud project."
+    if "PERMISSION_DENIED" in text or "403" in text:
+        return f"{service_name} is not available with the current Google Cloud credentials."
+    return f"{service_name} is temporarily unavailable."

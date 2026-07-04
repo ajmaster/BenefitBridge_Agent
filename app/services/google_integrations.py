@@ -8,7 +8,6 @@ import os
 import urllib.parse
 import urllib.request
 from dataclasses import asdict, dataclass
-from datetime import UTC, datetime, timedelta
 from typing import Any, Protocol
 
 from app.policies.privacy import redact_pii
@@ -44,14 +43,9 @@ class MapsPlacesProvider(Protocol):
     ) -> dict[str, object]: ...
 
 
-class FirestoreMetadataProvider(Protocol):
-    def write_metadata(self, metadata: dict[str, object], *, ttl_hours: int) -> str: ...
-
-
 _DLP_PROVIDER: DlpProvider | None = None
 _MODEL_ARMOR_PROVIDER: ModelArmorProvider | None = None
 _MAPS_PLACES_PROVIDER: MapsPlacesProvider | None = None
-_FIRESTORE_METADATA_PROVIDER: FirestoreMetadataProvider | None = None
 
 _GOOGLE_GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 _GOOGLE_TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
@@ -83,21 +77,6 @@ _GOOGLE_TEXT_SEARCH_FIELD_MASKS = {
 _MAPS_AVAILABILITY_NOTICE = "Google Places details may change. Call before going."
 _SPECIFIC_GEOCODE_TYPES = {"street_address", "premise", "subpremise"}
 
-_ALLOWED_TELEMETRY_FIELDS = {
-    "city_bucket",
-    "county",
-    "eval_outcome",
-    "flow_step",
-    "language",
-    "latency_ms",
-    "redaction_counts",
-    "route",
-    "source_ids",
-    "status_labels",
-    "tool_name",
-    "validation_pass",
-}
-
 
 def google_integration_status() -> list[dict[str, Any]]:
     """Return non-secret readiness for Google-backed integrations."""
@@ -117,17 +96,6 @@ def google_integration_status() -> list[dict[str, Any]]:
             notes=[
                 "ADK model calls are owned by app/agent.py.",
                 f"Configured location: {location}.",
-            ],
-        ),
-        IntegrationStatus(
-            name="firebase_auth",
-            enabled=_env_enabled("ENABLE_AUTH"),
-            available=bool(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
-            and _module_exists("firebase_admin"),
-            mode="demo_gate_bearer_token_only",
-            notes=[
-                "Verifies Firebase ID tokens per request; no server session/cookie state.",
-                "Identity is never logged or persisted (see llm_wiki/safety/privacy-and-pii.md).",
             ],
         ),
         IntegrationStatus(
@@ -192,16 +160,6 @@ def google_integration_status() -> list[dict[str, Any]]:
             ],
         ),
         IntegrationStatus(
-            name="firestore_ttl_metadata",
-            enabled=_env_enabled("ENABLE_FIRESTORE_TELEMETRY"),
-            available=project and _module_exists("google.cloud.firestore"),
-            mode="redacted_metadata_only",
-            notes=[
-                "Never store raw user text or packet contents.",
-                f"Configured TTL hours: {_firestore_ttl_hours()}.",
-            ],
-        ),
-        IntegrationStatus(
             name="cloud_storage_artifacts",
             enabled=_env_enabled("ENABLE_CLOUD_STORAGE_ARTIFACTS"),
             available=project and _module_exists("google.cloud.storage"),
@@ -233,22 +191,12 @@ def set_maps_places_provider(provider: MapsPlacesProvider | None) -> None:
     _MAPS_PLACES_PROVIDER = provider
 
 
-def set_firestore_metadata_provider(
-    provider: FirestoreMetadataProvider | None,
-) -> None:
-    """Override the Firestore metadata provider for tests or runtime wiring."""
-
-    global _FIRESTORE_METADATA_PROVIDER
-    _FIRESTORE_METADATA_PROVIDER = provider
-
-
 def reset_integration_providers() -> None:
     """Clear test/runtime provider overrides."""
 
     set_dlp_provider(None)
     set_model_armor_provider(None)
     set_maps_places_provider(None)
-    set_firestore_metadata_provider(None)
 
 
 def detect_sensitive_text(text: str, *, context: str = "standard") -> dict[str, Any]:
@@ -433,58 +381,6 @@ def maps_geocode_location(location_text: str) -> dict[str, Any]:
     return _coarse_geocode_result(raw)
 
 
-def record_redacted_session_metadata(metadata: dict[str, object]) -> dict[str, Any]:
-    """Optionally write redacted, whitelisted session metadata to Firestore."""
-
-    if not _env_enabled("ENABLE_FIRESTORE_TELEMETRY"):
-        return {"provider": "disabled", "written": False}
-
-    unsupported = sorted(set(metadata) - _ALLOWED_TELEMETRY_FIELDS)
-    if unsupported:
-        return {
-            "provider": "firestore_metadata_guard",
-            "written": False,
-            "error": {
-                "code": "UNSUPPORTED_TELEMETRY_FIELD",
-                "fields": unsupported,
-            },
-        }
-
-    findings: set[str] = set()
-    counts: dict[str, int] = {}
-    for text in _walk_strings(metadata):
-        scan = detect_sensitive_text(text, context="standard")
-        findings.update(scan["findings"])
-        counts = _merge_counts(counts, scan.get("finding_counts", {}))
-    if findings:
-        return {
-            "provider": "firestore_metadata_guard",
-            "written": False,
-            "error": {
-                "code": "SENSITIVE_METADATA_BLOCKED",
-                "findings": sorted(findings),
-                "finding_counts": counts,
-            },
-        }
-
-    provider = _get_firestore_metadata_provider()
-    if provider is None:
-        return {
-            "provider": "firestore_metadata_configured_without_provider",
-            "written": False,
-            "warning": "not_available",
-        }
-
-    ttl_hours = _firestore_ttl_hours()
-    document_id = provider.write_metadata(metadata, ttl_hours=ttl_hours)
-    return {
-        "provider": "firestore_metadata_provider",
-        "written": True,
-        "document_id": document_id,
-        "ttl_hours": ttl_hours,
-    }
-
-
 def translation_mode() -> dict[str, Any]:
     """Return current translation integration mode without translating live text."""
 
@@ -526,15 +422,6 @@ def _model_armor_mode() -> str:
     return mode if mode in {"audit", "block", "off"} else "block"
 
 
-def _firestore_ttl_hours() -> int:
-    raw = os.getenv("FIRESTORE_SESSION_TTL_HOURS", "24")
-    try:
-        value = int(raw)
-    except ValueError:
-        return 24
-    return min(max(value, 1), 168)
-
-
 def _get_dlp_provider() -> DlpProvider | None:
     if _DLP_PROVIDER is not None:
         return _DLP_PROVIDER
@@ -556,16 +443,6 @@ def _get_maps_places_provider() -> MapsPlacesProvider | None:
     if not api_key:
         return None
     return _GoogleMapsPlacesProvider(api_key)
-
-
-def _get_firestore_metadata_provider() -> FirestoreMetadataProvider | None:
-    if _FIRESTORE_METADATA_PROVIDER is not None:
-        return _FIRESTORE_METADATA_PROVIDER
-    if not bool(os.getenv("GOOGLE_CLOUD_PROJECT")):
-        return None
-    if not _module_exists("google.cloud.firestore"):
-        return None
-    return _GoogleFirestoreMetadataProvider()
 
 
 def _finding_counts(findings: list[str]) -> dict[str, int]:
@@ -914,20 +791,3 @@ class _GoogleDlpProvider:
             "findings": findings,
             "finding_counts": _finding_counts(findings),
         }
-
-
-class _GoogleFirestoreMetadataProvider:
-    """Live Firestore adapter for already-sanitized metadata only."""
-
-    def __init__(self) -> None:
-        from google.cloud import firestore
-
-        self._client = firestore.Client(project=os.getenv("GOOGLE_CLOUD_PROJECT"))
-        self._collection = os.getenv("FIRESTORE_SESSION_COLLECTION", "session_metadata")
-
-    def write_metadata(self, metadata: dict[str, object], *, ttl_hours: int) -> str:
-        ttl_expires_at = datetime.now(UTC) + timedelta(hours=ttl_hours)
-        document = {**metadata, "ttl_expires_at": ttl_expires_at}
-        ref = self._client.collection(self._collection).document()
-        ref.set(document)
-        return str(ref.path)

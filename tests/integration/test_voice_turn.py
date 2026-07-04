@@ -2,6 +2,7 @@ import base64
 
 import pytest
 from fastapi.testclient import TestClient
+from google.api_core.exceptions import PermissionDenied
 
 import app.fast_api_app as fast_api_module
 from app.fast_api_app import app
@@ -55,6 +56,32 @@ def test_voice_turn_surfaces_transcription_failure(
 
     assert response.status_code == 503
     assert response.json()["detail"]["code"] == "VOICE_UNAVAILABLE"
+
+
+def test_voice_turn_surfaces_google_service_disabled(
+    enable_voice: None, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def _raise(_audio: bytes, *, language: str) -> str:
+        raise PermissionDenied("403 Cloud Speech-to-Text API has not been used")
+
+    monkeypatch.setattr(fast_api_module, "transcribe_audio", _raise)
+
+    response = client.post("/api/voice/turn", json=_voice_payload())
+
+    assert response.status_code == 503
+    body = response.json()
+    assert body["detail"]["code"] == "VOICE_UNAVAILABLE"
+    assert "Speech-to-Text" in body["detail"]["message"]
+
+
+def test_voice_status_reports_runtime_mode() -> None:
+    response = client.get("/api/voice/status")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["enabled"] is False
+    assert body["available"] is False
+    assert body["provider"] == "disabled"
 
 
 def test_voice_turn_rejects_empty_transcript(
